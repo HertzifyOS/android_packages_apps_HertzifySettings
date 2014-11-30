@@ -9,4 +9,12 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/user_interface_title">
 
+    <!-- Wake when plugged or unplugged -->
+    <com.hertzify.settings.preferences.GlobalSettingSwitchPreference
+        android:key="wake_when_plugged_or_unplugged"
+        android:title="@string/wake_when_plugged_or_unplugged_title"
+        android:summary="@string/wake_when_plugged_or_unplugged_summary"
+        android:defaultValue="@*android:bool/config_unplugTurnsOnScreen"
+        settings:requiresConfig="@bool/config_show_top_level_battery" />
+
 </PreferenceScreen>
