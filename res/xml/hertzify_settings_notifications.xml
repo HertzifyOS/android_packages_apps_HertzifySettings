@@ -9,4 +9,9 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/hertzify_notifications_title">
 
+    <!-- Heads up -->
+    <com.hertzify.settings.preferences.GlobalSettingSwitchPreference
+        android:key="heads_up_notifications_enabled"
+        android:title="@string/heads_up_notifications_enabled_title"
+        android:summary="@string/heads_up_notifications_enabled_summary" />
 </PreferenceScreen>
