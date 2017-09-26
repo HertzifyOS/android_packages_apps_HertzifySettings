@@ -39,4 +39,12 @@
         android:title="@string/status_bar_clock_title"
         android:summary="@string/status_bar_clock_summary"
         android:fragment="com.hertzify.settings.fragments.statusbar.Clock" />
+
+    <!-- Double tap to sleep -->
+    <com.hertzify.settings.preferences.SystemSettingSwitchPreference
+        android:key="double_tap_sleep_gesture"
+        android:title="@string/status_bar_double_tap_to_sleep_title"
+        android:summary="@string/status_bar_double_tap_to_sleep_summary"
+        android:defaultValue="false" />
+
 </PreferenceScreen>
