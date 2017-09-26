@@ -282,4 +282,8 @@
     <!-- Allow application downgrade -->
     <string name="miscellaneous_app_downgrade_title">Allow application downgrade</string>
     <string name="miscellaneous_app_downgrade_summary">Allow downgrading system applications, which may result in crashes and data loss</string>
+
+    <!-- Double tap to sleep -->
+    <string name="status_bar_double_tap_to_sleep_title">Tap to sleep</string>
+    <string name="status_bar_double_tap_to_sleep_summary">Double-tap on the status bar to turn off the display</string>
 </resources>
