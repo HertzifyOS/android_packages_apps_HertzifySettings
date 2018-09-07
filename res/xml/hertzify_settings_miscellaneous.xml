@@ -41,4 +41,11 @@
         android:title="@string/hide_status_bar_in_screenshot_title"
         android:summary="@string/hide_status_bar_in_screenshot_summary"
         android:defaultValue="false" />
+
+    <!-- Sensor block per package -->
+    <Preference
+        android:key="sensor_block_settings"
+        android:title="@string/sensor_block_title"
+        android:summary="@string/sensor_block_summary"
+        android:fragment="com.hertzify.settings.fragments.miscellaneous.SensorBlock"/>
 </PreferenceScreen>
