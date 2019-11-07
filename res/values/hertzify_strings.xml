@@ -242,4 +242,8 @@
     <string name="status_bar_battery_style_circle">Circle</string>
     <string name="status_bar_battery_style_text">Text</string>
     <string name="status_bar_battery_style_dotted_circle">Dotted circle</string>
+
+    <!-- Advanced Restart -->
+    <string name="advanced_reboot_title">Enable advanced restart</string>
+    <string name="advanced_reboot_summary">Show options for recovery and bootloader in power menu</string>
 </resources>
