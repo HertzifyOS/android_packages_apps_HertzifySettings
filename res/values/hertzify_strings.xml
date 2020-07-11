@@ -80,4 +80,9 @@
     <string name="unit_milliseconds">milliseconds</string>
     <string name="unit_pixels" translatable="false">dp</string>
     <string name="unit_seconds">seconds</string>
+
+    <!-- Status bar Icon Manager -->
+    <string name="icon_manager_title">Status bar items</string>
+    <string name="icon_manager_summary">Control visibility of status bar icons</string>
+
 </resources>
