@@ -64,4 +64,9 @@
     <!-- App list fragment -->
     <string name="search">Search</string>
     <string name="search_apps">Search apps</string>
+
+    <!-- Status bar Icon Manager -->
+    <string name="icon_manager_title">Status bar items</string>
+    <string name="icon_manager_summary">Control visibility of status bar icons</string>
+
 </resources>
