@@ -74,4 +74,11 @@
         android:title="@string/status_bar_notif_count_title"
         android:summary="@string/status_bar_notif_count_summary"
         android:defaultValue="false" />
+
+    <!-- Network Traffic -->
+    <PreferenceScreen
+        android:key="network_traffic_settings"
+        android:title="@string/network_traffic_settings_title"
+        android:summary="@string/network_traffic_settings_summary"
+        android:fragment="com.hertzify.settings.fragments.statusbar.NetworkTrafficSettings" />
 </PreferenceScreen>
