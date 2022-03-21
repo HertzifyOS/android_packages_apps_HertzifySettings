@@ -323,4 +323,10 @@
     <!-- Notification counter -->
     <string name="status_bar_notif_count_title">Notification count</string>
     <string name="status_bar_notif_count_summary">Display the number of unread notifications on each app icon</string>
+
+    <!-- Fingerprint authentication vibration -->
+    <string name="fp_error_vibrate_title">Fingerprint error vibration</string>
+    <string name="fp_error_vibrate_summary">Vibrate on error fingerprint authentication</string>
+    <string name="fp_success_vibrate_title">Fingerprint authentication vibration</string>
+    <string name="fp_success_vibrate_summary">Vibrate on successful fingerprint authentication</string>
 </resources>
