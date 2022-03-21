@@ -30,8 +30,12 @@ public class LockScreen extends SettingsPreferenceFragment implements
     private static final String TAG = "LockScreen";
 
     private static final String KEY_RIPPLE_EFFECT = "enable_ripple_effect";
+    private static final String KEY_FP_SUCCESS = "fp_success_vibrate";
+    private static final String KEY_FP_ERROR = "fp_error_vibrate";
 
     private Preference mRippleEffect;
+    private Preference mFpSuccessVib;
+    private Preference mFpErrorVib;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,14 @@ public class LockScreen extends SettingsPreferenceFragment implements
         boolean hasFingerprint = DeviceUtils.hasFingerprint(context);
         if (!hasFingerprint) {
             prefScreen.removePreference(mRippleEffect);
+        }
+
+        mFpSuccessVib = (Preference) findPreference(KEY_FP_SUCCESS);
+        mFpErrorVib = (Preference) findPreference(KEY_FP_ERROR);
+        boolean hapticAvailable = DeviceUtils.hasVibrator(context);
+        if (!hasFingerprint || !hapticAvailable) {
+            prefScreen.removePreference(mFpSuccessVib);
+            prefScreen.removePreference(mFpErrorVib);
         }
     }
 
