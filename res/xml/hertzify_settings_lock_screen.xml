@@ -29,4 +29,17 @@
         android:title="@string/status_bar_carrier_lock_screen_title"
         android:summary="@string/status_bar_carrier_lock_screen_summary"
         android:defaultValue="true" />
+        
+    <!-- Fingerprint authentication vibration -->
+    <com.hertzify.settings.preferences.SystemSettingSwitchPreference
+         android:key="fp_success_vibrate"
+         android:title="@string/fp_success_vibrate_title"
+         android:summary="@string/fp_success_vibrate_summary"
+         android:defaultValue="true" />
+
+    <com.hertzify.settings.preferences.SystemSettingSwitchPreference
+         android:key="fp_error_vibrate"
+         android:title="@string/fp_error_vibrate_title"
+         android:summary="@string/fp_error_vibrate_summary"
+         android:defaultValue="true" />
 </PreferenceScreen>
