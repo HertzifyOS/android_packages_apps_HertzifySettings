@@ -323,4 +323,8 @@
     <string name="status_bar_battery_style_circle">Circle</string>
     <string name="status_bar_battery_style_text">Text</string>
     <string name="status_bar_battery_style_dotted_circle">Dotted circle</string>
+
+    <!-- Statusbar Clock background chip -->
+    <string name="status_bar_clock_chip_title">Clock background chip</string>
+    <string name="status_bar_clock_chip_summary">Display accented chip behind clock</string>
 </resources>
