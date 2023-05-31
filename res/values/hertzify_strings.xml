@@ -219,4 +219,8 @@
     <string name="spoof_ap_remove_profile_message">Remove %s?</string>
     <string name="spoof_ap_save">Save</string>
     <string name="spoof_ap_profile_applied">Applied %1$s</string>
+
+    <!-- Hide developer status -->
+    <string name="hide_developer_status_title">Hide developer status</string>
+    <string name="hide_developer_status_summary">Hide developer status from apps</string>
 </resources>
