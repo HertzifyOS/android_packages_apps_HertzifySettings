@@ -335,4 +335,8 @@
     <string name="dynamic_bar_guide_keyguard_title">Lock screen chip</string>
     <string name="dynamic_bar_footer_title">About Dynamic Bar</string>
     <string name="dynamic_bar_footer_body">Dynamic Bar transforms your status bar into an interactive hub. Status chips appear and animate based on system events, giving you at-a-glance information without interrupting your workflow.\n\nEach event type has its own accent color and expanded card with quick actions.</string>
+
+    <!-- Hide developer status -->
+    <string name="hide_developer_status_title">Hide developer status</string>
+    <string name="hide_developer_status_summary">Hide developer status from apps</string>
 </resources>
