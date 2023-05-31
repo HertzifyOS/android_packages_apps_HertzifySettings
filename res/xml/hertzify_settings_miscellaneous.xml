@@ -29,4 +29,12 @@
         android:title="@string/spoof_ap_title"
         android:summary="@string/spoof_ap_summary"
         android:fragment="com.hertzify.settings.fragments.miscellaneous.AppSpoofing" />
+
+    <!-- Hide developer status in about phone -->
+    <Preference
+        android:key="hide_developer_status_settings"
+        android:title="@string/hide_developer_status_title"
+        android:summary="@string/hide_developer_status_summary"
+        android:fragment="com.hertzify.settings.fragments.miscellaneous.HideDeveloperStatusSettings"
+        settings:controller="com.hertzify.settings.fragments.miscellaneous.HideDeveloperStatusPreferenceController" />
 </PreferenceScreen>
