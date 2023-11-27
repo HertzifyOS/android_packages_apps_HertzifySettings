@@ -468,4 +468,8 @@
     <string name="spoof_ap_clear_search_desc">Clear search</string>
     <string name="spoof_ap_delete_desc">Delete</string>
     <string name="spoof_ap_back_desc">Back</string>
+
+    <!-- Data usage info in QS footer -->
+    <string name="qs_footer_datausage_title">Data usage</string>
+    <string name="qs_footer_datausage_summary">Display data usage summary in quick settings footer</string>
 </resources>

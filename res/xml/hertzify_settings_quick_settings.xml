@@ -40,4 +40,9 @@
         android:title="@string/qs_compact_media_player_mode_title"
         android:summary="@string/qs_compact_media_player_mode_summary"
         android:defaultValue="false" />
+
+    <com.hertzify.settings.preferences.SystemSettingSwitchPreference
+        android:key="qs_show_data_usage"
+        android:title="@string/qs_footer_datausage_title"
+        android:summary="@string/qs_footer_datausage_summary" />
 </PreferenceScreen>
