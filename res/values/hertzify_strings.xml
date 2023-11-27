@@ -469,4 +469,8 @@
     <string name="spoof_ap_error_empty_name">Name cannot be empty</string>
     <string name="spoof_ap_profile_saved">Profile saved</string>
     <string name="spoof_ap_save">Save</string>
+
+    <!-- Data usage info in QS footer -->
+    <string name="qs_footer_datausage_title">Data usage</string>
+    <string name="qs_footer_datausage_summary">Display data usage summary in quick settings footer</string>
 </resources>
