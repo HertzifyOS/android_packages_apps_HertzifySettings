@@ -245,4 +245,8 @@
     <string name="lockscreen_weather_wind_info_summary">Display current wind speed and direction</string>
     <string name="lockscreen_weather_humidity_info_title">Humidity info</string>
     <string name="lockscreen_weather_humidity_info_summary">Display current humidity in percentage</string>
+
+    <!-- System font -->
+    <string name="system_font_title">System font</string>
+    <string name="system_font_summary">Set system font style</string>
 </resources>
