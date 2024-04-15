@@ -9,6 +9,12 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/user_interface_title">
 
+    <!-- Font style -->
+    <com.hertzify.settings.preferences.FontsPickerPreference
+        android:key="system_font"
+        android:title="@string/system_font_title"
+        android:summary="@string/system_font_summary" />
+
     <!-- Wake when plugged or unplugged -->
     <com.hertzify.settings.preferences.GlobalSettingSwitchPreference
         android:key="wake_when_plugged_or_unplugged"
