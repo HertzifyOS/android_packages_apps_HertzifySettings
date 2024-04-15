@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2019 Havoc-OS
+<!--
+     Copyright (C) 2026 HertzifyOS
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,10 +14,11 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-
-    <color name="disabled_text_color">#66000000</color>
-    <color name="option_border_default">#5f6368</color>
-    
+    <style name="OptionTitleTextAppearance" parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:lineHeight">15sp</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+    </style>
 </resources>
