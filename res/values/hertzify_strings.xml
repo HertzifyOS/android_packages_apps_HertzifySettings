@@ -315,4 +315,8 @@
     <!-- Fingerprint unlock ripple animation -->
     <string name="lock_screen_fingerprint_ripple_title">Ripple animation</string>
     <string name="lock_screen_fingerprint_ripple_summary">Show ripple animation when unlocked with fingerprint</string>
+
+    <!-- Colored icons -->
+    <string name="status_bar_colored_icons_title">Colored icons</string>
+    <string name="status_bar_colored_icons_summary">Use launcher icons for app notifications</string>
 </resources>
