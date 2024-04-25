@@ -149,4 +149,8 @@
     <!-- Lockscreen battery info indicator -->
     <string name="lockscreen_battery_info_title">Charging Info on Lock Screen</string>
     <string name="lockscreen_battery_info_summary">Show current, voltage, wattage, and temperature while charging</string>
+
+    <!-- Colored icons -->
+    <string name="status_bar_colored_icons_title">Colored icons</string>
+    <string name="status_bar_colored_icons_summary">Use launcher icons for app notifications</string>
 </resources>
