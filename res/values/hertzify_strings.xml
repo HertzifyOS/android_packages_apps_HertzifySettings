@@ -278,4 +278,8 @@
     <!-- Lockscreen clock: album art color override -->
     <string name="clock_album_art_color_title">Album art color clocks</string>
     <string name="clock_album_art_color_summary">Override clock color with the album art palette when media is playing</string>
+
+    <!-- Power menu -->
+    <string name="power_menu_lock_screen_secure_title">Show on secure lock screen</string>
+    <string name="power_menu_lock_screen_secure_summary">Show the power menu while the device is locked</string>
 </resources>
