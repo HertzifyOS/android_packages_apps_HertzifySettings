@@ -37,6 +37,13 @@
         android:summary="@string/pulse_settings_summary"
         android:fragment="com.hertzify.settings.fragments.lockscreen.PulseSettings" />
 
+    <!-- Secure lock screen power menu -->
+    <com.hertzify.settings.preferences.SystemSettingSwitchPreference
+        android:key="lockscreen_enable_power_menu"
+        android:title="@string/power_menu_lock_screen_secure_title"
+        android:summary="@string/power_menu_lock_screen_secure_summary"
+        android:defaultValue="true" />
+        
     <!-- Lockscreen Smartspace -->
     <com.hertzify.settings.preferences.SecureSettingSwitchPreference
         android:key="lockscreen_smartspace_enabled"
