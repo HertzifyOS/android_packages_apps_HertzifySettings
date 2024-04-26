@@ -354,4 +354,8 @@
     <string name="solid_gradient_light">Gradient light</string>
     <string name="solid_gradient_shape">Sharp gradient corner</string>
     <string name="solid_gradient_void_light">Gradient void light</string>
+
+    <!-- Kill app button -->
+    <string name="notifications_kill_app_button_title">Kill app</string>
+    <string name="notifications_kill_app_button_summary">Show a kill app button in the notification\'s longpress menu</string>
 </resources>
