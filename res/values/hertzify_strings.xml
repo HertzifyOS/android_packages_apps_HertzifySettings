@@ -300,4 +300,8 @@
     <!-- Lockscreen battery info indicator -->
     <string name="lockscreen_battery_info_title">Charging Info on Lock Screen</string>
     <string name="lockscreen_battery_info_summary">Show current, voltage, wattage, and temperature while charging</string>
+
+    <!-- Power menu -->
+    <string name="power_menu_lock_screen_secure_title">Power menu on secure lock screen</string>
+    <string name="power_menu_lock_screen_secure_summary">Show the power menu while the device is locked</string>
 </resources>
