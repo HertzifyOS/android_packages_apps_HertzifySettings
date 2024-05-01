@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2026 HertzifyOS
+     SPDX-License-Identifier: Apache-2.0
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/hertzify_dashboard_title">
+
+    <!-- Status bar -->
+    <Preference
+        android:key="status_bar"
+        android:title="@string/status_bar_title"
+        android:summary="@string/status_bar_summary"
+        android:icon="@drawable/ic_status_bar"
+        android:fragment="com.hertzify.settings.fragments.statusbar.StatusBar" />
+
+    <!-- Quick settings -->
+    <Preference
+        android:key="quick_settings"
+        android:title="@string/quick_settings_title"
+        android:summary="@string/quick_settings_summary"
+        android:icon="@drawable/ic_quick_settings"
+        android:fragment="com.hertzify.settings.fragments.quicksettings.QuickSettings" />
+
+    <!-- Notifications -->
+    <Preference
+        android:key="notifications"
+        android:title="@string/notifications_title"
+        android:summary="@string/notifications_summary"
+        android:icon="@drawable/ic_notifications"
+        android:fragment="com.hertzify.settings.fragments.notifications.Notifications" />
+
+    <!-- User Interface -->
+    <Preference
+        android:key="user_interface"
+        android:title="@string/user_interface_title"
+        android:summary="@string/user_interface_summary"
+        android:icon="@drawable/ic_user_interface"
+        android:fragment="com.hertzify.settings.fragments.ui.UserInterface" />
+
+    <!-- Lock screen -->
+    <Preference
+        android:key="lock_screen"
+        android:title="@string/lock_screen_title"
+        android:summary="@string/lock_screen_summary"
+        android:icon="@drawable/ic_lock_screen"
+        android:fragment="com.hertzify.settings.fragments.lockscreen.LockScreen" />
+
+    <!-- Miscellaneous -->
+    <Preference
+        android:key="miscellaneous"
+        android:title="@string/miscellaneous_title"
+        android:summary="@string/miscellaneous_summary"
+        android:icon="@drawable/ic_miscellaneous"
+        android:fragment="com.hertzify.settings.fragments.miscellaneous.Miscellaneous" />
+
+    <!-- About -->
+    <Preference
+        android:key="about"
+        android:title="@string/about_title"
+        android:summary="@string/about_summary"
+        android:icon="@drawable/ic_about"
+        android:fragment="com.hertzify.settings.fragments.about.About" />
+</PreferenceScreen>
