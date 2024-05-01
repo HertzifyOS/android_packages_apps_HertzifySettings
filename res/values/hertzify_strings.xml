@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2026 HertzifyOS
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- Hertzify Main Dashboard -->
+    <string name="hertzify_dashboard_title">Hertzify Settings</string>
+    <string name="hertzify_dashboard_summary">Tune your system to the right frequency</string>
+
+    <!-- Main Features -->
+    <string name="hertzify_status_bar_title">Status bar</string>
+    <string name="hertzify_status_bar_summary">Gestures, Icons, privacy indicators</string>
+    <string name="hertzify_quick_settings_title">Quick settings</string>
+    <string name="hertzify_quick_settings_summary">Interface, lock screen</string>
+    <string name="hertzify_notifications_title">Notifications</string>
+    <string name="hertzify_notifications_summary">Alerts, interface</string>
+    <string name="hertzify_user_interface_title">User Interface</string>
+    <string name="hertzify_user_interface_summary">Customize the look and feel of your device</string>
+    <string name="hertzify_lock_screen_title">Lock screen</string>
+    <string name="hertzify_lock_screen_summary">Interface, miscellaneous</string>
+    <string name="hertzify_miscellaneous_title">Miscellaneous</string>
+    <string name="hertzify_miscellaneous_summary">Developer options, spoofing</string>
+    <string name="hertzify_about_title">About</string>
+    <string name="hertzify_about_summary">About HertzifyOS</string>
+
+    <!-- About Section Strings -->
+    <string name="hertzify_about_info">HertzifyOS is designed to keep your system in perfect rhythm — offering a clean AOSP experience with powerful customization features at your fingertips</string>
+    <string name="hertzify_about_links_category_title">Official Links</string>
+    <string name="hertzify_about_website_title">Website</string>
+    <string name="hertzify_about_website_summary">Feel free to drop by our website</string>
+    <string name="hertzify_about_telegram_title" translatable="false">Telegram</string>
+    <string name="hertzify_about_telegram_summary">Come see our Telegram</string>
+    <string name="hertzify_about_github_title" translatable="false">GitHub</string>
+    <string name="hertzify_about_github_summary">Check out our GitHub</string>
+    <string name="hertzify_about_contributors_title">Contributors</string>
+    <string name="hertzify_about_contributor_title" translatable="false">HDzungx</string>
+    <string name="hertzify_about_contributor_summary" translatable="false">Founder/Lead Developer</string>
+</resources>
