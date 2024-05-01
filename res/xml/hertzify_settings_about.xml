@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2026 HertzifyOS
+     SPDX-License-Identifier: Apache-2.0
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/hertzify_about_title">
+
+    <!-- Top Info Intro -->
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="hertzify_about_info_header"
+        android:title="@string/hertzify_about_info" />
+
+    <!-- Links Category -->
+    <PreferenceCategory
+        android:key="hertzify_about_links_category"
+        android:title="@string/hertzify_about_links_category_title">
+
+        <!-- Website -->
+        <Preference
+            android:key="hertzify_about_website"
+            android:title="@string/hertzify_about_website_title"
+            android:summary="@string/hertzify_about_website_summary"
+            android:icon="@drawable/ic_about">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://hertzifyos.pages.dev/" />
+        </Preference>
+
+        <!-- Telegram -->
+        <Preference
+            android:key="hertzify_about_telegram"
+            android:title="@string/hertzify_about_telegram_title"
+            android:summary="@string/hertzify_about_telegram_summary"
+            android:icon="@drawable/ic_telegram">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://t.me/HertzifyOS" />
+        </Preference>
+
+        <!-- Github -->
+        <Preference
+            android:key="hertzify_about_github"
+            android:title="@string/hertzify_about_github_title"
+            android:summary="@string/hertzify_about_github_summary"
+            android:icon="@drawable/ic_github">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/HertzifyOS" />
+        </Preference>
+
+    </PreferenceCategory>
+
+    <!-- Support & Community Category -->
+    <PreferenceCategory
+        android:key="hertzify_about_community_category"
+        android:title="@string/hertzify_about_contributors_title">
+
+        <!-- Contributor & Donate -->
+        <Preference
+            android:key="hertzify_about_contributor"
+            android:title="@string/hertzify_about_contributor_title"
+            android:summary="@string/hertzify_about_contributor_summary"
+            android:icon="@drawable/ic_donate">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://hertzifyos.pages.dev/donate" />
+        </Preference>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
