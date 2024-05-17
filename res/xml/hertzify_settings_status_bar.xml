@@ -32,4 +32,11 @@
         android:entries="@array/status_bar_battery_percent_entries"
         android:entryValues="@array/status_bar_battery_percent_values"
         android:defaultValue="0" />
+
+    <!-- Clock -->
+    <Preference
+        android:key="clock"
+        android:title="@string/status_bar_clock_title"
+        android:summary="@string/status_bar_clock_summary"
+        android:fragment="com.hertzify.settings.fragments.statusbar.Clock" />
 </PreferenceScreen>
