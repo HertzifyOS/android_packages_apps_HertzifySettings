@@ -9,4 +9,10 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/miscellaneous_title">
 
+    <!-- Hide screen capture status -->
+    <com.hertzify.settings.preferences.GlobalSettingSwitchPreference
+        android:key="hide_screen_capture_status"
+        android:title="@string/hide_screen_capture_status_title"
+        android:summary="@string/hide_screen_capture_status_summary"
+        android:defaultValue="false"/>
 </PreferenceScreen>
