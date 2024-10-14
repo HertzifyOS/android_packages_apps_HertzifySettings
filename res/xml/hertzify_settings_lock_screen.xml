@@ -9,6 +9,13 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/lock_screen_title">
 
+    <!-- Custom clock style -->
+    <Preference
+        android:key="lockscreen_custom_clock_style"
+        android:title="@string/lockscreen_custom_clock_style_title"
+        android:summary="@string/lockscreen_custom_clock_style_summary"
+        android:fragment="com.hertzify.settings.fragments.lockscreen.CustomClockPreview" />
+
     <!-- Lock screen battery info -->
     <com.hertzify.settings.preferences.SystemSettingSwitchPreference
         android:key="lockscreen_battery_info"
