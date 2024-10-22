@@ -44,6 +44,12 @@
         android:summary="@string/power_menu_lock_screen_secure_summary"
         android:defaultValue="true" />
         
+    <com.hertzify.settings.preferences.SystemSettingSwitchPreference
+        android:key="lockscreen_show_carrier"
+        android:title="@string/status_bar_carrier_lock_screen_title"
+        android:summary="@string/status_bar_carrier_lock_screen_summary"
+        android:defaultValue="true" />
+
     <!-- Lockscreen Smartspace -->
     <com.hertzify.settings.preferences.SecureSettingSwitchPreference
         android:key="lockscreen_smartspace_enabled"
