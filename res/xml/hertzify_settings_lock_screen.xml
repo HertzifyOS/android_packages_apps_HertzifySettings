@@ -22,4 +22,11 @@
         android:title="@string/power_menu_lock_screen_secure_title"
         android:summary="@string/power_menu_lock_screen_secure_summary"
         android:defaultValue="true" />
+
+    <!-- Lock Screen carrier -->
+    <com.hertzify.settings.preferences.SystemSettingSwitchPreference
+        android:key="lockscreen_show_carrier"
+        android:title="@string/status_bar_carrier_lock_screen_title"
+        android:summary="@string/status_bar_carrier_lock_screen_summary"
+        android:defaultValue="true" />
 </PreferenceScreen>
