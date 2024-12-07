@@ -37,7 +37,14 @@
         android:summary="@string/hide_developer_status_summary"
         android:fragment="com.hertzify.settings.fragments.miscellaneous.HideDeveloperStatusSettings"
         settings:controller="com.hertzify.settings.fragments.miscellaneous.HideDeveloperStatusPreferenceController" />
-        
+
+    <!-- Hide app list -->
+    <Preference
+        android:key="hide_applist_setting"
+        android:title="@string/hide_applist_title"
+        android:summary="@string/hide_applist_summary"
+        android:fragment="com.hertzify.settings.fragments.miscellaneous.HideAppListSettings" />
+          
     <!-- Allow application downgrade -->
     <com.hertzify.settings.preferences.GlobalSettingSwitchPreference
         android:key="pm_downgrade_allowed"
