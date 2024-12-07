@@ -17,6 +17,13 @@
         android:fragment="com.hertzify.settings.fragments.miscellaneous.HideDeveloperStatusSettings"
         settings:controller="com.hertzify.settings.fragments.miscellaneous.HideDeveloperStatusPreferenceController" />
 
+    <!-- Hide app list -->
+    <Preference
+        android:key="hide_applist_setting"
+        android:title="@string/hide_applist_title"
+        android:summary="@string/hide_applist_summary"
+        android:fragment="com.hertzify.settings.fragments.miscellaneous.HideAppListSettings" />
+
     <!-- Hide screen capture status -->
     <com.hertzify.settings.preferences.GlobalSettingSwitchPreference
         android:key="hide_screen_capture_status"
