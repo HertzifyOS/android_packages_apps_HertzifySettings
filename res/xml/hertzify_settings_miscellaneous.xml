@@ -45,6 +45,13 @@
         android:summary="@string/hide_applist_summary"
         android:fragment="com.hertzify.settings.fragments.miscellaneous.HideAppListSettings" />
 
+    <!-- Smart Pixels -->
+    <Preference
+        android:key="smart_pixels"
+        android:title="@string/smart_pixels_title" 
+        android:summary="@string/smart_pixels_summary" 
+        android:fragment="com.hertzify.settings.fragments.miscellaneous.SmartPixels" />
+
     <!-- Block PairIP license activity -->
     <com.hertzify.settings.preferences.SystemPropertySwitchPreference
         android:key="persist.sys.pairip.activity.block"
