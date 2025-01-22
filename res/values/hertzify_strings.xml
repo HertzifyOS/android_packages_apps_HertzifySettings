@@ -495,4 +495,10 @@
     <!-- QS media player -->
     <string name="qs_show_media_player_title">QS Media player</string>
     <string name="qs_show_media_player_summary">Display media controls in Quick Settings</string>
+
+    <!-- Smart Pixels -->
+    <string name="smart_pixels_warning_text">Smart pixels is a power saving feature. Depending on how many pixels you decide to turn off, you could see improvement in battery life. Note that in some cases it can result in unresponsive areas on touch screen</string>
+    <string name="smart_pixels_title">Smart Pixels</string>
+    <string name="smart_pixels_summary">Save battery by shutting off extra pixels</string>
+    <string name="smart_pixels_percent">Percent of pixels to disable</string>
 </resources>
