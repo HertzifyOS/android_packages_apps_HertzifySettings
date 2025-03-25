@@ -15,7 +15,14 @@
         android:title="@string/lockscreen_battery_info_title"
         android:summary="@string/lockscreen_battery_info_summary"
         android:defaultValue="true" />
-        
+
+    <!-- DT2S -->
+    <com.hertzify.settings.preferences.SystemSettingSwitchPreference
+        android:defaultValue="false"
+        android:key="double_tap_sleep_lockscreen"
+        android:summary="@string/double_tap_to_sleep_lockscreen_summary"
+        android:title="@string/double_tap_to_sleep_lockscreen_title" />
+
     <!-- Secure lock screen power menu -->
     <com.hertzify.settings.preferences.SystemSettingSwitchPreference
         android:key="lockscreen_enable_power_menu"
