@@ -216,4 +216,13 @@
     <string name="pif_data_failed">Failed to read JSON</string>
     <string name="pif_current_title">Current Play Integrity Profile</string>
     <string name="pif_current_summary">Tap to view active PIF</string>
+
+    <!-- Spoofing/Keybox Data -->
+    <string name="keybox_data_title">Select keybox XML to spoof</string>
+    <string name="keybox_data_summary">Select the keybox XML used for system-wide key attestation spoofing.</string>
+    <string name="keybox_data_loaded">Keybox XML loaded</string>
+    <string name="keybox_data_failed">Failed to read XML</string>
+    <string name="keybox_data_invalid_file">Invalid file selected</string>
+    <string name="keybox_data_invalid_xml">Invalid XML: missing required data</string>
+    <string name="keybox_data_cleared">XML data cleared</string>
 </resources>

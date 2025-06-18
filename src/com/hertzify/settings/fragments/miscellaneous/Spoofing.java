@@ -24,6 +24,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
+import com.hertzify.settings.preferences.KeyboxDataPreference;
 import com.hertzify.settings.preferences.PifDataPreference;
 import com.hertzify.settings.preferences.SecureSettingSwitchPreference;
 
@@ -42,6 +43,7 @@ public class Spoofing extends SettingsPreferenceFragment implements
     private static final String KEY_PI_PHOTOS       = "pi_photos_spoof";
     private static final String KEY_PIF_INFO        = "pif_current_info";
     private static final String PIF_DATA_KEY        = "pif_data_setting";
+    private static final String KEYBOX_DATA_KEY     = "keybox_data_setting";
 
     private static final String GOOGLE_PHOTOS_PKG   = "com.google.android.apps.photos";
     private static final String[] GMS_PACKAGES      = {
@@ -53,9 +55,11 @@ public class Spoofing extends SettingsPreferenceFragment implements
     };
 
     private ActivityResultLauncher<Intent> mPifFilePickerLauncher;
+    private ActivityResultLauncher<Intent> mKeyboxFilePickerLauncher;
 
     private Preference mPifInfoPreference;
     private PifDataPreference mPifDataPreference;
+    private KeyboxDataPreference mKeyboxDataPreference;
 
     private SecureSettingSwitchPreference mPiEnableSpoof;
     private SecureSettingSwitchPreference mPiPixelSpoof;
@@ -101,6 +105,20 @@ public class Spoofing extends SettingsPreferenceFragment implements
                 }
             }
         );
+
+        // Keybox file picker    
+        mKeyboxFilePickerLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                    Uri uri = result.getData().getData();
+                    Preference pref = findPreference(KEYBOX_DATA_KEY);
+                    if (pref instanceof KeyboxDataPreference) {
+                        ((KeyboxDataPreference) pref).handleFileSelected(uri);
+                    }
+                }
+            }
+        );
     }
 
     @Override
@@ -115,6 +133,12 @@ public class Spoofing extends SettingsPreferenceFragment implements
                 killGMSPackages();
                 return true;
             });
+        }
+
+        // Keybox
+        mKeyboxDataPreference = findPreference(KEYBOX_DATA_KEY);
+        if (mKeyboxDataPreference != null) {
+            mKeyboxDataPreference.setFilePickerLauncher(mKeyboxFilePickerLauncher);
         }
     }
 

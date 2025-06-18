@@ -20,6 +20,11 @@
         <com.hertzify.settings.preferences.PifDataPreference
             android:key="pif_data_setting"
             android:title="@string/pif_data_title" />
+
+        <!-- Keybox Data -->
+        <com.hertzify.settings.preferences.KeyboxDataPreference
+            android:key="keybox_data_setting"
+            android:title="@string/keybox_data_title" />
     </PreferenceCategory>
 
     <PreferenceCategory
