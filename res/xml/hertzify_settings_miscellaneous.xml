@@ -44,4 +44,11 @@
         android:title="@string/hide_applist_title"
         android:summary="@string/hide_applist_summary"
         android:fragment="com.hertzify.settings.fragments.miscellaneous.HideAppListSettings" />
+
+    <!-- Allow application downgrade -->
+    <com.hertzify.settings.preferences.GlobalSettingSwitchPreference
+        android:key="pm_downgrade_allowed"
+        android:title="@string/miscellaneous_app_downgrade_title"
+        android:summary="@string/miscellaneous_app_downgrade_summary"
+        android:defaultValue="false" />
 </PreferenceScreen>
