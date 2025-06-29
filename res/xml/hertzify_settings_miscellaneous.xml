@@ -52,6 +52,13 @@
         android:summary="@string/miscellaneous_pairip_activity_block_summary"
         android:defaultValue="false" />   
 
+    <!-- Allow application downgrade -->
+    <com.hertzify.settings.preferences.GlobalSettingSwitchPreference
+        android:key="pm_downgrade_allowed"
+        android:title="@string/miscellaneous_app_downgrade_title"
+        android:summary="@string/miscellaneous_app_downgrade_summary"
+        android:defaultValue="false" />
+
     <!-- Hide screen capture status -->
     <com.hertzify.settings.preferences.GlobalSettingSwitchPreference
         android:key="hide_screen_capture_status"
