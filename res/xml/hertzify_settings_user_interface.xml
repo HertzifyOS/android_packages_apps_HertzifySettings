@@ -37,4 +37,12 @@
         android:title="@string/notification_bubble_apps_title"
         android:summary="@string/notification_bubble_apps_summary"
         android:defaultValue="false" />
+
+    <!-- QuickSwitch -->
+    <Preference
+        android:key="quickswitch"
+        android:title="@string/quickswitch_launcher_title" 
+        android:summary="@string/quickswitch_launcher_summary" 
+        android:fragment="com.hertzify.settings.fragments.miscellaneous.QuickSwitch" /> 
+        
 </PreferenceScreen>
