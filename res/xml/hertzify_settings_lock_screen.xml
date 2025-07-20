@@ -22,4 +22,11 @@
         android:title="@string/ls_media_art_title"
         android:summary="@string/ls_media_art_summary"
         android:fragment="com.hertzify.settings.fragments.lockscreen.MediaArtSettings" />
+
+    <!-- Pulse music visualizer -->
+    <Preference
+        android:key="pulse_settings"
+        android:title="@string/pulse_settings_title"
+        android:summary="@string/pulse_settings_summary"
+        android:fragment="com.hertzify.settings.fragments.lockscreen.PulseSettings" />
 </PreferenceScreen>
