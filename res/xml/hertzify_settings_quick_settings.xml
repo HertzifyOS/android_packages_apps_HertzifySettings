@@ -33,4 +33,11 @@
         android:dependency="qs_show_brightness_slider"
         settings:requiresConfig="@*android:bool/config_automatic_brightness_available"
         android:defaultValue="true" />
+
+    <!-- Media player mode -->
+    <com.hertzify.settings.preferences.SystemSettingSwitchPreference
+        android:key="qs_compact_media_player_mode"
+        android:title="@string/qs_compact_media_player_mode_title"
+        android:summary="@string/qs_compact_media_player_mode_summary"
+        android:defaultValue="false" />
 </PreferenceScreen>

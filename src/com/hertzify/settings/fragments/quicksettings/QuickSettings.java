@@ -19,6 +19,8 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
+import com.hertzify.settings.utils.SystemUtils;
+
 import java.util.List;
 
 @SearchIndexable
@@ -26,6 +28,10 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
 
     private static final String TAG = "QuickSettings";
+
+    private static final String KEY_QS_COMPACT_PLAYER  = "qs_compact_media_player_mode";
+
+    private Preference mQsCompactPlayer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,12 +42,21 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         final ContentResolver resolver = context.getContentResolver();
         final PreferenceScreen prefScreen = getPreferenceScreen();
         final Resources resources = context.getResources();
+
+        mQsCompactPlayer = (Preference) findPreference(KEY_QS_COMPACT_PLAYER);
+        mQsCompactPlayer.setOnPreferenceChangeListener(this);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final Context context = getContext();
         final ContentResolver resolver = context.getContentResolver();
+
+        if (preference == mQsCompactPlayer) {
+            SystemUtils.showSystemUiRestartDialog(context);
+            return true;
+        }
+
         return false;
     }
 
