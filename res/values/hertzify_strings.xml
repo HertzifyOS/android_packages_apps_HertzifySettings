@@ -348,4 +348,8 @@
     <string name="system_restart_message">For changes to take effect, a system restart is required. Restart now?</string>
     <string name="system_restart_yes">Yes</string>
     <string name="system_restart_not_now">Not now</string>
+
+    <!-- Media player mode -->
+    <string name="qs_compact_media_player_mode_title">Compact media player</string>
+    <string name="qs_compact_media_player_mode_summary">Use compact mode for the quick settings media player</string>
 </resources>
