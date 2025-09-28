@@ -15,4 +15,10 @@
         android:summary="@string/lockscreen_battery_info_summary"
         android:defaultValue="true" />
 
+        <!-- Lockscreen Media Art -->
+        <Preference
+            android:key="media_art_settings"
+            android:title="@string/ls_media_art_title"
+            android:summary="@string/ls_media_art_summary"
+            android:fragment="com.hertzify.settings.fragments.lockscreen.MediaArtSettings" />
 </PreferenceScreen>
