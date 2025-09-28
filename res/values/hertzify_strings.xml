@@ -157,4 +157,8 @@
     <!-- Notification counter -->
     <string name="status_bar_notif_count_title">Notification count</string>
     <string name="status_bar_notif_count_summary">Display the number of unread notifications on each app icon</string>
+
+    <!-- Disable QS -->
+    <string name="quick_settings_secure_lock_screen_title">QS on lock screen</string>
+    <string name="quick_settings_secure_lock_screen_summary">Allow swipe down on lock screen to view Quick Settings</string>
 </resources>
