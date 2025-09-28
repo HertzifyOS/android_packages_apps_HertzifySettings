@@ -34,4 +34,11 @@
         android:dependency="qs_show_brightness_slider"
         settings:requiresConfig="@*android:bool/config_automatic_brightness_available"
         android:defaultValue="true" />
+
+    <!-- Hide on secure lock screen -->
+    <com.hertzify.settings.preferences.SecureSettingSwitchPreference
+        android:key="enable_lockscreen_quick_settings"
+        android:title="@string/quick_settings_secure_lock_screen_title"
+        android:summary="@string/quick_settings_secure_lock_screen_summary"
+        android:defaultValue="true" />
 </PreferenceScreen>
