@@ -37,4 +37,48 @@
     <string name="hertzify_about_contributors_title">Contributors</string>
     <string name="hertzify_about_contributor_title" translatable="false">HDzungx</string>
     <string name="hertzify_about_contributor_summary" translatable="false">Founder/Lead Developer</string>
+
+    <!-- Custom seekbar -->
+    <string name="custom_seekbar_value">Value: <xliff:g id="v">%s</xliff:g></string>
+    <string name="custom_seekbar_default_value">by default</string>
+    <string name="custom_seekbar_default_value_to_set">Default value: <xliff:g id="v">%s</xliff:g>\nLong tap to set</string>
+    <string name="custom_seekbar_default_value_is_set">Default value is set</string>
+
+    <!-- Color Picker -->
+    <string name="dialog_color_picker">Color Picker</string>
+    <string name="press_color_to_apply">Press on color below to apply</string>
+    <string name="arrow_right" translatable="false">→</string>
+    <string name="arrow_down" translatable="false">↓</string>
+    <string name="hex" translatable="false">Hex:</string>
+    <string name="hex_hint" translatable="false">#ff000000</string>
+    <string name="set">Set</string>
+    <string name="color_default">Default</string>
+    <string name="accent_color">Accent color</string>
+    <string name="rainbow_color">Rainbow color</string>
+    <string name="custom_color">Custom color</string>
+
+    <!-- Proper seekbar -->
+    <string name="proper_seekbar_value">Value: <xliff:g id="v">%s</xliff:g></string>
+    <string name="proper_seekbar_default_value">Default</string>
+    <string name="proper_seekbar_default_value_to_set">Default value: <xliff:g id="v">%s</xliff:g>\nLong press to set</string>
+    <string name="proper_seekbar_default_value_is_set">Default value is set</string>
+
+    <!-- General -->
+    <string name="enable">Enable</string>
+    <string name="disable">Disable</string>
+    <string name="default_value">Default</string>
+    <string name="top">Top</string>
+    <string name="bottom">Bottom</string>
+    <string name="reset">Reset</string>
+    <string name="delete_message">Remove selected item?</string>
+    <string name="choose_app">Choose app</string>
+    <string name="search">Search</string>
+    <string name="search_apps">Search apps</string>
+    <string name="apply">Apply</string>
+
+    <!-- Units -->
+    <string name="unit_hz">hz</string>
+    <string name="unit_milliseconds">milliseconds</string>
+    <string name="unit_pixels" translatable="false">dp</string>
+    <string name="unit_seconds">seconds</string>
 </resources>
