@@ -9,6 +9,13 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/quick_settings_title">
 
+    <!-- Single Tone QS -->
+    <com.hertzify.settings.preferences.SystemSettingSwitchPreference
+        android:key="single_qs_tone_enabled"
+        android:title="@string/qs_single_tone_title"
+        android:summary="@string/qs_single_tone_summary"
+        android:defaultValue="false" />
+
     <!-- Brightness slider in quick settings -->
     <com.hertzify.settings.preferences.SecureSettingSwitchPreference
         android:key="qs_show_brightness_slider"
