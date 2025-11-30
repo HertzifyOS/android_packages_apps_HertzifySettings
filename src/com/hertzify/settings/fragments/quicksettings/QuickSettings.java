@@ -21,6 +21,10 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.search.SearchIndexable;
 
+import com.hertzify.settings.preferences.SystemSettingSwitchPreference;
+
+import com.hertzify.settings.utils.SystemUtils;
+
 import java.util.List;
 
 @SearchIndexable
@@ -28,6 +32,10 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
 
     private static final String TAG = "QuickSettings";
+
+    private static final String KEY_SINGLE_QS_TONE_ENABLED = "single_qs_tone_enabled";
+    
+    private SystemSettingSwitchPreference mSingleQsToneEnabled;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,12 +46,21 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         final ContentResolver resolver = context.getContentResolver();
         final PreferenceScreen prefScreen = getPreferenceScreen();
         final Resources resources = context.getResources();
+
+        mSingleQsToneEnabled = (SystemSettingSwitchPreference) findPreference(KEY_SINGLE_QS_TONE_ENABLED);
+        if (mSingleQsToneEnabled != null) {
+            mSingleQsToneEnabled.setOnPreferenceChangeListener(this);
+        }
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final Context context = getContext();
         final ContentResolver resolver = context.getContentResolver();
+        if (preference == mSingleQsToneEnabled) {
+            SystemUtils.showSystemUiRestartDialog(getActivity());
+            return true;
+        } 
         return false;
     }
 
