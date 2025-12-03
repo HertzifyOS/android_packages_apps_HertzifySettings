@@ -88,4 +88,12 @@
     <!-- Notifications/Compact Heads-up -->
     <string name="compact_heads_up_notifications_enabled_title">Compact heads-up</string>
     <string name="compact_heads_up_notifications_enabled_summary">Display notifications in compact size</string>
+
+    <!-- Brightness Slider -->
+    <string name="status_bar_brightness_slider_title">Brightness slider</string>
+    <string name="status_bar_brightness_slider_summary">Adjust brightness from the Quick Settings</string>
+    <string name="status_bar_brightness_slider_position_title">Brightness slider position</string>
+    <string name="status_bar_brightness_slider_position_top">Top</string>
+    <string name="status_bar_brightness_slider_position_bottom">Bottom</string>
+
 </resources>
