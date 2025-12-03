@@ -9,7 +9,10 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.provider.Settings;
 
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -27,6 +30,12 @@ public class QuickSettings extends SettingsPreferenceFragment implements
 
     private static final String TAG = "QuickSettings";
 
+    private static final String KEY_SHOW_BRIGHTNESS_SLIDER = "qs_show_brightness_slider";
+    private static final String KEY_BRIGHTNESS_SLIDER_POSITION = "qs_brightness_slider_position";
+
+    private ListPreference mShowBrightnessSlider;
+    private ListPreference mBrightnessSliderPosition;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,12 +45,27 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         final ContentResolver resolver = context.getContentResolver();
         final PreferenceScreen prefScreen = getPreferenceScreen();
         final Resources resources = context.getResources();
+
+        mShowBrightnessSlider = findPreference(KEY_SHOW_BRIGHTNESS_SLIDER);
+        mShowBrightnessSlider.setOnPreferenceChangeListener(this);
+        boolean showSlider = Settings.Secure.getIntForUser(resolver,
+                Settings.Secure.QS_SHOW_BRIGHTNESS_SLIDER, 1, UserHandle.USER_CURRENT) > 0;
+
+        mBrightnessSliderPosition = findPreference(KEY_BRIGHTNESS_SLIDER_POSITION);
+        mBrightnessSliderPosition.setEnabled(showSlider);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final Context context = getContext();
         final ContentResolver resolver = context.getContentResolver();
+
+        if (preference == mShowBrightnessSlider) {
+            int value = Integer.parseInt((String) newValue);
+            mBrightnessSliderPosition.setEnabled(value > 0);
+            return true;
+        }
+
         return false;
     }
 
