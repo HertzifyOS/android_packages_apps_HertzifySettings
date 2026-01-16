@@ -93,5 +93,6 @@
     <string name="status_bar_brightness_slider_position_title">Brightness slider position</string>
     <string name="status_bar_brightness_slider_position_top">Top</string>
     <string name="status_bar_brightness_slider_position_bottom">Bottom</string>
-
+    <string name="status_bar_brightness_slider_auto_title">Auto brightness button</string>
+    <string name="status_bar_brightness_slider_auto_summary">Show toggle for adaptive brightness near the slider</string>
 </resources>
