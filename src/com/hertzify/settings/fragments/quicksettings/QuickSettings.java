@@ -15,6 +15,7 @@ import android.provider.Settings;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -32,9 +33,11 @@ public class QuickSettings extends SettingsPreferenceFragment implements
 
     private static final String KEY_SHOW_BRIGHTNESS_SLIDER = "qs_show_brightness_slider";
     private static final String KEY_BRIGHTNESS_SLIDER_POSITION = "qs_brightness_slider_position";
+    private static final String KEY_SHOW_AUTO_BRIGHTNESS = "qs_show_auto_brightness";
 
     private ListPreference mShowBrightnessSlider;
     private ListPreference mBrightnessSliderPosition;
+    private SwitchPreferenceCompat mShowAutoBrightness;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,16 @@ public class QuickSettings extends SettingsPreferenceFragment implements
 
         mBrightnessSliderPosition = findPreference(KEY_BRIGHTNESS_SLIDER_POSITION);
         mBrightnessSliderPosition.setEnabled(showSlider);
+
+        mShowAutoBrightness = findPreference(KEY_SHOW_AUTO_BRIGHTNESS);
+        boolean automaticAvailable = context.getResources().getBoolean(
+                com.android.internal.R.bool.config_automatic_brightness_available);
+
+        if (automaticAvailable) {
+            mShowAutoBrightness.setEnabled(showSlider);
+        } else {
+            prefScreen.removePreference(mShowAutoBrightness);
+        }
     }
 
     @Override
@@ -63,6 +76,8 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         if (preference == mShowBrightnessSlider) {
             int value = Integer.parseInt((String) newValue);
             mBrightnessSliderPosition.setEnabled(value > 0);
+            if (mShowAutoBrightness != null)
+                mShowAutoBrightness.setEnabled(value > 0);
             return true;
         }
 
