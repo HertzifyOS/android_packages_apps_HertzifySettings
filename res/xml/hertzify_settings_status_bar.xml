@@ -75,4 +75,11 @@
         android:title="@string/network_traffic_settings_title"
         android:summary="@string/network_traffic_settings_summary"
         android:fragment="com.hertzify.settings.fragments.statusbar.NetworkTrafficSettings" />
+
+    <!-- Cutout Progress -->
+    <Preference
+        android:key="cutout_progress"
+        android:title="@string/cutout_progress_title"
+        android:summary="@string/cutout_progress_summary"
+        android:fragment="com.hertzify.settings.fragments.statusbar.CutoutProgressSettingsFragment" />
 </PreferenceScreen>
