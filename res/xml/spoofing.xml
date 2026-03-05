@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/spoofing_title">
+
+    <PreferenceCategory
+        android:title="@string/spoofing_system_wide_category">
+
+        <com.hertzify.settings.preferences.SecureSettingSwitchPreference
+            android:key="pi_enable_spoof"
+            android:title="@string/pi_spoof_title"
+            android:summary="@string/pi_spoof_summary"
+            android:defaultValue="true" />
+
+        <Preference
+            android:key="pif_current_info"
+            android:title="@string/pif_current_title"
+            android:summary="@string/pif_current_summary"/>
+            
+        <com.hertzify.settings.preferences.PifDataPreference
+            android:key="pif_data_setting"
+            android:title="@string/pif_data_title" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="pi_spoof_options_category"
+        android:title="@string/spoofing_app_specific_category">
+
+        <com.hertzify.settings.preferences.SecureSettingSwitchPreference
+            android:key="pi_pixel_spoof"
+            android:title="@string/pixel_spoof_title"
+            android:summary="@string/pixel_spoof_summary"
+            android:defaultValue="true" />
+
+        <com.hertzify.settings.preferences.SecureSettingSwitchPreference
+            android:key="pi_photos_spoof"
+            android:title="@string/gphotos_spoof_title"
+            android:summary="@string/gphotos_spoof_summary"
+            android:defaultValue="true" />
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -192,4 +192,28 @@
     <string name="pulse_renderer_minimal_wave">Minimal wave</string>
     <string name="pulse_renderer_sparkle">Sparkle</string>
     <string name="pulse_renderer_matrix">Matrix</string>
+
+    <!-- Spoofing -->
+    <string name="spoofing_title">Component spoofing</string>
+    <string name="spoofing_summary">Bypass app restrictions by spoofing components</string>
+    <string name="spoofing_system_wide_category">System-Wide</string>
+    <string name="spoofing_app_specific_category">App-Specific</string>
+    <!-- Google Play Integrity Spoof -->
+    <string name="pi_spoof_title">Google Play Integrity spoof</string>
+    <string name="pi_spoof_summary">Spoof your device as different model for Google Play Integrity</string>
+    <!-- Pixel Spoof -->
+    <string name="pixel_spoof_title">Pixel props spoof</string>
+    <string name="pixel_spoof_summary">Spoof a select group of Google apps to the latest Pixel device</string>
+    <!-- Google Photos Spoof -->
+    <string name="gphotos_spoof_title">Unlimited Photos storage</string>
+    <string name="gphotos_spoof_summary">Spoof your device as Pixel XL for Google Photos app only</string>
+    <!-- Pif Data -->
+    <string name="pif_data_title">Select PIF JSON to spoof</string>
+    <string name="pif_data_summary">Select PIF JSON used for prop attestation spoofing for GMS and play store.</string>
+    <string name="pif_data_loaded">PIF JSON loaded</string>
+    <string name="pif_data_cleared">PIF JSON cleared</string>
+    <string name="pif_data_invalid_file">Invalid JSON file</string>
+    <string name="pif_data_failed">Failed to read JSON</string>
+    <string name="pif_current_title">Current Play Integrity Profile</string>
+    <string name="pif_current_summary">Tap to view active PIF</string>
 </resources>
