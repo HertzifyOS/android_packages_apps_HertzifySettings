@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/app_spoof_title">
+
+    <PreferenceCategory
+        android:key="category_settings"
+        android:title="@string/app_spoof_category_settings">
+
+        <SwitchPreferenceCompat
+            android:key="pref_app_spoof_enabled"
+            android:title="@string/app_spoof_enabled_title"
+            android:summary="@string/app_spoof_enabled_summary"
+            android:defaultValue="true" />
+
+        <SwitchPreferenceCompat
+            android:key="pref_show_uninstalled"
+            android:title="@string/app_spoof_show_uninstalled_title"
+            android:summary="@string/app_spoof_show_uninstalled_summary"
+            android:defaultValue="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="category_apps"
+        android:title="@string/app_spoof_category_apps" />
+
+</PreferenceScreen>

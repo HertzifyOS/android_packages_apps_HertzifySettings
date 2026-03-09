@@ -42,5 +42,11 @@
             android:title="@string/gphotos_spoof_title"
             android:summary="@string/gphotos_spoof_summary"
             android:defaultValue="true" />
+
+        <Preference
+            android:key="app_spoofing"
+            android:title="@string/app_spoof_title"
+            android:summary="@string/app_spoof_summary"
+            android:fragment="com.hertzify.settings.fragments.miscellaneous.AppSpoofingFragment" />
     </PreferenceCategory>
 </PreferenceScreen>
