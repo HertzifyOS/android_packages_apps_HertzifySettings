@@ -486,4 +486,8 @@
     <!-- Single Tone QS -->
     <string name="qs_single_tone_title">Single Tone QS</string>
     <string name="qs_single_tone_summary">Hide notification scrim for unified Quick Settings appearance</string>
+
+    <!-- Status bar icon order -->
+    <string name="status_bar_icon_order_title">Status bar icon order</string>
+    <string name="status_bar_icon_order_summary">Enable legacy status bar icon order</string>
 </resources>
