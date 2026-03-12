@@ -14,12 +14,17 @@ import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.search.SearchIndexable;
+
+import com.hertzify.settings.preferences.SystemSettingSwitchPreference;
+
+import com.hertzify.settings.utils.SystemUtils;
 
 import java.util.List;
 
@@ -28,6 +33,10 @@ public class StatusBar extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
 
     private static final String TAG = "StatusBar";
+
+    private static final String STATUS_BAR_ICON_ORDER_LEGACY = "status_bar_icon_order_legacy";
+
+    private SwitchPreferenceCompat mStatusBarIconOrderLegacy;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,12 +47,21 @@ public class StatusBar extends SettingsPreferenceFragment implements
         final ContentResolver resolver = context.getContentResolver();
         final PreferenceScreen prefScreen = getPreferenceScreen();
         final Resources resources = context.getResources();
+
+        mStatusBarIconOrderLegacy = findPreference(STATUS_BAR_ICON_ORDER_LEGACY);
+        if (mStatusBarIconOrderLegacy != null) {
+            mStatusBarIconOrderLegacy.setOnPreferenceChangeListener(this);
+        }
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final Context context = getContext();
         final ContentResolver resolver = context.getContentResolver();
+        if (preference == mStatusBarIconOrderLegacy) {
+            SystemUtils.showSystemUiRestartDialog(context);
+            return true;
+        }
         return false;
     }
 
