@@ -479,4 +479,8 @@
     <string name="spoof_ap_remove_profile_message">Remove %s?</string>
     <string name="spoof_ap_save">Save</string>
     <string name="spoof_ap_profile_applied">Applied %1$s</string>
+
+    <!-- Block PairIP -->
+    <string name="miscellaneous_pairip_activity_block_title">Block PairIP license verification</string>
+    <string name="miscellaneous_pairip_activity_block_summary">Prevent Play Store apps from launching the \"Get this app from Play\" screen when not installed by the Play Store</string>
 </resources>
