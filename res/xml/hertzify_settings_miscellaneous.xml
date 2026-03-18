@@ -52,6 +52,13 @@
         android:summary="@string/smart_pixels_summary" 
         android:fragment="com.hertzify.settings.fragments.miscellaneous.SmartPixels" />
 
+    <!-- Block PairIP license activity -->
+    <com.hertzify.settings.preferences.SystemPropertySwitchPreference
+        android:key="persist.sys.pairip.activity.block"
+        android:title="@string/miscellaneous_pairip_activity_block_title"
+        android:summary="@string/miscellaneous_pairip_activity_block_summary"
+        android:defaultValue="false" />   
+
     <!-- Hide screen capture status -->
     <com.hertzify.settings.preferences.GlobalSettingSwitchPreference
         android:key="hide_screen_capture_status"
