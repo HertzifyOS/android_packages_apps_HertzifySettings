@@ -19,6 +19,8 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
+import com.hertzify.settings.utils.DeviceUtils;
+
 import java.util.List;
 
 @SearchIndexable
@@ -26,6 +28,10 @@ public class LockScreen extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
 
     private static final String TAG = "LockScreen";
+
+    private static final String KEY_RIPPLE_EFFECT = "enable_ripple_effect";
+
+    private Preference mRippleEffect;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,6 +42,12 @@ public class LockScreen extends SettingsPreferenceFragment implements
         final ContentResolver resolver = context.getContentResolver();
         final PreferenceScreen prefScreen = getPreferenceScreen();
         final Resources resources = context.getResources();
+
+        mRippleEffect = (Preference) findPreference(KEY_RIPPLE_EFFECT);
+        boolean hasFingerprint = DeviceUtils.hasFingerprint(context);
+        if (!hasFingerprint) {
+            prefScreen.removePreference(mRippleEffect);
+        }
     }
 
     @Override

@@ -25,6 +25,13 @@
         android:entryValues="@array/screen_off_animation_values"
         android:defaultValue="0" />
 
+    <!-- Fingerprint unlock ripple animation -->
+    <com.hertzify.settings.preferences.SystemSettingSwitchPreference
+        android:key="enable_ripple_effect"
+        android:title="@string/lock_screen_fingerprint_ripple_title"
+        android:summary="@string/lock_screen_fingerprint_ripple_summary"
+        android:defaultValue="true" />
+
     <!-- Show clipboard overlay -->
     <com.hertzify.settings.preferences.SecureSettingSwitchPreference
         android:key="show_clipboard_overlay"
