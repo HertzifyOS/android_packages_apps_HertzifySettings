@@ -304,4 +304,8 @@
     <!-- Power menu -->
     <string name="power_menu_lock_screen_secure_title">Power menu on secure lock screen</string>
     <string name="power_menu_lock_screen_secure_summary">Show the power menu while the device is locked</string>
+
+    <!-- Show clipboard overlay -->
+    <string name="show_clipboard_overlay_title">Show clipboard overlay</string>
+    <string name="show_clipboard_overlay_summary">Show an overlay in the left bottom corner of the screen when something is copied to the clipboard</string>    
 </resources>
