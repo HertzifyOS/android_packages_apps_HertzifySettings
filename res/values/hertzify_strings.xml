@@ -270,4 +270,6 @@
     <string name="lockscreen_custom_clock_color_mode_title">Custom clock color mode</string>
     <string name="lockscreen_custom_clock_size_title">Clock size</string>
     <string name="lockscreen_custom_clock_size_summary">Scale the lockscreen clock (50–150%)</string>
+    <string name="lockscreen_custom_clock_aod_anim_title">Custom clock AOD animation</string>
+    <string name="lockscreen_custom_clock_aod_anim_summary">Set AOD animation for custom clock style</string>
 </resources>
