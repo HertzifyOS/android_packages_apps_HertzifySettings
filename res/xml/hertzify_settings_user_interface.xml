@@ -37,6 +37,13 @@
         android:summary="@string/floating_rotation_button_summary"
         android:defaultValue="true" />
 
+    <!-- Show clipboard overlay -->
+    <com.hertzify.settings.preferences.SecureSettingSwitchPreference
+        android:key="show_clipboard_overlay"
+        android:title="@string/show_clipboard_overlay_title"
+        android:summary="@string/show_clipboard_overlay_summary"
+        android:defaultValue="true"/>
+        
      <!-- Notification bubble apps -->
     <com.hertzify.settings.preferences.SystemSettingSwitchPreference
         android:key="notification_bubble_apps"
