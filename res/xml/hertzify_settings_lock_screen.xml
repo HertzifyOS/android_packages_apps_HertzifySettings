@@ -29,4 +29,59 @@
         android:title="@string/pulse_settings_title"
         android:summary="@string/pulse_settings_summary"
         android:fragment="com.hertzify.settings.fragments.lockscreen.PulseSettings" />
+
+    <!-- Lockscreen Smartspace -->
+    <com.hertzify.settings.preferences.SecureSettingSwitchPreference
+        android:key="lockscreen_smartspace_enabled"
+        android:title="@string/lockscreen_smartspace_title"
+        android:summary="@string/lockscreen_smartspace_summary"
+        android:defaultValue="true" />
+
+    <!-- Weather Settings -->
+    <Preference
+        android:title="@string/weather_settings_title"
+        android:summary="@string/weather_settings_summary">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="org.omnirom.omnijaws"
+            android:targetClass="org.omnirom.omnijaws.SettingsActivity" />
+    </Preference>
+
+    <!-- Lockscreen Weather -->
+    <com.hertzify.settings.preferences.SystemSettingSwitchPreference
+        android:key="lockscreen_weather_enabled"
+        android:title="@string/lockscreen_weather_title"
+        android:summary="@string/lockscreen_weather_summary" />
+    
+    <!-- Weather LocationInfo -->
+    <com.hertzify.settings.preferences.SystemSettingSwitchPreference
+        android:key="lockscreen_weather_location"
+        android:title="@string/lockscreen_weather_location_title"
+        android:summary="@string/lockscreen_weather_location_summary"
+        android:dependency="lockscreen_weather_enabled" />
+
+    <!-- Weather Text -->
+    <com.hertzify.settings.preferences.SystemSettingSwitchPreference
+        android:key="lockscreen_weather_text"
+        android:title="@string/lockscreen_weather_text_title"
+        android:summary="@string/lockscreen_weather_text_summary"
+        android:defaultValue="true"
+        android:dependency="lockscreen_weather_enabled" />
+
+    <!-- Weather wind info -->
+    <com.hertzify.settings.preferences.SystemSettingSwitchPreference
+        android:key="lockscreen_weather_wind_info"
+        android:title="@string/lockscreen_weather_wind_info_title"
+        android:summary="@string/lockscreen_weather_wind_info_summary"
+        android:defaultValue="false"
+        android:dependency="lockscreen_weather_enabled" />
+
+    <!-- Weather humidity info-->
+    <com.hertzify.settings.preferences.SystemSettingSwitchPreference
+        android:key="lockscreen_weather_humidity_info"
+        android:title="@string/lockscreen_weather_humidity_info_title"
+        android:summary="@string/lockscreen_weather_humidity_info_summary"
+        android:defaultValue="false"
+        android:dependency="lockscreen_weather_enabled" />
+
 </PreferenceScreen>
