@@ -337,4 +337,8 @@
     <string name="app_spoof_msg_import_error">Import failed: %1$s</string>
     <string name="app_spoof_msg_export_success">Export successful</string>
     <string name="app_spoof_msg_export_error">Export failed: %1$s</string>
+
+    <!-- Sidebar -->
+    <string name="sidebar_title">Sidebar</string>
+    <string name="sidebar_summary">Quickly open apps in a floating window</string>
 </resources>
