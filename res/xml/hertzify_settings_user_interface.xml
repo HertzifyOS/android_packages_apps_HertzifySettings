@@ -37,4 +37,16 @@
         android:title="@string/notification_bubble_apps_title"
         android:summary="@string/notification_bubble_apps_summary"
         android:defaultValue="false" />
+
+    <!-- Sidebar -->
+    <Preference
+        android:key="sidebar"
+        android:title="@string/sidebar_title"
+        android:summary="@string/sidebar_summary">
+
+        <intent
+            android:action="android.intent.action.IA_SETTINGS"
+            android:targetPackage="com.libremobileos.sidebar"
+            android:targetClass="com.libremobileos.sidebar.ui.sidebar.SidebarSettingsActivity" />
+    </Preference>   
 </PreferenceScreen>
