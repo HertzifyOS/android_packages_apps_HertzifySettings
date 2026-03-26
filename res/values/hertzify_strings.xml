@@ -302,4 +302,8 @@
     <string name="app_spoof_profile_saved">Profile \"%1$s\" saved</string>
     <string name="app_spoof_profile_updated">Profile \"%1$s\" updated</string>
     <string name="app_spoof_add_prop">+ Add property</string>
+
+    <!-- Sidebar -->
+    <string name="sidebar_title">Sidebar</string>
+    <string name="sidebar_summary">Quickly open apps in a floating window</string>
 </resources>
