@@ -5,236 +5,236 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Hertzify -->
-    <string name="hertzify_dashboard_title">Hertzify Settings</string>
-    <string name="hertzify_dashboard_summary">Tune your system to the right frequency</string>
+    <string name="hertzify_dashboard_title">Cài đặt Hertzify</string>
+    <string name="hertzify_dashboard_summary">Tinh chỉnh hệ thống của bạn đến đúng tần số</string>
     <!-- Categories -->
-    <string name="status_bar_title">Status bar</string>
-    <string name="status_bar_summary">Gestures, Icons, privacy indicators</string>
-    <string name="quick_settings_title">Quick settings</string>
-    <string name="quick_settings_summary">Interface, lock screen</string>
-    <string name="notifications_title">Notifications</string>
-    <string name="notifications_summary">Alerts, interface</string>
-    <string name="themes_title">Themes</string>
-    <string name="themes_summary">Monet, fonts, icons</string>
-    <string name="lock_screen_title">Lock screen</string>
-    <string name="lock_screen_summary">Interface, miscellaneous</string>
-    <string name="miscellaneous_title">Miscellaneous</string>
-    <string name="miscellaneous_summary">Developer options, spoofing</string>
-    <string name="about_title">About</string>
-    <string name="about_summary">About HertzifyOS</string>
+    <string name="status_bar_title">Thanh trạng thái</string>
+    <string name="status_bar_summary">Cử chỉ, biểu tượng, chỉ báo quyền riêng tư</string>
+    <string name="quick_settings_title">Cài đặt nhanh</string>
+    <string name="quick_settings_summary">Giao diện, màn hình khoá</string>
+    <string name="notifications_title">Thông báo</string>
+    <string name="notifications_summary">Cảnh báo, giao diện</string>
+    <string name="themes_title">Chủ đề</string>
+    <string name="themes_summary">Monet, phông chữ, biểu tượng</string>
+    <string name="lock_screen_title">Màn hình khoá</string>
+    <string name="lock_screen_summary">Giao diện, mục khác</string>
+    <string name="miscellaneous_title">Khác</string>
+    <string name="miscellaneous_summary">Tùy chọn nhà phát triển, spoofing</string>
+    <string name="about_title">Giới thiệu</string>
+    <string name="about_summary">Về HertzifyOS</string>
     <!-- About -->
-    <string name="about_info">    HertzifyOS is designed to keep your system in perfect rhythm — offering a clean AOSP experience with powerful customization features at your fingertips
+    <string name="about_info">    HertzifyOS được thiết kế để giữ cho hệ thống của bạn vận hành nhịp nhàng — mang đến trải nghiệm AOSP thuần với khả năng tùy chỉnh mạnh mẽ ngay trong tầm tay.
     </string>
     <string name="about_website_title">Website</string>
-    <string name="about_website_summary">Feel free to drop by our website</string>
-    <string name="about_telegram_summary">Come see our Telegram</string>
-    <string name="about_github_summary">Check out our GitHub</string>
-    <string name="about_contributors_title">Contributors</string>
+    <string name="about_website_summary">Hãy ghé thăm website của chúng tôi</string>
+    <string name="about_telegram_summary">Tham gia Telegram của chúng tôi</string>
+    <string name="about_github_summary">Xem GitHub của chúng tôi</string>
+    <string name="about_contributors_title">Những người đóng góp</string>
     <!-- Custom seekbar -->
-    <string name="custom_seekbar_value">Value: <xliff:g id="v">%s</xliff:g></string>
-    <string name="custom_seekbar_default_value">by default</string>
-    <string name="custom_seekbar_default_value_to_set">Default value: <xliff:g id="v">%s</xliff:g>\nLong tap to set</string>
-    <string name="custom_seekbar_default_value_is_set">Default value is set</string>
+    <string name="custom_seekbar_value">Giá trị: <xliff:g id="v">%s</xliff:g></string>
+    <string name="custom_seekbar_default_value">theo mặc định</string>
+    <string name="custom_seekbar_default_value_to_set">Giá trị mặc định: <xliff:g id="v">%s</xliff:g>\nNhấn giữ để đặt</string>
+    <string name="custom_seekbar_default_value_is_set">Giá trị mặc định đã được đặt</string>
     <!-- Color Picker -->
-    <string name="dialog_color_picker">Color Picker</string>
-    <string name="press_color_to_apply">Press on color below to apply</string>
-    <string name="set">Set</string>
-    <string name="color_default">Default</string>
+    <string name="dialog_color_picker">Bộ chọn màu</string>
+    <string name="press_color_to_apply">Nhấn vào màu bên dưới để áp dụng</string>
+    <string name="set">Đặt</string>
+    <string name="color_default">Mặc định</string>
     <!-- Proper seekbar -->
-    <string name="proper_seekbar_value">Value: <xliff:g id="v">%s</xliff:g></string>
-    <string name="proper_seekbar_default_value">Default</string>
-    <string name="proper_seekbar_default_value_to_set">Default value: <xliff:g id="v">%s</xliff:g>\nLong press to set</string>
-    <string name="proper_seekbar_default_value_is_set">Default value is set</string>
+    <string name="proper_seekbar_value">Giá trị: <xliff:g id="v">%s</xliff:g></string>
+    <string name="proper_seekbar_default_value">Mặc định</string>
+    <string name="proper_seekbar_default_value_to_set">Giá trị mặc định: <xliff:g id="v">%s</xliff:g>\nNhấn giữ để đặt</string>
+    <string name="proper_seekbar_default_value_is_set">Giá trị mặc định đã được đặt</string>
     <!-- App list fragment -->
-    <string name="search">Search</string>
-    <string name="search_apps">Search apps</string>
+    <string name="search">Tìm kiếm</string>
+    <string name="search_apps">Tìm kiếm ứng dụng</string>
     <!-- Status bar Icon Manager -->
-    <string name="icon_manager_title">Status bar items</string>
-    <string name="icon_manager_summary">Control visibility of status bar icons</string>
+    <string name="icon_manager_title">Mục trong thanh trạng thái</string>
+    <string name="icon_manager_summary">Điều khiển hiển thị của các biểu tượng</string>
     <!-- Heads-up -->
-    <string name="heads_up_notifications_enabled_title">Heads-up</string>
-    <string name="heads_up_notifications_enabled_summary">Display priority notifications in a small floating window</string>
+    <string name="heads_up_notifications_enabled_title">Thông báo nổi</string>
+    <string name="heads_up_notifications_enabled_summary">Hiển thị thông báo ưu tiên trong cửa sổ nổi</string>
     <!-- Wake on plug -->
-    <string name="wake_when_plugged_or_unplugged_title">Wake on plug</string>
-    <string name="wake_when_plugged_or_unplugged_summary">Turn the screen on when connecting or disconnecting a power source</string>
+    <string name="wake_when_plugged_or_unplugged_title">Bật màn hình khi sạc</string>
+    <string name="wake_when_plugged_or_unplugged_summary">Bật màn hình khi kết nối hoặc ngắt kết nối nguồn điện</string>
     <!-- Global Actions -->
-    <string name="global_actions_advanced_reboot_title">Enable advanced restart</string>
-    <string name="global_actions_advanced_reboot_summary">Show options for recovery and bootloader in power menu</string>
+    <string name="global_actions_advanced_reboot_title">Khởi động nâng cao</string>
+    <string name="global_actions_advanced_reboot_summary">Hiển thị các tùy chọn khởi động khác trong menu nguồn</string>
     <!-- Floating rotation button -->
-    <string name="floating_rotation_button_title">Floating rotate button</string>
-    <string name="floating_rotation_button_summary">Show a floating rotate button when device is rotated</string>
+    <string name="floating_rotation_button_title">Nút xoay nổi</string>
+    <string name="floating_rotation_button_summary">Hiển thị nút xoay nổi khi thiết bị được xoay</string>
     <!-- Notifications/Compact Heads-up -->
-    <string name="compact_heads_up_notifications_enabled_title">Compact heads-up</string>
-    <string name="compact_heads_up_notifications_enabled_summary">Display notifications in compact size</string>
+    <string name="compact_heads_up_notifications_enabled_title">Thông báo nổi thu gọn</string>
+    <string name="compact_heads_up_notifications_enabled_summary">Hiển thị thông báo nổi ở dạng nhỏ gọn</string>
     <!-- Brightness Slider -->
-    <string name="status_bar_brightness_slider_title">Brightness slider</string>
-    <string name="status_bar_brightness_slider_summary">Adjust brightness from the Quick Settings</string>
-    <string name="status_bar_brightness_slider_position_title">Brightness slider position</string>
-    <string name="status_bar_brightness_slider_position_top">Top</string>
-    <string name="status_bar_brightness_slider_position_bottom">Bottom</string>
-    <string name="status_bar_brightness_slider_auto_title">Auto brightness button</string>
-    <string name="status_bar_brightness_slider_auto_summary">Show toggle for adaptive brightness near the slider</string>
+    <string name="status_bar_brightness_slider_title">Thanh trượt độ sáng</string>
+    <string name="status_bar_brightness_slider_summary">Điều chỉnh độ sáng từ Cài đặt nhanh</string>
+    <string name="status_bar_brightness_slider_position_title">Vị trí thanh trượt độ sáng</string>
+    <string name="status_bar_brightness_slider_position_top">Trên cùng</string>
+    <string name="status_bar_brightness_slider_position_bottom">Dưới cùng</string>
+    <string name="status_bar_brightness_slider_auto_title">Nút độ sáng tự động</string>
+    <string name="status_bar_brightness_slider_auto_summary">Hiển thị nút chuyển đổi cho độ sáng thích ứng gần thanh trượt</string>
     <!-- Hide screen capture status -->
-    <string name="hide_screen_capture_status_title">Hide screen capture status</string>
-    <string name="hide_screen_capture_status_summary">Hide screen capture and screen record status from all applications. Can be convenient in some cases but may lead to privacy leaks. Need to restart applications for the change to take effect.</string>
+    <string name="hide_screen_capture_status_title">Ẩn trạng thái chụp màn hình</string>
+    <string name="hide_screen_capture_status_summary">Ẩn trạng thái chụp màn hình và quay màn hình khỏi mọi ứng dụng. Có thể tiện lợi nhưng tiềm ẩn rủi ro rò rỉ quyền riêng tư.</string>
     <!-- No storage restrict -->
-    <string name="no_storage_restrict_title">No storage restrict</string>
-    <string name="no_storage_restrict_summary">Remove the restriction when selecting folders through Storage Access Framework. Can be convenient in some cases but may lead to privacy leaks.</string>
+    <string name="no_storage_restrict_title">Bỏ giới hạn lưu trữ</string>
+    <string name="no_storage_restrict_summary">Gỡ giới hạn khi chọn thư mục qua Storage Access Framework. Có thể tiện nhưng tiềm ẩn rò rỉ quyền riêng tư.</string>
     <!-- Unlimit screenrecord -->
-    <string name="unlimit_screenrecord_title">Unlimit screenrecord</string>
-    <string name="unlimit_screenrecord_summary">Remove the 15GiB file size limit\nMay result in a larger than needed output file</string>
+    <string name="unlimit_screenrecord_title">Không giới hạn quay màn hình</string>
+    <string name="unlimit_screenrecord_summary">Gỡ bỏ giới hạn kích thước tệp 15GiB\nCó thể dẫn đến tệp đầu ra lớn hơn mức cần thiết</string>
     <!-- Ignore window secure -->
-    <string name="ignore_window_secure_title">Ignore window secure flags</string>
-    <string name="ignore_window_secure_summary">Remove screenshot and screenrecord limits for all apps. This can be convenient in some cases but may lead to privacy leaks.</string>
+    <string name="ignore_window_secure_title">Bỏ qua cờ bảo mật cửa sổ</string>
+    <string name="ignore_window_secure_summary">Gỡ bỏ giới hạn chụp màn hình và quay màn hình cho tất cả ứng dụng. Điều này có thể thuận tiện trong một số trường hợp nhưng có thể dẫn đến rò rỉ quyền riêng tư.</string>
     <!-- Hide developer status -->
-    <string name="hide_developer_status_title">Hide developer status</string>
-    <string name="hide_developer_status_summary">Hide developer status from apps</string>
+    <string name="hide_developer_status_title">Ẩn trạng thái nhà phát triển</string>
+    <string name="hide_developer_status_summary">Ẩn trạng thái nhà phát triển khỏi các ứng dụng</string>
     <!-- Hide applist -->
-    <string name="hide_applist_title">Hide applist</string>
-    <string name="hide_applist_summary">Prevent apps from checking selected apps from appslist</string>
-    <string name="menu_show_overlay">Show overlay</string>
-    <string name="menu_hide_overlay">Hide overlay</string>
+    <string name="hide_applist_title">Ẩn danh sách ứng dụng</string>
+    <string name="hide_applist_summary">Ngăn ứng dụng kiểm tra các ứng dụng được chọn trong danh sách</string>
+    <string name="menu_show_overlay">Hiện overlay</string>
+    <string name="menu_hide_overlay">Ẩn overlay</string>
     <!-- Double tap to sleep on status bar or lockscreen -->
-    <string name="status_bar_double_tap_to_sleep_title">Tap to sleep</string>
-    <string name="status_bar_double_tap_to_sleep_summary">Double-tap on the status bar to turn off the display</string>
+    <string name="status_bar_double_tap_to_sleep_title">Chạm để tắt màn hình</string>
+    <string name="status_bar_double_tap_to_sleep_summary">Chạm hai lần vào thanh trạng thái hoặc màn hình khóa để tắt màn hình</string>
     <!-- Lockscreen battery info indicator -->
-    <string name="lockscreen_battery_info_title">Charging Info on Lock Screen</string>
-    <string name="lockscreen_battery_info_summary">Show current, voltage, wattage, and temperature while charging</string>
+    <string name="lockscreen_battery_info_title">Thông tin sạc trên màn hình khóa</string>
+    <string name="lockscreen_battery_info_summary">Hiển thị dòng điện, điện áp, công suất và nhiệt độ khi đang sạc</string>
     <!-- Colored icons -->
-    <string name="status_bar_colored_icons_title">Colored icons</string>
-    <string name="status_bar_colored_icons_summary">Use launcher icons for app notifications</string>
+    <string name="status_bar_colored_icons_title">Biểu tượng có màu</string>
+    <string name="status_bar_colored_icons_summary">Dùng biểu tượng của launcher cho thông báo ứng dụng</string>
     <!-- Notification counter -->
-    <string name="status_bar_notif_count_title">Notification count</string>
-    <string name="status_bar_notif_count_summary">Display the number of unread notifications on each app icon</string>
+    <string name="status_bar_notif_count_title">Đếm thông báo</string>
+    <string name="status_bar_notif_count_summary">Hiển thị số lượng thông báo chưa đọc trên biểu tượng ứng dụng</string>
     <!-- Disable QS -->
-    <string name="quick_settings_secure_lock_screen_title">QS on lock screen</string>
-    <string name="quick_settings_secure_lock_screen_summary">Allow swipe down on lock screen to view Quick Settings</string>
+    <string name="quick_settings_secure_lock_screen_title">QS trên màn hình khoá</string>
+    <string name="quick_settings_secure_lock_screen_summary">Cho phép vuốt xuống để mở Quick Settings khi màn hình khoá</string>
     <!-- Lock screen media art -->
-    <string name="ls_media_art_title">Media cover art</string>
-    <string name="ls_media_art_summary">Display media cover art when available</string>
+    <string name="ls_media_art_title">Ảnh bìa media</string>
+    <string name="ls_media_art_summary">Hiển thị ảnh bìa media khi có</string>
     <!-- Lock screen media art on Ambient Display -->
-    <string name="ambient_media_art_title">Ambient media cover art</string>
-    <string name="ambient_media_art_summary">Display media cover art on Ambient display when available</string>
+    <string name="ambient_media_art_title">Ảnh bìa media trên màn hình chờ</string>
+    <string name="ambient_media_art_summary">Hiển thị ảnh bìa media trên màn hình chờ khi có</string>
     <!-- Lock screen album art filter -->
-    <string name="ls_media_art_filter_title">Media cover art filter</string>
-    <string name="ls_media_art_filter_none">None</string>
-    <string name="ls_media_art_filter_blur">Blur</string>
-    <string name="ls_media_art_filter_grayscale">Grayscale</string>
+    <string name="ls_media_art_filter_title">Bộ lọc ảnh bìa media</string>
+    <string name="ls_media_art_filter_none">Không</string>
+    <string name="ls_media_art_filter_blur">Làm mờ</string>
+    <string name="ls_media_art_filter_grayscale">Xám</string>
     <string name="ls_media_art_filter_sepia">Sepia</string>
-    <string name="ls_media_art_filter_tint">Accent tinted</string>
-    <string name="ls_media_art_filter_invert">Invert</string>
-    <string name="ls_media_art_filter_grayblur">Grayscale and blur</string>
+    <string name="ls_media_art_filter_tint">Tô màu theo màu nhấn</string>
+    <string name="ls_media_art_filter_invert">Đảo màu</string>
+    <string name="ls_media_art_filter_grayblur">Xám và mờ</string>
     <!-- Lock screen media art fade level -->
-    <string name="ls_media_art_fade_level_title">Media cover art fade level</string>
-    <string name="ls_media_art_fade_level_summary">Set media cover art fade level</string>
+    <string name="ls_media_art_fade_level_title">Mức độ mờ ảnh bìa media</string>
+    <string name="ls_media_art_fade_level_summary">Đặt mức độ mờ cho ảnh bìa media</string>
     <!-- Lock screen media art blur level -->
-    <string name="ls_media_art_blur_level_title">Media art blur level</string>
-    <string name="ls_media_art_blur_level_summary">Blur intensity when blur filter is applied</string>
+    <string name="ls_media_art_blur_level_title">Mức độ làm mờ media art</string>
+    <string name="ls_media_art_blur_level_summary">Cường độ làm mờ khi bộ lọc mờ được áp dụng</string>
     <!-- Pulse music visualizer -->
     <string name="pulse_settings_title">Pulse Visualizer</string>
-    <string name="pulse_settings_summary">Show a bar visualizer on the lock screen while music is playing</string>
+    <string name="pulse_settings_summary">Hiển thị thanh visualizer trên màn hình khóa khi phát nhạc</string>
     <string name="ambient_pulse_enabled_title">Ambient Pulse</string>
-    <string name="ambient_pulse_enabled_summary">Show visualizer on Ambient Display</string>
-    <string name="pulse_rounded_bars_title">Rounded bars</string>
-    <string name="pulse_rounded_bars_summary">Display visualizer bars with rounded corners</string>
-    <string name="pulse_color">Visualizer color</string>
+    <string name="ambient_pulse_enabled_summary">Hiển thị visualizer trên màn hình Ambient</string>
+    <string name="pulse_rounded_bars_title">Thanh bo tròn</string>
+    <string name="pulse_rounded_bars_summary">Hiển thị thanh visualizer với góc bo tròn</string>
+    <string name="pulse_color">Màu visualizer</string>
     <string name="pulse_color_lavalamp">Lavalamp</string>
-    <string name="pulse_color_album">Album art</string>
-    <string name="pulse_color_accent">Accent color</string>
-    <string name="pulse_bar_count_title">Number of bars</string>
-    <string name="pulse_bar_count_summary">Set how many bars are shown in the visualizer</string>
-    <string name="pulse_bar_count_units">bars</string>
-    <string name="pulse_renderer">Visualizer style</string>
-    <string name="pulse_renderer_solid">Solid lines</string>
-    <string name="pulse_renderer_fading">Fading blocks</string>
+    <string name="pulse_color_album">Ảnh album</string>
+    <string name="pulse_color_accent">Màu nhấn</string>
+    <string name="pulse_bar_count_title">Số lượng thanh</string>
+    <string name="pulse_bar_count_summary">Thiết lập số thanh hiển thị trong visualizer</string>
+    <string name="pulse_bar_count_units">thanh</string>
+    <string name="pulse_renderer">Kiểu visualizer</string>
+    <string name="pulse_renderer_solid">Đường liền</string>
+    <string name="pulse_renderer_fading">Khối mờ dần</string>
     <string name="pulse_renderer_neon_glow">Neon glow</string>
-    <string name="pulse_renderer_retro_vu_meter">Retro VU meter</string>
+    <string name="pulse_renderer_retro_vu_meter">VU meter retro</string>
     <string name="pulse_renderer_minimal_wave">Minimal wave</string>
     <string name="pulse_renderer_sparkle">Sparkle</string>
     <string name="pulse_renderer_matrix">Matrix</string>
     <!-- Spoofing -->
-    <string name="spoofing_title">Component spoofing</string>
-    <string name="spoofing_summary">Bypass app restrictions by spoofing components</string>
-    <string name="spoofing_system_wide_category">System-Wide</string>
-    <string name="spoofing_app_specific_category">App-Specific</string>
+    <string name="spoofing_title">Spoofing thành phần</string>
+    <string name="spoofing_summary">Vượt qua hạn chế ứng dụng bằng cách giả lập thông tin thiết bị</string>
+    <string name="spoofing_system_wide_category">Toàn hệ thống</string>
+    <string name="spoofing_app_specific_category">Theo ứng dụng</string>
     <!-- Google Play Integrity Spoof -->
-    <string name="pi_spoof_title">Google Play Integrity spoof</string>
-    <string name="pi_spoof_summary">Spoof your device as different model for Google Play Integrity</string>
+    <string name="pi_spoof_title">Giả mạo Google Play Integrity</string>
+    <string name="pi_spoof_summary">Giả mạo thiết bị thành model khác để vượt kiểm tra Google Play Integrity</string>
     <!-- Pixel Spoof -->
-    <string name="pixel_spoof_title">Pixel props spoof</string>
-    <string name="pixel_spoof_summary">Spoof a select group of Google apps to the latest Pixel device</string>
+    <string name="pixel_spoof_title">Giả mạo thông số Pixel</string>
+    <string name="pixel_spoof_summary">Giả mạo một số ứng dụng Google thành thiết bị Pixel mới nhất</string>
     <!-- Google Photos Spoof -->
-    <string name="gphotos_spoof_title">Unlimited Photos storage</string>
-    <string name="gphotos_spoof_summary">Spoof your device as Pixel XL for Google Photos app only</string>
+    <string name="gphotos_spoof_title">Lưu trữ Google Photos không giới hạn</string>
+    <string name="gphotos_spoof_summary">Giả mạo thiết bị thành Pixel XL chỉ cho ứng dụng Google Photos</string>
     <!-- Pif Data -->
-    <string name="pif_data_title">Select PIF JSON to spoof</string>
-    <string name="pif_data_summary">Select PIF JSON used for prop attestation spoofing for GMS and play store.</string>
-    <string name="pif_data_loaded">PIF JSON loaded</string>
-    <string name="pif_data_cleared">PIF JSON cleared</string>
-    <string name="pif_data_invalid_file">Invalid JSON file</string>
-    <string name="pif_data_failed">Failed to read JSON</string>
-    <string name="pif_current_title">Current Play Integrity Profile</string>
-    <string name="pif_current_summary">Tap to view active PIF</string>
+    <string name="pif_data_title">Chọn PIF JSON để giả mạo</string>
+    <string name="pif_data_summary">Chọn file PIF JSON dùng để giả mạo attestation cho GMS và Play Store.</string>
+    <string name="pif_data_loaded">Đã tải PIF JSON</string>
+    <string name="pif_data_cleared">Đã xoá PIF JSON</string>
+    <string name="pif_data_invalid_file">File JSON không hợp lệ</string>
+    <string name="pif_data_failed">Không thể đọc file JSON</string>
+    <string name="pif_current_title">Thông tin PIF</string>
+    <string name="pif_current_summary">Thông tin thiết bị PIF đang sử dụng để giả mạo</string>
     <!-- Spoofing/Keybox Data -->
-    <string name="keybox_data_title">Select keybox XML to spoof</string>
-    <string name="keybox_data_summary">Select the keybox XML used for system-wide key attestation spoofing.</string>
-    <string name="keybox_data_loaded">Keybox XML loaded</string>
-    <string name="keybox_data_failed">Failed to read XML</string>
-    <string name="keybox_data_invalid_file">Invalid file selected</string>
-    <string name="keybox_data_invalid_xml">Invalid XML: missing required data</string>
-    <string name="keybox_data_cleared">XML data cleared</string>
+    <string name="keybox_data_title">Ghi đè attestation Keybox</string>
+    <string name="keybox_data_summary">Tải file keybox XML tùy chỉnh để ghi đè attestation của thiết bị</string>
+    <string name="keybox_data_loaded">Đã tải keybox XML</string>
+    <string name="keybox_data_failed">Không thể đọc file XML</string>
+    <string name="keybox_data_invalid_file">File được chọn không hợp lệ</string>
+    <string name="keybox_data_invalid_xml">XML không hợp lệ: thiếu dữ liệu cần thiết</string>
+    <string name="keybox_data_cleared">Đã xoá dữ liệu XML</string>
     <!-- App Spoofing -->
-    <string name="app_spoof_title">App Spoofing</string>
-    <string name="app_spoof_summary">Spoof Build properties per-app</string>
-    <string name="app_spoof_category_settings">Settings</string>
-    <string name="app_spoof_category_apps">Configured apps</string>
-    <string name="app_spoof_enabled_title">Enable app spoofing</string>
-    <string name="app_spoof_enabled_summary">Apply Build property overrides per-app</string>
-    <string name="app_spoof_show_uninstalled_title">Show uninstalled apps</string>
-    <string name="app_spoof_show_uninstalled_summary">Display entries for apps that are not currently installed</string>
-    <string name="app_spoof_empty">No apps configured.</string>
-    <string name="app_spoof_all_hidden">All entries are for uninstalled apps. Enable \"Show uninstalled apps\" to view them.</string>
-    <string name="app_spoof_not_installed">Not installed</string>
-    <string name="app_spoof_add_app">Add app</string>
-    <string name="app_spoof_manage_presets">Manage presets</string>
-    <string name="app_spoof_import_json">Import JSON</string>
-    <string name="app_spoof_export_json">Export JSON</string>
-    <string name="app_spoof_edit_app">Edit</string>
-    <string name="app_spoof_save_as_preset">Save as preset</string>
-    <string name="app_spoof_delete_app">Delete</string>
-    <string name="app_spoof_preset_pick">Use preset profile</string>
-    <string name="app_spoof_edit_preset">Edit preset</string>
-    <string name="app_spoof_delete_preset">Delete preset</string>
-    <string name="app_spoof_no_presets">No presets saved yet. Add an app and use \"Save as preset\".</string>
-    <string name="app_spoof_preset_name_label">Preset name</string>
-    <string name="app_spoof_preset_name_hint">e.g. My ROG Phone</string>
-    <string name="app_spoof_confirm_delete_title">Remove entry?</string>
-    <string name="app_spoof_confirm_delete_msg">Remove spoofing for %1$s?</string>
-    <string name="app_spoof_confirm_delete_preset_msg">Delete preset \"%1$s\"?</string>
-    <string name="app_spoof_hint_package">Package name</string>
-    <string name="app_spoof_hint_manufacturer">MANUFACTURER ✱ required</string>
-    <string name="app_spoof_hint_model">MODEL ✱ required</string>
+    <string name="app_spoof_title">Giả lập ứng dụng</string>
+    <string name="app_spoof_summary">Giả lập thuộc tính Build theo từng ứng dụng</string>
+    <string name="app_spoof_category_settings">Cài đặt</string>
+    <string name="app_spoof_category_apps">Ứng dụng đã cấu hình</string>
+    <string name="app_spoof_enabled_title">Bật giả lập ứng dụng</string>
+    <string name="app_spoof_enabled_summary">Áp dụng ghi đè thuộc tính Build cho từng ứng dụng</string>
+    <string name="app_spoof_show_uninstalled_title">Hiển thị ứng dụng chưa cài đặt</string>
+    <string name="app_spoof_show_uninstalled_summary">Hiển thị các mục cho ứng dụng hiện chưa được cài đặt</string>
+    <string name="app_spoof_empty">Chưa có ứng dụng nào được cấu hình.</string>
+    <string name="app_spoof_all_hidden">Tất cả mục đều thuộc ứng dụng chưa cài đặt. Bật \"Hiển thị ứng dụng chưa cài đặt\" để xem.</string>
+    <string name="app_spoof_not_installed">Chưa cài đặt</string>
+    <string name="app_spoof_add_app">Thêm ứng dụng</string>
+    <string name="app_spoof_manage_presets">Quản lý preset</string>
+    <string name="app_spoof_import_json">Nhập JSON</string>
+    <string name="app_spoof_export_json">Xuất JSON</string>
+    <string name="app_spoof_edit_app">Chỉnh sửa</string>
+    <string name="app_spoof_save_as_preset">Lưu thành preset</string>
+    <string name="app_spoof_delete_app">Xóa</string>
+    <string name="app_spoof_preset_pick">Sử dụng hồ sơ preset</string>
+    <string name="app_spoof_edit_preset">Chỉnh sửa preset</string>
+    <string name="app_spoof_delete_preset">Xóa preset</string>
+    <string name="app_spoof_no_presets">Chưa có preset nào. Thêm ứng dụng và dùng \"Lưu thành preset\".</string>
+    <string name="app_spoof_preset_name_label">Tên preset</string>
+    <string name="app_spoof_preset_name_hint">ví dụ: ROG Phone của tôi</string>
+    <string name="app_spoof_confirm_delete_title">Xóa mục?</string>
+    <string name="app_spoof_confirm_delete_msg">Xóa giả lập cho %1$s?</string>
+    <string name="app_spoof_confirm_delete_preset_msg">Xóa preset \"%1$s\"?</string>
+    <string name="app_spoof_hint_package">Tên package</string>
+    <string name="app_spoof_hint_manufacturer">MANUFACTURER ✱ bắt buộc</string>
+    <string name="app_spoof_hint_model">MODEL ✱ bắt buộc</string>
     <string name="app_spoof_hint_brand">BRAND</string>
     <string name="app_spoof_hint_device">DEVICE</string>
     <string name="app_spoof_hint_fingerprint">FINGERPRINT</string>
     <string name="app_spoof_hint_product">PRODUCT</string>
-    <string name="app_spoof_required_hint">Required</string>
-    <string name="app_spoof_optional_hint">Optional</string>
-    <string name="app_spoof_err_empty_pkg">Package name cannot be empty</string>
-    <string name="app_spoof_err_required_manufacturer">MANUFACTURER is required</string>
-    <string name="app_spoof_err_required_model">MODEL is required</string>
-    <string name="app_spoof_err_preset_name_empty">Preset name cannot be empty</string>
-    <string name="app_spoof_saved">Saved</string>
-    <string name="app_spoof_deleted">Deleted</string>
-    <string name="app_spoof_preset_saved">Preset saved</string>
-    <string name="app_spoof_import_success">Imported %1$d app(s)</string>
-    <string name="app_spoof_import_empty">No valid entries found in file</string>
-    <string name="app_spoof_import_fail">Import failed — check JSON format</string>
-    <string name="app_spoof_export_success">Config exported successfully</string>
-    <string name="app_spoof_export_fail">Export failed</string>
-    <string name="app_spoof_add_preset">Add preset</string>
-    <string name="app_spoof_no_presets_item">No presets yet</string>
-    <string name="app_spoof_clear_all">Clear all</string>
-    <string name="app_spoof_confirm_clear_all_msg">Remove all app spoofing entries?</string>
-    <string name="app_spoof_cleared">All entries cleared</string>
+    <string name="app_spoof_required_hint">Bắt buộc</string>
+    <string name="app_spoof_optional_hint">Tùy chọn</string>
+    <string name="app_spoof_err_empty_pkg">Tên package không được để trống</string>
+    <string name="app_spoof_err_required_manufacturer">MANUFACTURER là bắt buộc</string>
+    <string name="app_spoof_err_required_model">MODEL là bắt buộc</string>
+    <string name="app_spoof_err_preset_name_empty">Tên preset không được để trống</string>
+    <string name="app_spoof_saved">Đã lưu</string>
+    <string name="app_spoof_deleted">Đã xóa</string>
+    <string name="app_spoof_preset_saved">Đã lưu preset</string>
+    <string name="app_spoof_import_success">Đã nhập %1$d ứng dụng</string>
+    <string name="app_spoof_import_empty">Không tìm thấy mục hợp lệ trong tệp</string>
+    <string name="app_spoof_import_fail">Nhập thất bại — kiểm tra định dạng JSON</string>
+    <string name="app_spoof_export_success">Xuất cấu hình thành công</string>
+    <string name="app_spoof_export_fail">Xuất thất bại</string>
+    <string name="app_spoof_add_preset">Thêm preset</string>
+    <string name="app_spoof_no_presets_item">Chưa có preset</string>
+    <string name="app_spoof_clear_all">Xóa tất cả</string>
+    <string name="app_spoof_confirm_clear_all_msg">Xóa tất cả các cấu hình giả mạo?</string>
+    <string name="app_spoof_cleared">Đã xóa tất cả</string>
 </resources>
