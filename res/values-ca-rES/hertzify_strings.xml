@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2026 HertzifyOS
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Hertzify -->
+    <string name="hertzify_dashboard_title">Hertzify Settings</string>
+    <string name="hertzify_dashboard_summary">Tune your system to the right frequency</string>
+    <!-- Categories -->
+    <string name="status_bar_title">Status bar</string>
+    <string name="status_bar_summary">Gestures, Icons, privacy indicators</string>
+    <string name="quick_settings_title">Quick settings</string>
+    <string name="quick_settings_summary">Interface, lock screen</string>
+    <string name="notifications_title">Notifications</string>
+    <string name="notifications_summary">Alerts, interface</string>
+    <string name="themes_title">Themes</string>
+    <string name="themes_summary">Monet, fonts, icons</string>
+    <string name="lock_screen_title">Lock screen</string>
+    <string name="lock_screen_summary">Interface, miscellaneous</string>
+    <string name="miscellaneous_title">Miscellaneous</string>
+    <string name="miscellaneous_summary">Developer options, spoofing</string>
+    <string name="about_title">About</string>
+    <string name="about_summary">About HertzifyOS</string>
+    <!-- About -->
+    <string name="about_info">    HertzifyOS is designed to keep your system in perfect rhythm — offering a clean AOSP experience with powerful customization features at your fingertips
+    </string>
+    <string name="about_website_title">Website</string>
+    <string name="about_website_summary">Feel free to drop by our website</string>
+    <string name="about_telegram_summary">Come see our Telegram</string>
+    <string name="about_github_summary">Check out our GitHub</string>
+    <string name="about_contributors_title">Contributors</string>
+    <!-- Custom seekbar -->
+    <string name="custom_seekbar_value">Value: <xliff:g id="v">%s</xliff:g></string>
+    <string name="custom_seekbar_default_value">by default</string>
+    <string name="custom_seekbar_default_value_to_set">Default value: <xliff:g id="v">%s</xliff:g>\nLong tap to set</string>
+    <string name="custom_seekbar_default_value_is_set">Default value is set</string>
+    <!-- Color Picker -->
+    <string name="dialog_color_picker">Color Picker</string>
+    <string name="press_color_to_apply">Press on color below to apply</string>
+    <string name="set">Set</string>
+    <string name="color_default">Default</string>
+    <!-- Proper seekbar -->
+    <string name="proper_seekbar_value">Value: <xliff:g id="v">%s</xliff:g></string>
+    <string name="proper_seekbar_default_value">Default</string>
+    <string name="proper_seekbar_default_value_to_set">Default value: <xliff:g id="v">%s</xliff:g>\nLong press to set</string>
+    <string name="proper_seekbar_default_value_is_set">Default value is set</string>
+    <!-- App list fragment -->
+    <string name="search">Search</string>
+    <string name="search_apps">Search apps</string>
+    <!-- Status bar Icon Manager -->
+    <string name="icon_manager_title">Status bar items</string>
+    <string name="icon_manager_summary">Control visibility of status bar icons</string>
+    <!-- Heads-up -->
+    <string name="heads_up_notifications_enabled_title">Heads-up</string>
+    <string name="heads_up_notifications_enabled_summary">Display priority notifications in a small floating window</string>
+    <!-- Wake on plug -->
+    <string name="wake_when_plugged_or_unplugged_title">Wake on plug</string>
+    <string name="wake_when_plugged_or_unplugged_summary">Turn the screen on when connecting or disconnecting a power source</string>
+    <!-- Global Actions -->
+    <string name="global_actions_advanced_reboot_title">Enable advanced restart</string>
+    <string name="global_actions_advanced_reboot_summary">Show options for recovery and bootloader in power menu</string>
+    <!-- Floating rotation button -->
+    <string name="floating_rotation_button_title">Floating rotate button</string>
+    <string name="floating_rotation_button_summary">Show a floating rotate button when device is rotated</string>
+    <!-- Notifications/Compact Heads-up -->
+    <string name="compact_heads_up_notifications_enabled_title">Compact heads-up</string>
+    <string name="compact_heads_up_notifications_enabled_summary">Display notifications in compact size</string>
+    <!-- Brightness Slider -->
+    <string name="status_bar_brightness_slider_title">Brightness slider</string>
+    <string name="status_bar_brightness_slider_summary">Adjust brightness from the Quick Settings</string>
+    <string name="status_bar_brightness_slider_position_title">Brightness slider position</string>
+    <string name="status_bar_brightness_slider_position_top">Top</string>
+    <string name="status_bar_brightness_slider_position_bottom">Bottom</string>
+    <string name="status_bar_brightness_slider_auto_title">Auto brightness button</string>
+    <string name="status_bar_brightness_slider_auto_summary">Show toggle for adaptive brightness near the slider</string>
+    <!-- Hide screen capture status -->
+    <string name="hide_screen_capture_status_title">Hide screen capture status</string>
+    <string name="hide_screen_capture_status_summary">Hide screen capture and screen record status from all applications. Can be convenient in some cases but may lead to privacy leaks. Need to restart applications for the change to take effect.</string>
+    <!-- No storage restrict -->
+    <string name="no_storage_restrict_title">No storage restrict</string>
+    <string name="no_storage_restrict_summary">Remove the restriction when selecting folders through Storage Access Framework. Can be convenient in some cases but may lead to privacy leaks.</string>
+    <!-- Unlimit screenrecord -->
+    <string name="unlimit_screenrecord_title">Unlimit screenrecord</string>
+    <string name="unlimit_screenrecord_summary">Remove the 15GiB file size limit\nMay result in a larger than needed output file</string>
+    <!-- Ignore window secure -->
+    <string name="ignore_window_secure_title">Ignore window secure flags</string>
+    <string name="ignore_window_secure_summary">Remove screenshot and screenrecord limits for all apps. This can be convenient in some cases but may lead to privacy leaks.</string>
+    <!-- Hide developer status -->
+    <string name="hide_developer_status_title">Hide developer status</string>
+    <string name="hide_developer_status_summary">Hide developer status from apps</string>
+    <!-- Hide applist -->
+    <string name="hide_applist_title">Hide applist</string>
+    <string name="hide_applist_summary">Prevent apps from checking selected apps from appslist</string>
+    <string name="menu_show_overlay">Show overlay</string>
+    <string name="menu_hide_overlay">Hide overlay</string>
+    <!-- Double tap to sleep on status bar or lockscreen -->
+    <string name="status_bar_double_tap_to_sleep_title">Tap to sleep</string>
+    <string name="status_bar_double_tap_to_sleep_summary">Double-tap on the status bar to turn off the display</string>
+    <!-- Lockscreen battery info indicator -->
+    <string name="lockscreen_battery_info_title">Charging Info on Lock Screen</string>
+    <string name="lockscreen_battery_info_summary">Show current, voltage, wattage, and temperature while charging</string>
+    <!-- Colored icons -->
+    <string name="status_bar_colored_icons_title">Colored icons</string>
+    <string name="status_bar_colored_icons_summary">Use launcher icons for app notifications</string>
+    <!-- Notification counter -->
+    <string name="status_bar_notif_count_title">Notification count</string>
+    <string name="status_bar_notif_count_summary">Display the number of unread notifications on each app icon</string>
+    <!-- Disable QS -->
+    <string name="quick_settings_secure_lock_screen_title">QS on lock screen</string>
+    <string name="quick_settings_secure_lock_screen_summary">Allow swipe down on lock screen to view Quick Settings</string>
+    <!-- Lock screen media art -->
+    <string name="ls_media_art_title">Media cover art</string>
+    <string name="ls_media_art_summary">Display media cover art when available</string>
+    <!-- Lock screen media art on Ambient Display -->
+    <string name="ambient_media_art_title">Ambient media cover art</string>
+    <string name="ambient_media_art_summary">Display media cover art on Ambient display when available</string>
+    <!-- Lock screen album art filter -->
+    <string name="ls_media_art_filter_title">Media cover art filter</string>
+    <string name="ls_media_art_filter_none">None</string>
+    <string name="ls_media_art_filter_blur">Blur</string>
+    <string name="ls_media_art_filter_grayscale">Grayscale</string>
+    <string name="ls_media_art_filter_sepia">Sepia</string>
+    <string name="ls_media_art_filter_tint">Accent tinted</string>
+    <string name="ls_media_art_filter_invert">Invert</string>
+    <string name="ls_media_art_filter_grayblur">Grayscale and blur</string>
+    <!-- Lock screen media art fade level -->
+    <string name="ls_media_art_fade_level_title">Media cover art fade level</string>
+    <string name="ls_media_art_fade_level_summary">Set media cover art fade level</string>
+    <!-- Lock screen media art blur level -->
+    <string name="ls_media_art_blur_level_title">Media art blur level</string>
+    <string name="ls_media_art_blur_level_summary">Blur intensity when blur filter is applied</string>
+    <!-- Pulse music visualizer -->
+    <string name="pulse_settings_title">Pulse Visualizer</string>
+    <string name="pulse_settings_summary">Show a bar visualizer on the lock screen while music is playing</string>
+    <string name="ambient_pulse_enabled_title">Ambient Pulse</string>
+    <string name="ambient_pulse_enabled_summary">Show visualizer on Ambient Display</string>
+    <string name="pulse_rounded_bars_title">Rounded bars</string>
+    <string name="pulse_rounded_bars_summary">Display visualizer bars with rounded corners</string>
+    <string name="pulse_color">Visualizer color</string>
+    <string name="pulse_color_lavalamp">Lavalamp</string>
+    <string name="pulse_color_album">Album art</string>
+    <string name="pulse_color_accent">Accent color</string>
+    <string name="pulse_bar_count_title">Number of bars</string>
+    <string name="pulse_bar_count_summary">Set how many bars are shown in the visualizer</string>
+    <string name="pulse_bar_count_units">bars</string>
+    <string name="pulse_renderer">Visualizer style</string>
+    <string name="pulse_renderer_solid">Solid lines</string>
+    <string name="pulse_renderer_fading">Fading blocks</string>
+    <string name="pulse_renderer_neon_glow">Neon glow</string>
+    <string name="pulse_renderer_retro_vu_meter">Retro VU meter</string>
+    <string name="pulse_renderer_minimal_wave">Minimal wave</string>
+    <string name="pulse_renderer_sparkle">Sparkle</string>
+    <string name="pulse_renderer_matrix">Matrix</string>
+    <!-- Spoofing -->
+    <string name="spoofing_title">Component spoofing</string>
+    <string name="spoofing_summary">Bypass app restrictions by spoofing components</string>
+    <string name="spoofing_system_wide_category">System-Wide</string>
+    <string name="spoofing_app_specific_category">App-Specific</string>
+    <!-- Google Play Integrity Spoof -->
+    <string name="pi_spoof_title">Google Play Integrity spoof</string>
+    <string name="pi_spoof_summary">Spoof your device as different model for Google Play Integrity</string>
+    <!-- Pixel Spoof -->
+    <string name="pixel_spoof_title">Pixel props spoof</string>
+    <string name="pixel_spoof_summary">Spoof a select group of Google apps to the latest Pixel device</string>
+    <!-- Google Photos Spoof -->
+    <string name="gphotos_spoof_title">Unlimited Photos storage</string>
+    <string name="gphotos_spoof_summary">Spoof your device as Pixel XL for Google Photos app only</string>
+    <!-- Pif Data -->
+    <string name="pif_data_title">Select PIF JSON to spoof</string>
+    <string name="pif_data_summary">Select PIF JSON used for prop attestation spoofing for GMS and play store.</string>
+    <string name="pif_data_loaded">PIF JSON loaded</string>
+    <string name="pif_data_cleared">PIF JSON cleared</string>
+    <string name="pif_data_invalid_file">Invalid JSON file</string>
+    <string name="pif_data_failed">Failed to read JSON</string>
+    <string name="pif_current_title">Current Play Integrity Profile</string>
+    <string name="pif_current_summary">Tap to view active PIF</string>
+    <!-- Spoofing/Keybox Data -->
+    <string name="keybox_data_title">Select keybox XML to spoof</string>
+    <string name="keybox_data_summary">Select the keybox XML used for system-wide key attestation spoofing.</string>
+    <string name="keybox_data_loaded">Keybox XML loaded</string>
+    <string name="keybox_data_failed">Failed to read XML</string>
+    <string name="keybox_data_invalid_file">Invalid file selected</string>
+    <string name="keybox_data_invalid_xml">Invalid XML: missing required data</string>
+    <string name="keybox_data_cleared">XML data cleared</string>
+    <!-- App Spoofing -->
+    <string name="app_spoof_title">App Spoofing</string>
+    <string name="app_spoof_summary">Spoof Build properties per-app</string>
+    <string name="app_spoof_category_settings">Settings</string>
+    <string name="app_spoof_category_apps">Configured apps</string>
+    <string name="app_spoof_enabled_title">Enable app spoofing</string>
+    <string name="app_spoof_enabled_summary">Apply Build property overrides per-app</string>
+    <string name="app_spoof_show_uninstalled_title">Show uninstalled apps</string>
+    <string name="app_spoof_show_uninstalled_summary">Display entries for apps that are not currently installed</string>
+    <string name="app_spoof_empty">No apps configured.</string>
+    <string name="app_spoof_all_hidden">All entries are for uninstalled apps. Enable \"Show uninstalled apps\" to view them.</string>
+    <string name="app_spoof_not_installed">Not installed</string>
+    <string name="app_spoof_add_app">Add app</string>
+    <string name="app_spoof_manage_presets">Manage presets</string>
+    <string name="app_spoof_import_json">Import JSON</string>
+    <string name="app_spoof_export_json">Export JSON</string>
+    <string name="app_spoof_edit_app">Edit</string>
+    <string name="app_spoof_save_as_preset">Save as preset</string>
+    <string name="app_spoof_delete_app">Delete</string>
+    <string name="app_spoof_preset_pick">Use preset profile</string>
+    <string name="app_spoof_edit_preset">Edit preset</string>
+    <string name="app_spoof_delete_preset">Delete preset</string>
+    <string name="app_spoof_no_presets">No presets saved yet. Add an app and use \"Save as preset\".</string>
+    <string name="app_spoof_preset_name_label">Preset name</string>
+    <string name="app_spoof_preset_name_hint">e.g. My ROG Phone</string>
+    <string name="app_spoof_confirm_delete_title">Remove entry?</string>
+    <string name="app_spoof_confirm_delete_msg">Remove spoofing for %1$s?</string>
+    <string name="app_spoof_confirm_delete_preset_msg">Delete preset \"%1$s\"?</string>
+    <string name="app_spoof_hint_package">Package name</string>
+    <string name="app_spoof_hint_manufacturer">MANUFACTURER ✱ required</string>
+    <string name="app_spoof_hint_model">MODEL ✱ required</string>
+    <string name="app_spoof_hint_brand">BRAND</string>
+    <string name="app_spoof_hint_device">DEVICE</string>
+    <string name="app_spoof_hint_fingerprint">FINGERPRINT</string>
+    <string name="app_spoof_hint_product">PRODUCT</string>
+    <string name="app_spoof_required_hint">Required</string>
+    <string name="app_spoof_optional_hint">Optional</string>
+    <string name="app_spoof_err_empty_pkg">Package name cannot be empty</string>
+    <string name="app_spoof_err_required_manufacturer">MANUFACTURER is required</string>
+    <string name="app_spoof_err_required_model">MODEL is required</string>
+    <string name="app_spoof_err_preset_name_empty">Preset name cannot be empty</string>
+    <string name="app_spoof_saved">Saved</string>
+    <string name="app_spoof_deleted">Deleted</string>
+    <string name="app_spoof_preset_saved">Preset saved</string>
+    <string name="app_spoof_import_success">Imported %1$d app(s)</string>
+    <string name="app_spoof_import_empty">No valid entries found in file</string>
+    <string name="app_spoof_import_fail">Import failed — check JSON format</string>
+    <string name="app_spoof_export_success">Config exported successfully</string>
+    <string name="app_spoof_export_fail">Export failed</string>
+    <string name="app_spoof_add_preset">Add preset</string>
+    <string name="app_spoof_no_presets_item">No presets yet</string>
+    <string name="app_spoof_clear_all">Clear all</string>
+    <string name="app_spoof_confirm_clear_all_msg">Remove all app spoofing entries?</string>
+    <string name="app_spoof_cleared">All entries cleared</string>
+</resources>
