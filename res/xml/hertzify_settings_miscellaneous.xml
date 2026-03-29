@@ -68,4 +68,11 @@
         android:summary="@string/hide_applist_summary"
         android:fragment="com.hertzify.settings.fragments.miscellaneous.HideAppListSettings" />
 
+
+    <!-- Notification bubble apps -->
+    <com.hertzify.settings.preferences.SystemSettingSwitchPreference
+        android:key="notification_bubble_apps"
+        android:title="@string/notification_bubble_apps_title"
+        android:summary="@string/notification_bubble_apps_summary"
+        android:defaultValue="false" />
 </PreferenceScreen>
