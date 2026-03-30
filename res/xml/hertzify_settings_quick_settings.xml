@@ -47,4 +47,12 @@
         android:title="@string/quick_settings_secure_lock_screen_title"
         android:summary="@string/quick_settings_secure_lock_screen_summary"
         android:defaultValue="true" />
+
+    <!-- QS media player -->
+    <com.hertzify.settings.preferences.SecureSettingSwitchPreference
+        android:key="qs_show_media_player"
+        android:title="@string/qs_show_media_player_title"
+        android:summary="@string/qs_show_media_player_summary"
+        android:defaultValue="true" />
+
 </PreferenceScreen>
