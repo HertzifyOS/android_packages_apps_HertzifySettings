@@ -21,6 +21,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.search.SearchIndexable;
 
+import com.hertzify.settings.preferences.SecureSettingSwitchPreference;
 import com.hertzify.settings.preferences.SystemSettingSwitchPreference;
 
 import com.hertzify.settings.utils.SystemUtils;
@@ -34,8 +35,10 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String TAG = "QuickSettings";
 
     private static final String KEY_SINGLE_QS_TONE_ENABLED = "single_qs_tone_enabled";
-    
+    private static final String KEY_QS_SHOW_MEDIA_PLAYER = "qs_show_media_player";
+
     private SystemSettingSwitchPreference mSingleQsToneEnabled;
+    private SecureSettingSwitchPreference mQsShowMediaPlayer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,11 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         if (mSingleQsToneEnabled != null) {
             mSingleQsToneEnabled.setOnPreferenceChangeListener(this);
         }
+
+        mQsShowMediaPlayer = (SecureSettingSwitchPreference) findPreference(KEY_QS_SHOW_MEDIA_PLAYER);
+        if (mQsShowMediaPlayer != null) {
+            mQsShowMediaPlayer.setOnPreferenceChangeListener(this);
+        }
     }
 
     @Override
@@ -58,6 +66,9 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         final Context context = getContext();
         final ContentResolver resolver = context.getContentResolver();
         if (preference == mSingleQsToneEnabled) {
+            SystemUtils.showSystemUiRestartDialog(getActivity());
+            return true;
+        } else if (preference == mQsShowMediaPlayer) {
             SystemUtils.showSystemUiRestartDialog(getActivity());
             return true;
         } 
