@@ -490,4 +490,8 @@
     <!-- Emoji style -->
     <string name="emoji_style_title">Emoji style</string>
     <string name="emoji_style_summary">Choose the system emoji pack without changing text fonts</string>
+
+    <!-- QS media player -->
+    <string name="qs_show_media_player_title">QS Media player</string>
+    <string name="qs_show_media_player_summary">Display media controls in Quick Settings</string>
 </resources>
