@@ -238,4 +238,35 @@
     <string name="pif_options_category">PIF Options</string>
     <string name="pif_spoof_photos_title">Spoof Google Photos</string>
     <string name="pif_spoof_photos_summary">Appear as Pixel XL for unlimited original quality backup</string>
+
+    <!-- Keybox & TrickyStore -->
+    <string name="keybox_category_title">Keybox (TrickyStore)</string>
+    <string name="keybox_import_title">Import Keybox</string>
+    <string name="keybox_loaded">Keybox loaded ✓</string>
+    <string name="keybox_not_found">No keybox found</string>
+    <string name="keybox_import_success">Keybox imported successfully</string>
+    <string name="keybox_import_failed">Import failed: %1$s</string>
+    <string name="keybox_delete_pref_title">Delete Keybox</string>
+    <string name="keybox_delete_summary">Remove the current keybox.xml file</string>
+    <string name="keybox_delete_title">Delete Keybox?</string>
+    <string name="keybox_delete_message">The keybox.xml file will be permanently removed. Attestation will fall back to the system default.</string>
+    <string name="keybox_deleted">Keybox deleted</string>
+    <!-- Target apps -->
+    <string name="target_category_title">Target Apps (TrickyStore)</string>
+    <string name="target_screen_title">Target Apps</string>
+    <string name="target_manage_title">Manage Target Apps</string>
+    <string name="target_no_apps">No apps configured</string>
+    <string name="target_apps_count">%1$d apps configured</string>
+    <string name="target_import_title">Import target.txt</string>
+    <string name="target_import_summary">Load a pre-built target list from file</string>
+    <string name="target_import_success">Target list imported</string>
+    <string name="target_import_failed">Import failed: %1$s</string>
+    <!-- Target app modes -->
+    <string name="target_mode_auto">Auto</string>
+    <string name="target_mode_leaf_hack">Leaf Hack</string>
+    <string name="target_mode_cert_gen">Cert Gen</string>
+    <!-- Target apps screen -->
+    <string name="show_system_apps">Show system apps</string>
+    <string name="selected_count">%1$d selected</string>
+    <string name="loading_apps">Loading apps…</string>
 </resources>
