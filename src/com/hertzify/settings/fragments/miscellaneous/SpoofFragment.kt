@@ -26,10 +26,23 @@ class SpoofFragment : SettingsPreferenceFragment() {
         }
     }
 
+    private val keyboxPicker = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            result.data?.data?.let { uri -> viewModel.importKeybox(uri) }
+        }
+    }
+
+    private val targetFilePicker = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            result.data?.data?.let { uri -> importTargetFile(uri) }
+        }
+    }
+
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.spoof_settings, rootKey)
 
         setupPifPreferences()
+        setupTrickyStorePreferences()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -67,6 +80,36 @@ class SpoofFragment : SettingsPreferenceFragment() {
         }
     }
 
+    private fun setupTrickyStorePreferences() {
+        findPreference<Preference>("keybox_import")?.setOnPreferenceClickListener {
+            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+                addCategory(Intent.CATEGORY_OPENABLE)
+                type = "*/*"
+            }
+            keyboxPicker.launch(intent); true
+        }
+
+        findPreference<Preference>("keybox_delete")?.setOnPreferenceClickListener {
+            showDeleteKeyboxDialog(); true
+        }
+
+        findPreference<Preference>("target_manage_apps")?.setOnPreferenceClickListener {
+            val intent = Intent(requireContext(), com.android.settings.SubSettings::class.java).apply {
+                putExtra(":settings:show_fragment", TrickyStoreAppList::class.java.name)
+            }
+            startActivity(intent); true
+        }
+
+        findPreference<Preference>("target_import_file")?.setOnPreferenceClickListener {
+            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+                addCategory(Intent.CATEGORY_OPENABLE)
+                type = "text/plain"
+            }
+            targetFilePicker.launch(intent)
+            true
+        }
+    }
+
     private fun observeViewModel() {
         viewModel.isFetching.observe(viewLifecycleOwner) { fetching ->
             findPreference<Preference>("pif_fetch")?.isEnabled = !fetching
@@ -80,6 +123,19 @@ class SpoofFragment : SettingsPreferenceFragment() {
                 this.isEnabled = hasConfig
             }
             findPreference<Preference>("pif_delete")?.isEnabled = hasConfig
+        }
+
+        viewModel.keyboxStatus.observe(viewLifecycleOwner) { status ->
+            findPreference<Preference>("keybox_import")?.summary = status
+            findPreference<Preference>("keybox_delete")?.isEnabled = !status.contains(getString(R.string.keybox_not_found))
+        }
+
+        viewModel.targetAppCount.observe(viewLifecycleOwner) { count ->
+            findPreference<Preference>("target_manage_apps")?.summary = if (count > 0) {
+                getString(R.string.target_apps_count, count)
+            } else {
+                getString(R.string.target_no_apps)
+            }
         }
 
         viewModel.toastEvent.observe(viewLifecycleOwner) { event ->
@@ -102,6 +158,19 @@ class SpoofFragment : SettingsPreferenceFragment() {
         }
     }
 
+    private fun importTargetFile(uri: Uri) {
+        try {
+            val lines = requireContext().contentResolver.openInputStream(uri)?.use { input ->
+                input.bufferedReader().readLines().filter { it.isNotBlank() }
+            } ?: emptyList()
+            if (lines.isNotEmpty()) {
+                viewModel.importTargetList(lines)
+            }
+        } catch (e: Exception) {
+            Toast.makeText(context, "Import target failed", Toast.LENGTH_SHORT).show()
+        }
+    }
+    
     private fun getFileName(uri: Uri): String? {
         requireContext().contentResolver.query(uri, null, null, null, null)?.use {
             if (it.moveToFirst()) return it.getString(it.getColumnIndexOrThrow(OpenableColumns.DISPLAY_NAME))
@@ -138,9 +207,19 @@ class SpoofFragment : SettingsPreferenceFragment() {
             .show()
     }
 
+    private fun showDeleteKeyboxDialog() {
+        AlertDialog.Builder(requireContext())
+            .setTitle(R.string.keybox_delete_title)
+            .setMessage(R.string.keybox_delete_message)
+            .setPositiveButton(R.string.delete) { _, _ -> viewModel.deleteKeybox() }
+            .setNegativeButton(android.R.string.cancel, null)
+            .show()
+    }
+    
     override fun onResume() {
         super.onResume()
         activity?.title = getString(R.string.spoof_screen_title)
+        viewModel.refreshTrickyStatus()
     }
 
     override fun getMetricsCategory(): Int = MetricsProto.MetricsEvent.HERTZIFY

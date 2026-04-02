@@ -244,4 +244,31 @@
     <string name="pif_import_success">Imported %1$s successfully</string>
     <string name="pif_import_failed">Failed to import configuration</string>
     <string name="pif_no_valid_ota">No valid beta OTA found</string>
+
+    <!-- Keybox & TrickyStore -->
+    <string name="keybox_category_title">Keybox (TrickyStore)</string>
+    <string name="keybox_import_title">Import Keybox</string>
+    <string name="keybox_loaded">Keybox loaded ✓</string>
+    <string name="keybox_not_found">No keybox found</string>
+    <string name="keybox_import_success">Keybox imported successfully</string>
+    <string name="keybox_import_failed">Import failed: %1$s</string>
+    <string name="keybox_delete_pref_title">Delete Keybox</string>
+    <string name="keybox_delete_summary">Remove the current keybox.xml file</string>
+    <string name="keybox_delete_title">Delete Keybox?</string>
+    <string name="keybox_delete_message">The keybox file will be permanently removed. Attestation will fall back to the system default.</string>
+    <string name="keybox_delete_success">Keybox deleted successfully</string>
+    <string name="delete">Delete</string>
+    <!-- Target apps -->
+    <string name="target_category_title">Target Apps (TrickyStore)</string>
+    <string name="target_screen_title">Target Apps</string>
+    <string name="target_manage_title">Manage Target Apps</string>
+    <string name="target_no_apps">No apps configured</string>
+    <string name="target_apps_count">%1$d apps configured</string>
+    <string name="target_import_title">Import target.txt</string>
+    <string name="target_import_summary">Import app list from a text file</string>
+    <string name="target_import_success">Target list updated successfully</string>
+    <!-- Target app modes -->
+    <string name="target_mode_auto">Auto</string>
+    <string name="target_mode_leaf_hack">Leaf Hack</string>
+    <string name="target_mode_cert_gen">Cert Gen</string>
 </resources>

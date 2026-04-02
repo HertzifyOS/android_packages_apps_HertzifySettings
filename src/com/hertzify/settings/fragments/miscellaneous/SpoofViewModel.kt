@@ -1,6 +1,7 @@
 package com.hertzify.settings.fragments.miscellaneous
 
 import android.app.Application
+import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,6 +15,7 @@ class SpoofViewModel(application: Application) : AndroidViewModel(application) {
 
     private val pifManager = PifManager(application)
     private val repository = PifRepository()
+    private val trickyController = TrickyStoreController(application)
 
     private val _isFetching = MutableLiveData(false)
     val isFetching: LiveData<Boolean> = _isFetching
@@ -24,8 +26,15 @@ class SpoofViewModel(application: Application) : AndroidViewModel(application) {
     private val _configSummary = MutableLiveData<String>()
     val configSummary: LiveData<String> = _configSummary
 
+    private val _keyboxStatus = MutableLiveData<String>()
+    val keyboxStatus: LiveData<String> = _keyboxStatus
+
+    private val _targetAppCount = MutableLiveData<Int>()
+    val targetAppCount: LiveData<Int> = _targetAppCount
+
     init {
         refreshSummary()
+        refreshTrickyStatus()
     }
 
     fun fetchAndApply(source: PifRepository.Source) {
@@ -71,6 +80,52 @@ class SpoofViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch(Dispatchers.IO) {
             pifManager.deleteConfig(name)
             refreshSummary()
+        }
+    }
+
+    fun refreshTrickyStatus() {
+        val context = getApplication<Application>()
+        val hasKeybox = trickyController.keyboxExists()
+        val status = if (hasKeybox) {
+            context.getString(R.string.keybox_loaded)
+        } else {
+            context.getString(R.string.keybox_not_found)
+        }
+        _keyboxStatus.postValue(status)
+        _targetAppCount.postValue(trickyController.getTargetAppCount())
+    }
+
+    fun importKeybox(uri: Uri) {
+        viewModelScope.launch(Dispatchers.IO) {
+            trickyController.importKeybox(uri)
+            withContext(Dispatchers.Main) {
+                refreshTrickyStatus()
+                showToast(R.string.keybox_import_success)
+            }
+        }
+    }
+
+    fun deleteKeybox() {
+        viewModelScope.launch(Dispatchers.IO) {
+            trickyController.deleteKeybox()
+            withContext(Dispatchers.Main) {
+                refreshTrickyStatus()
+                showToast(R.string.keybox_delete_success)
+            }
+        }
+    }
+
+    fun importTargetList(lines: List<String>) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val map = lines.associate { line ->
+                TrickyStoreController.TargetMode.fromLine(line)
+            }
+            trickyController.saveTargetMap(map)
+            
+            withContext(Dispatchers.Main) {
+                refreshTrickyStatus()
+                showToast(R.string.target_import_success)
+            }
         }
     }
 
