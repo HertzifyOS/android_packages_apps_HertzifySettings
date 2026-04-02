@@ -75,4 +75,12 @@
         android:title="@string/notification_bubble_apps_title"
         android:summary="@string/notification_bubble_apps_summary"
         android:defaultValue="false" />
+
+    <!-- Spoof settings -->
+    <Preference
+        android:key="spoof_settings"
+        android:title="@string/spoof_screen_title"
+        android:summary="@string/spoof_screen_summary"
+        android:fragment="com.hertzify.settings.fragments.miscellaneous.SpoofFragment" />
+
 </PreferenceScreen>
