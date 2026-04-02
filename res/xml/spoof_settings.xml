@@ -68,4 +68,15 @@
             android:summary="@string/target_import_summary" />
 
     </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="app_spoof_category"
+        android:title="@string/app_spoof_category_title">
+
+        <Preference
+            android:key="app_spoof_manage"
+            android:title="@string/app_spoof_manage_title"
+            android:summary="@string/app_spoof_manage_summary" />
+
+    </PreferenceCategory>
 </PreferenceScreen>
