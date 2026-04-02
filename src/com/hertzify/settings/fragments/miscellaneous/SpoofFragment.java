@@ -53,6 +53,7 @@ public class SpoofFragment extends SettingsPreferenceFragment {
     private static final String KEY_KEYBOX_DELETE   = "keybox_delete";
     private static final String KEY_TARGET_MANAGE   = "target_manage_apps";
     private static final String KEY_TARGET_IMPORT   = "target_import_file";
+    private static final String KEY_APP_SPOOF_MANAGE = "app_spoof_manage";
 
     private final Handler mHandler = new Handler(Looper.getMainLooper());
 
@@ -68,6 +69,7 @@ public class SpoofFragment extends SettingsPreferenceFragment {
     private Preference mDeleteKeybox;
     private Preference mManageTarget;
     private Preference mImportTarget;
+    private Preference mManageAppSpoof;
 
     private final ActivityResultLauncher<Intent> mPifFileLauncher =
             registerForActivityResult(
@@ -128,6 +130,7 @@ public class SpoofFragment extends SettingsPreferenceFragment {
         mDeleteKeybox = requirePreference(KEY_KEYBOX_DELETE);
         mManageTarget = requirePreference(KEY_TARGET_MANAGE);
         mImportTarget = requirePreference(KEY_TARGET_IMPORT);
+        mManageAppSpoof = requirePreference(KEY_APP_SPOOF_MANAGE);
 
         mFetchBeta.setOnPreferenceClickListener(p -> { fetchBetaPif();      return true; });
         mImportPif.setOnPreferenceClickListener(p -> { openFilePicker();    return true; });
@@ -147,6 +150,11 @@ public class SpoofFragment extends SettingsPreferenceFragment {
             return true;
         });
         mImportTarget.setOnPreferenceClickListener(p -> { openTargetFilePicker(); return true; });
+
+        mManageAppSpoof.setOnPreferenceClickListener(p -> {
+            openFragment(new AppSpoofFragment());
+            return true;
+        });
     }
 
     private void refreshSummaries() {
@@ -312,6 +320,9 @@ public class SpoofFragment extends SettingsPreferenceFragment {
         if (fragment instanceof TargetAppsFragment) {
             fragmentClass = TargetAppsFragment.class.getName();
             title = getString(R.string.target_screen_title);
+        } else if (fragment instanceof AppSpoofFragment) {
+            fragmentClass = AppSpoofFragment.class.getName();
+            title = getString(R.string.app_spoof_screen_title);
         } else {
             return;
         }

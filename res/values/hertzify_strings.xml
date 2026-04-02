@@ -249,4 +249,37 @@
     <string name="show_system_apps">Show system apps</string>
     <string name="selected_count">%1$d selected</string>
     <string name="loading_apps">Loading apps…</string>
+
+    <!-- App spoofing -->
+    <string name="app_spoof_screen_title">App Spoofing</string>
+    <string name="app_spoof_category_title">App Spoofing</string>
+    <string name="app_spoof_manage_title">Manage App Spoofing</string>
+    <string name="app_spoof_manage_summary">Spoof device properties per app</string>
+    <string name="app_spoof_enabled_title">Enable App Spoofing</string>
+    <string name="app_spoof_enabled_summary">Override device properties for configured apps</string>
+    <string name="app_spoof_add_app">Add App</string>
+    <string name="app_spoof_add_app_summary">Choose an app and assign a device profile</string>
+    <string name="app_spoof_configured_apps">Configured Apps</string>
+    <string name="app_spoof_no_apps">No apps configured</string>
+    <string name="app_spoof_select_app">Select an App</string>
+    <string name="app_spoof_select_profile">Select Device Profile</string>
+    <string name="app_spoof_app_added">%1$s added</string>
+    <string name="app_spoof_change_profile">Change Profile</string>
+    <string name="app_spoof_removed">App removed</string>
+    <string name="app_spoof_no_profiles">No profiles available. Add one first.</string>
+    <string name="app_spoof_custom_profile">Custom</string>
+    <!-- Profile management -->
+    <string name="app_spoof_manage_profiles_title">Manage Profiles</string>
+    <string name="app_spoof_manage_profiles_summary">Add, edit, or delete device profiles</string>
+    <string name="app_spoof_profile_add">Add Profile</string>
+    <string name="app_spoof_profile_edit">Edit Profile</string>
+    <string name="app_spoof_profile_delete">Delete Profile</string>
+    <string name="app_spoof_profile_name_hint">Profile name</string>
+    <string name="app_spoof_profile_name_empty">Profile name cannot be empty</string>
+    <string name="app_spoof_profile_delete_confirm_title">Delete Profile</string>
+    <string name="app_spoof_profile_delete_confirm_msg">Delete profile \"%1$s\"?</string>
+    <string name="app_spoof_profile_deleted">Profile deleted</string>
+    <string name="app_spoof_profile_saved">Profile \"%1$s\" saved</string>
+    <string name="app_spoof_profile_updated">Profile \"%1$s\" updated</string>
+    <string name="app_spoof_add_prop">+ Add property</string>
 </resources>
