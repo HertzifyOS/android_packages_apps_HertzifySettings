@@ -152,89 +152,99 @@
     <string name="pulse_renderer_minimal_wave">Minimal wave</string>
     <string name="pulse_renderer_sparkle">Sparkle</string>
     <string name="pulse_renderer_matrix">Matrix</string>
+    <!-- Notification bubbles -->
+    <string name="notification_bubble_apps_title">Bubble Notifications</string>
+    <string name="notification_bubble_apps_summary">Launch apps in a bubble when clicking their notifications</string>
     <!-- Spoofing -->
-    <string name="spoofing_title">Component spoofing</string>
-    <string name="spoofing_summary">Bypass app restrictions by spoofing components</string>
-    <string name="spoofing_system_wide_category">System-Wide</string>
-    <string name="spoofing_app_specific_category">App-Specific</string>
-    <!-- Google Play Integrity Spoof -->
-    <string name="pi_spoof_title">Google Play Integrity spoof</string>
-    <string name="pi_spoof_summary">Spoof your device as different model for Google Play Integrity</string>
-    <!-- Pixel Spoof -->
-    <string name="pixel_spoof_title">Pixel props spoof</string>
-    <string name="pixel_spoof_summary">Spoof a select group of Google apps to the latest Pixel device</string>
-    <!-- Google Photos Spoof -->
-    <string name="gphotos_spoof_title">Unlimited Photos storage</string>
-    <string name="gphotos_spoof_summary">Spoof your device as Pixel XL for Google Photos app only</string>
-    <!-- Pif Data -->
-    <string name="pif_data_title">Select PIF JSON to spoof</string>
-    <string name="pif_data_summary">Select PIF JSON used for prop attestation spoofing for GMS and play store.</string>
-    <string name="pif_data_loaded">PIF JSON loaded</string>
-    <string name="pif_data_cleared">PIF JSON cleared</string>
-    <string name="pif_data_invalid_file">Invalid JSON file</string>
-    <string name="pif_data_failed">Failed to read JSON</string>
-    <string name="pif_current_title">Current Play Integrity Profile</string>
-    <string name="pif_current_summary">Tap to view active PIF</string>
-    <!-- Spoofing/Keybox Data -->
-    <string name="keybox_data_title">Select keybox XML to spoof</string>
-    <string name="keybox_data_summary">Select the keybox XML used for system-wide key attestation spoofing.</string>
-    <string name="keybox_data_loaded">Keybox XML loaded</string>
-    <string name="keybox_data_failed">Failed to read XML</string>
-    <string name="keybox_data_invalid_file">Invalid file selected</string>
-    <string name="keybox_data_invalid_xml">Invalid XML: missing required data</string>
-    <string name="keybox_data_cleared">XML data cleared</string>
-    <!-- App Spoofing -->
-    <string name="app_spoof_title">App Spoofing</string>
-    <string name="app_spoof_summary">Spoof Build properties per-app</string>
-    <string name="app_spoof_category_settings">Settings</string>
-    <string name="app_spoof_category_apps">Configured apps</string>
-    <string name="app_spoof_enabled_title">Enable app spoofing</string>
-    <string name="app_spoof_enabled_summary">Apply Build property overrides per-app</string>
-    <string name="app_spoof_show_uninstalled_title">Show uninstalled apps</string>
-    <string name="app_spoof_show_uninstalled_summary">Display entries for apps that are not currently installed</string>
-    <string name="app_spoof_empty">No apps configured.</string>
-    <string name="app_spoof_all_hidden">All entries are for uninstalled apps. Enable \"Show uninstalled apps\" to view them.</string>
-    <string name="app_spoof_not_installed">Not installed</string>
-    <string name="app_spoof_add_app">Add app</string>
-    <string name="app_spoof_manage_presets">Manage presets</string>
-    <string name="app_spoof_import_json">Import JSON</string>
-    <string name="app_spoof_export_json">Export JSON</string>
-    <string name="app_spoof_edit_app">Edit</string>
-    <string name="app_spoof_save_as_preset">Save as preset</string>
-    <string name="app_spoof_delete_app">Delete</string>
-    <string name="app_spoof_preset_pick">Use preset profile</string>
-    <string name="app_spoof_edit_preset">Edit preset</string>
-    <string name="app_spoof_delete_preset">Delete preset</string>
-    <string name="app_spoof_no_presets">No presets saved yet. Add an app and use \"Save as preset\".</string>
-    <string name="app_spoof_preset_name_label">Preset name</string>
-    <string name="app_spoof_preset_name_hint">e.g. My ROG Phone</string>
-    <string name="app_spoof_confirm_delete_title">Remove entry?</string>
-    <string name="app_spoof_confirm_delete_msg">Remove spoofing for %1$s?</string>
-    <string name="app_spoof_confirm_delete_preset_msg">Delete preset \"%1$s\"?</string>
-    <string name="app_spoof_hint_package">Package name</string>
-    <string name="app_spoof_hint_manufacturer">MANUFACTURER ✱ required</string>
-    <string name="app_spoof_hint_model">MODEL ✱ required</string>
-    <string name="app_spoof_hint_brand">BRAND</string>
-    <string name="app_spoof_hint_device">DEVICE</string>
-    <string name="app_spoof_hint_fingerprint">FINGERPRINT</string>
-    <string name="app_spoof_hint_product">PRODUCT</string>
-    <string name="app_spoof_required_hint">Required</string>
-    <string name="app_spoof_optional_hint">Optional</string>
-    <string name="app_spoof_err_empty_pkg">Package name cannot be empty</string>
-    <string name="app_spoof_err_required_manufacturer">MANUFACTURER is required</string>
-    <string name="app_spoof_err_required_model">MODEL is required</string>
-    <string name="app_spoof_err_preset_name_empty">Preset name cannot be empty</string>
-    <string name="app_spoof_saved">Saved</string>
-    <string name="app_spoof_deleted">Deleted</string>
-    <string name="app_spoof_preset_saved">Preset saved</string>
-    <string name="app_spoof_import_success">Imported %1$d app(s)</string>
-    <string name="app_spoof_import_empty">No valid entries found in file</string>
-    <string name="app_spoof_import_fail">Import failed — check JSON format</string>
-    <string name="app_spoof_export_success">Config exported successfully</string>
-    <string name="app_spoof_export_fail">Export failed</string>
-    <string name="app_spoof_add_preset">Add preset</string>
-    <string name="app_spoof_no_presets_item">No presets yet</string>
-    <string name="app_spoof_clear_all">Clear all</string>
-    <string name="app_spoof_confirm_clear_all_msg">Remove all app spoofing entries?</string>
-    <string name="app_spoof_cleared">All entries cleared</string>
+    <string name="spoof_screen_title">Spoofing</string>
+    <string name="spoof_screen_summary">Spoof various system properties to bypass app restrictions</string>
+    <!-- Play Integrity Fix -->
+    <string name="pif_category_title">Play Integrity Fix</string>
+    <string name="pif_fetch_beta_title">Fetch Pixel Beta Fingerprint</string>
+    <string name="pif_no_config_loaded">No config loaded</string>
+    <string name="pif_active_config">Active: %1$s</string>
+    <string name="pif_import_title">Import Config File</string>
+    <string name="pif_import_summary">Load a custom pif.json or pif.prop</string>
+    <string name="pif_import_success">Config imported successfully</string>
+    <string name="pif_import_failed">Failed to import config</string>
+    <string name="pif_import_error">Import error: %1$s</string>
+    <string name="pif_show_props_title">Current Properties</string>
+    <string name="pif_no_props">No properties loaded</string>
+    <string name="pif_current_props_title">Active PIF Properties</string>
+    <string name="pif_fetching">Fetching Pixel Beta…</string>
+    <string name="pif_fetch_success">Updated to %1$s</string>
+    <string name="pif_fetch_failed">Fetch failed: %1$s</string>
+    <!-- Google Photos spoofing -->
+    <string name="pif_options_category">PIF Options</string>
+    <string name="pif_spoof_photos_title">Spoof Google Photos</string>
+    <string name="pif_spoof_photos_summary">Appear as Pixel XL for unlimited original quality backup</string>
+    <!-- Keybox & TrickyStore -->
+    <string name="keybox_category_title">Keybox (TrickyStore)</string>
+    <string name="keybox_import_title">Import Keybox</string>
+    <string name="keybox_installed">Keybox installed ✓</string>
+    <string name="keybox_not_found">No keybox found</string>
+    <string name="keybox_import_success">Keybox imported successfully</string>
+    <string name="keybox_import_failed">Import failed: %1$s</string>
+    <string name="keybox_delete_pref_title">Delete Keybox</string>
+    <string name="keybox_delete_summary">Remove the current keybox.xml file</string>
+    <string name="keybox_delete_title">Delete Keybox?</string>
+    <string name="keybox_delete_message">The keybox.xml file will be permanently removed. Attestation will fall back to the system default.</string>
+    <string name="keybox_deleted">Keybox deleted</string>
+    <!-- Target apps -->
+    <string name="target_category_title">Target Apps (TrickyStore)</string>
+    <string name="target_screen_title">Target Apps</string>
+    <string name="target_manage_title">Manage Target Apps</string>
+    <string name="target_no_apps">No apps configured</string>
+    <string name="target_apps_count">%1$d apps configured</string>
+    <string name="target_import_title">Import target.txt</string>
+    <string name="target_import_summary">Load a pre-built target list from file</string>
+    <string name="target_import_success">Target list imported</string>
+    <string name="target_import_failed">Import failed: %1$s</string>
+    <!-- Target app modes -->
+    <string name="target_mode_auto">Auto</string>
+    <string name="target_mode_leaf_hack">Leaf Hack</string>
+    <string name="target_mode_cert_gen">Cert Gen</string>
+    <!-- Target apps screen -->
+    <string name="show_system_apps">Show system apps</string>
+    <string name="selected_count">%1$d selected</string>
+    <string name="loading_apps">Loading apps…</string>
+    <!-- App spoofing -->
+    <string name="app_spoof_screen_title">App Spoofing</string>
+    <string name="app_spoof_category_title">App Spoofing</string>
+    <string name="app_spoof_manage_title">Manage App Spoofing</string>
+    <string name="app_spoof_manage_summary">Spoof device properties per app</string>
+    <string name="app_spoof_enabled_title">Enable App Spoofing</string>
+    <string name="app_spoof_enabled_summary">Override device properties for configured apps</string>
+    <string name="app_spoof_add_app">Add App</string>
+    <string name="app_spoof_add_app_summary">Choose an app and assign a device profile</string>
+    <string name="app_spoof_configured_apps">Configured Apps</string>
+    <string name="app_spoof_no_apps">No apps configured</string>
+    <string name="app_spoof_select_app">Select an App</string>
+    <string name="app_spoof_select_profile">Select Device Profile</string>
+    <string name="app_spoof_app_added">%1$s added</string>
+    <string name="app_spoof_change_profile">Change Profile</string>
+    <string name="app_spoof_removed">App removed</string>
+    <string name="app_spoof_no_profiles">No profiles available. Add one first.</string>
+    <string name="app_spoof_custom_profile">Custom</string>
+    <!-- Profile management -->
+    <string name="app_spoof_manage_profiles_title">Manage Profiles</string>
+    <string name="app_spoof_manage_profiles_summary">Add, edit, or delete device profiles</string>
+    <string name="app_spoof_profile_add">Add Profile</string>
+    <string name="app_spoof_profile_edit">Edit Profile</string>
+    <string name="app_spoof_profile_delete">Delete Profile</string>
+    <string name="app_spoof_profile_name_hint">Profile name</string>
+    <string name="app_spoof_profile_name_empty">Profile name cannot be empty</string>
+    <string name="app_spoof_profile_delete_confirm_title">Delete Profile</string>
+    <string name="app_spoof_profile_delete_confirm_msg">Delete profile \"%1$s\"?</string>
+    <string name="app_spoof_profile_deleted">Profile deleted</string>
+    <string name="app_spoof_profile_saved">Profile \"%1$s\" saved</string>
+    <string name="app_spoof_profile_updated">Profile \"%1$s\" updated</string>
+    <string name="app_spoof_add_prop">+ Add property</string>
+    <!-- QuickSwitch -->
+    <string name="quickswitch_launcher_title">Quick Switch</string>
+    <string name="quickswitch_launcher_summary">Switch default launcher</string>
+    <string name="quickswitch_not_supported">QuickSwitch is not supported; the system only has one launcher.</string>
+    <string name="quickswitch_footer_text">        Notes: \n\n
+        External launcher modules/modifications must be adapted to the QuickSwitch structure to function properly.
+    </string>
 </resources>
