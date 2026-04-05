@@ -218,4 +218,11 @@
     <!-- Sidebar -->
     <string name="sidebar_title">Sidebar</string>
     <string name="sidebar_summary">Quickly open apps in a floating window</string>
+
+    <!-- SystemUI restart dialog -->
+    <string name="systemui_restart_title">SystemUI restart required</string>
+    <string name="systemui_restart_message">For changes to take effect, a SystemUI restart is required. Restart SystemUI now?</string>
+    <string name="systemui_restart_yes">Yes</string>
+    <string name="systemui_restart_not_now">Not now</string>
+    <string name="systemui_restart_process">Restarting SystemUI to apply changes...</string>
 </resources>
