@@ -188,7 +188,7 @@
     <string name="pif_show_props_title">Thuộc tính hiện tại</string>
     <string name="pif_no_props">Chưa có thuộc tính nào</string>
     <string name="pif_current_props_title">Thuộc tính PIF đang dùng</string>
-    <string name="pif_fetching">Fetching PIF…</string>
+    <string name="pif_fetching">Đang tải PIF...</string>
     <string name="pif_fetch_success">Đã cập nhật sang %1$s</string>
     <string name="pif_fetch_failed">Lấy thất bại: %1$s</string>
     <!-- Google Photos spoofing -->
