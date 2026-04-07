@@ -23,8 +23,7 @@
     <string name="about_title">About</string>
     <string name="about_summary">About HertzifyOS</string>
     <!-- About -->
-    <string name="about_info">    HertzifyOS is designed to keep your system in perfect rhythm — offering a clean AOSP experience with powerful customization features at your fingertips
-    </string>
+    <string name="about_info">HertzifyOS foi projetado para manter seu sistema em perfeito ritmo — oferecendo uma experiência limpa em AOSP com poderosos recursos de personalização ao seu alcance</string>
     <string name="about_website_title">Website</string>
     <string name="about_website_summary">Feel free to drop by our website</string>
     <string name="about_telegram_summary">Come see our Telegram</string>
