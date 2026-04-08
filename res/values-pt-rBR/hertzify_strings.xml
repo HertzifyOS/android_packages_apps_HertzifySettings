@@ -5,66 +5,66 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Hertzify -->
-    <string name="hertzify_dashboard_title">Hertzify Settings</string>
-    <string name="hertzify_dashboard_summary">Tune your system to the right frequency</string>
+    <string name="hertzify_dashboard_title">Configurações do Hertzify</string>
+    <string name="hertzify_dashboard_summary">Ajuste seu sistema para a frequência certa</string>
     <!-- Categories -->
-    <string name="status_bar_title">Status bar</string>
-    <string name="status_bar_summary">Gestures, Icons, privacy indicators</string>
-    <string name="quick_settings_title">Quick settings</string>
-    <string name="quick_settings_summary">Interface, lock screen</string>
-    <string name="notifications_title">Notifications</string>
-    <string name="notifications_summary">Alerts, interface</string>
-    <string name="user_interface_title">User Interface</string>
-    <string name="user_interface_summary">Customize the look and feel of your device</string>
-    <string name="lock_screen_title">Lock screen</string>
-    <string name="lock_screen_summary">Interface, miscellaneous</string>
-    <string name="miscellaneous_title">Miscellaneous</string>
-    <string name="miscellaneous_summary">Developer options, spoofing</string>
-    <string name="about_title">About</string>
-    <string name="about_summary">About HertzifyOS</string>
+    <string name="status_bar_title">Barra de status</string>
+    <string name="status_bar_summary">Gestos, ícones, indicadores de privacidade</string>
+    <string name="quick_settings_title">Configurações rápidas</string>
+    <string name="quick_settings_summary">Interface, tela de bloqueio</string>
+    <string name="notifications_title">Notificações</string>
+    <string name="notifications_summary">Alertas, interface</string>
+    <string name="user_interface_title">Interface do usuário</string>
+    <string name="user_interface_summary">Personalize a interface e a experiência de uso do seu dispositivo</string>
+    <string name="lock_screen_title">Tela de bloqueio</string>
+    <string name="lock_screen_summary">Interface, diversos</string>
+    <string name="miscellaneous_title">Diversos</string>
+    <string name="miscellaneous_summary">Opções de desenvolvedor, spoofing</string>
+    <string name="about_title">Sobre</string>
+    <string name="about_summary">Sobre HertzifyOS</string>
     <!-- About -->
     <string name="about_info">HertzifyOS foi projetado para manter seu sistema em perfeito ritmo — oferecendo uma experiência limpa em AOSP com poderosos recursos de personalização ao seu alcance</string>
     <string name="about_website_title">Website</string>
-    <string name="about_website_summary">Feel free to drop by our website</string>
-    <string name="about_telegram_summary">Come see our Telegram</string>
-    <string name="about_github_summary">Check out our GitHub</string>
-    <string name="about_contributors_title">Contributors</string>
+    <string name="about_website_summary">Sinta-se à vontade para visitar nosso site</string>
+    <string name="about_telegram_summary">Venha ver nosso Telegram</string>
+    <string name="about_github_summary">Confira o nosso GitHub</string>
+    <string name="about_contributors_title">Contribuidores</string>
     <!-- Custom seekbar -->
-    <string name="custom_seekbar_value">Value: <xliff:g id="v">%s</xliff:g></string>
-    <string name="custom_seekbar_default_value">by default</string>
-    <string name="custom_seekbar_default_value_to_set">Default value: <xliff:g id="v">%s</xliff:g>\nLong tap to set</string>
-    <string name="custom_seekbar_default_value_is_set">Default value is set</string>
+    <string name="custom_seekbar_value">Valor: <xliff:g id="v">%s</xliff:g></string>
+    <string name="custom_seekbar_default_value">por padrão</string>
+    <string name="custom_seekbar_default_value_to_set">Valor padrão: <xliff:g id="v">%s</xliff:g>\nToque longo para definir</string>
+    <string name="custom_seekbar_default_value_is_set">O valor padrão está definido</string>
     <!-- Color Picker -->
-    <string name="dialog_color_picker">Color Picker</string>
-    <string name="press_color_to_apply">Press on color below to apply</string>
-    <string name="set">Set</string>
-    <string name="color_default">Default</string>
-    <string name="accent_color">Accent color</string>
-    <string name="rainbow_color">Rainbow color</string>
-    <string name="custom_color">Custom color</string>
+    <string name="dialog_color_picker">Seleção de cores</string>
+    <string name="press_color_to_apply">Selecione a cor abaixo para aplicar</string>
+    <string name="set">Definir</string>
+    <string name="color_default">Padrão</string>
+    <string name="accent_color">Cor de destaque</string>
+    <string name="rainbow_color">Cor do arco-íris</string>
+    <string name="custom_color">Cor personalizada</string>
     <!-- Proper seekbar -->
-    <string name="proper_seekbar_value">Value: <xliff:g id="v">%s</xliff:g></string>
-    <string name="proper_seekbar_default_value">Default</string>
-    <string name="proper_seekbar_default_value_to_set">Default value: <xliff:g id="v">%s</xliff:g>\nLong press to set</string>
-    <string name="proper_seekbar_default_value_is_set">Default value is set</string>
+    <string name="proper_seekbar_value">Valor: <xliff:g id="v">%s</xliff:g></string>
+    <string name="proper_seekbar_default_value">Padrão</string>
+    <string name="proper_seekbar_default_value_to_set">Valor padrão: <xliff:g id="v">%s</xliff:g>\nToque longo para definir</string>
+    <string name="proper_seekbar_default_value_is_set">O valor padrão está definido</string>
     <!-- General -->
-    <string name="enable">Enable</string>
-    <string name="disable">Disable</string>
-    <string name="default_value">Default</string>
-    <string name="top">Top</string>
-    <string name="bottom">Bottom</string>
-    <string name="reset">Reset</string>
-    <string name="delete_message">Remove selected item?</string>
-    <string name="choose_app">Choose app</string>
-    <string name="search">Search</string>
-    <string name="search_apps">Search apps</string>
-    <string name="apply">Apply</string>
+    <string name="enable">Ativado</string>
+    <string name="disable">Desativado</string>
+    <string name="default_value">Padrão</string>
+    <string name="top">Superior</string>
+    <string name="bottom">Inferior</string>
+    <string name="reset">Redefinir</string>
+    <string name="delete_message">Remover item selecionado?</string>
+    <string name="choose_app">Escolher aplicativo</string>
+    <string name="search">Pesquisa</string>
+    <string name="search_apps">Pesquisar aplicativos</string>
+    <string name="apply">Aplicar</string>
     <!-- Units -->
-    <string name="unit_hz">hz</string>
-    <string name="unit_milliseconds">milliseconds</string>
-    <string name="unit_seconds">seconds</string>
+    <string name="unit_hz">Hz</string>
+    <string name="unit_milliseconds">milissegundos</string>
+    <string name="unit_seconds">segundos</string>
     <!-- Status bar Icon Manager -->
-    <string name="icon_manager_title">Status bar items</string>
+    <string name="icon_manager_title">Itens da barra de status</string>
     <string name="icon_manager_summary">Control visibility of status bar icons</string>
     <!-- Heads-up -->
     <string name="heads_up_notifications_enabled_title">Heads-up</string>
@@ -125,26 +125,26 @@
     <string name="quick_settings_secure_lock_screen_title">QS on lock screen</string>
     <string name="quick_settings_secure_lock_screen_summary">Allow swipe down on lock screen to view Quick Settings</string>
     <!-- Lock screen media art -->
-    <string name="ls_media_art_title">Media cover art</string>
-    <string name="ls_media_art_summary">Display media cover art when available</string>
+    <string name="ls_media_art_title">Arte de capa da mídia</string>
+    <string name="ls_media_art_summary">Exibir arte de capa da mídia quando disponível</string>
     <!-- Lock screen media art on Ambient Display -->
-    <string name="ambient_media_art_title">Ambient media cover art</string>
-    <string name="ambient_media_art_summary">Display media cover art on Ambient display when available</string>
+    <string name="ambient_media_art_title">Arte de capa da mídia na tela ambiente</string>
+    <string name="ambient_media_art_summary">Exibir arte de capa da mídia na tela ambiente quando disponível</string>
     <!-- Lock screen album art filter -->
-    <string name="ls_media_art_filter_title">Media cover art filter</string>
-    <string name="ls_media_art_filter_none">None</string>
-    <string name="ls_media_art_filter_blur">Blur</string>
-    <string name="ls_media_art_filter_grayscale">Grayscale</string>
+    <string name="ls_media_art_filter_title">Filtro de arte de capa da mídia</string>
+    <string name="ls_media_art_filter_none">Nenhum</string>
+    <string name="ls_media_art_filter_blur">Desfocar</string>
+    <string name="ls_media_art_filter_grayscale">Escala cinza</string>
     <string name="ls_media_art_filter_sepia">Sepia</string>
-    <string name="ls_media_art_filter_tint">Accent tinted</string>
-    <string name="ls_media_art_filter_invert">Invert</string>
-    <string name="ls_media_art_filter_grayblur">Grayscale and blur</string>
+    <string name="ls_media_art_filter_tint">Seguir a cor de destaque</string>
+    <string name="ls_media_art_filter_invert">Inverter</string>
+    <string name="ls_media_art_filter_grayblur">Escala cinza e desfoque</string>
     <!-- Lock screen media art fade level -->
-    <string name="ls_media_art_fade_level_title">Media cover art fade level</string>
-    <string name="ls_media_art_fade_level_summary">Set media cover art fade level</string>
+    <string name="ls_media_art_fade_level_title">Nível de desvanecimento da arte de capa da mídia</string>
+    <string name="ls_media_art_fade_level_summary">Definir nível de desvanecimento da arte de capa da mídia</string>
     <!-- Lock screen media art blur level -->
-    <string name="ls_media_art_blur_level_title">Media art blur level</string>
-    <string name="ls_media_art_blur_level_summary">Blur intensity when blur filter is applied</string>
+    <string name="ls_media_art_blur_level_title">Nível de desfoque da arte da mídia</string>
+    <string name="ls_media_art_blur_level_summary">Intensidade de desfoque quando filtro de desfoque é aplicado</string>
     <!-- Pulse music visualizer -->
     <string name="pulse_settings_title">Pulse Visualizer</string>
     <string name="pulse_settings_summary">Show a bar visualizer on the lock screen while music is playing</string>
@@ -154,47 +154,47 @@
     <string name="pulse_rounded_bars_summary">Display visualizer bars with rounded corners</string>
     <string name="pulse_color">Visualizer color</string>
     <string name="pulse_color_lavalamp">Lavalamp</string>
-    <string name="pulse_color_album">Album art</string>
-    <string name="pulse_color_accent">Accent color</string>
-    <string name="pulse_bar_count_title">Number of bars</string>
-    <string name="pulse_bar_count_summary">Set how many bars are shown in the visualizer</string>
-    <string name="pulse_bar_count_units">bars</string>
-    <string name="pulse_renderer">Visualizer style</string>
-    <string name="pulse_renderer_solid">Solid lines</string>
-    <string name="pulse_renderer_fading">Fading blocks</string>
-    <string name="pulse_renderer_neon_glow">Neon glow</string>
-    <string name="pulse_renderer_retro_vu_meter">Retro VU meter</string>
-    <string name="pulse_renderer_minimal_wave">Minimal wave</string>
-    <string name="pulse_renderer_sparkle">Sparkle</string>
+    <string name="pulse_color_album">Arte do álbum</string>
+    <string name="pulse_color_accent">Cor de destaque</string>
+    <string name="pulse_bar_count_title">Número de barras</string>
+    <string name="pulse_bar_count_summary">Definir quantas barras são mostradas no visualizador</string>
+    <string name="pulse_bar_count_units">barras</string>
+    <string name="pulse_renderer">Estilo do visualizador</string>
+    <string name="pulse_renderer_solid">Linhas sólidas</string>
+    <string name="pulse_renderer_fading">Blocos desvanecentes</string>
+    <string name="pulse_renderer_neon_glow">Brilho de néon</string>
+    <string name="pulse_renderer_retro_vu_meter">Medidor VU retrô</string>
+    <string name="pulse_renderer_minimal_wave">Onda mínima</string>
+    <string name="pulse_renderer_sparkle">Brilhante</string>
     <string name="pulse_renderer_matrix">Matrix</string>
     <!-- Notification bubbles -->
-    <string name="notification_bubble_apps_title">Bubble Notifications</string>
-    <string name="notification_bubble_apps_summary">Launch apps in a bubble when clicking their notifications</string>
+    <string name="notification_bubble_apps_title">Notificações em Bolhas</string>
+    <string name="notification_bubble_apps_summary">Iniciar aplicativos em uma bolha ao clicar nas notificações deles</string>
     <!-- Spoofing -->
-    <string name="spoof_screen_title">Spoofing</string>
-    <string name="spoof_screen_summary">Spoof various system properties to bypass app restrictions</string>
+    <string name="spoof_screen_title">Falsificação</string>
+    <string name="spoof_screen_summary">Disfarçar várias propriedades do sistema para ignorar restrições de aplicativo</string>
     <!-- Play Integrity Fix -->
     <string name="pif_category_title">Play Integrity Fix</string>
-    <string name="pif_fetch_title">Fetch PIF</string>
-    <string name="pif_fetch_summary">Fetch the latest PIF from the server</string>
-    <string name="pif_fetch_select_source">Select Source</string>
+    <string name="pif_fetch_title">Buscar PIF</string>
+    <string name="pif_fetch_summary">Buscar o PIF mais recente do servidor</string>
+    <string name="pif_fetch_select_source">Selecionar fonte</string>
     <string name="pif_source_google">Google (Beta)</string>
     <string name="pif_source_hertzify">HertzifyOS</string>
-    <string name="pif_import_title">Import Config File</string>
-    <string name="pif_import_summary">Load a custom pif.json or pif.prop</string>
-    <string name="pif_import_success">Config imported successfully</string>
-    <string name="pif_import_failed">Failed to import config</string>
-    <string name="pif_import_error">Import error: %1$s</string>
-    <string name="pif_show_props_title">Current Properties</string>
-    <string name="pif_no_props">No properties loaded</string>
-    <string name="pif_current_props_title">Active PIF Properties</string>
-    <string name="pif_fetching">Fetching PIF…</string>
-    <string name="pif_fetch_success">Updated to %1$s</string>
-    <string name="pif_fetch_failed">Fetch failed: %1$s</string>
+    <string name="pif_import_title">Importar arquivo de configuração</string>
+    <string name="pif_import_summary">Carregar um pif.json ou pif.prop personalizado</string>
+    <string name="pif_import_success">Configuração importada com sucesso</string>
+    <string name="pif_import_failed">Falha ao importar configuração</string>
+    <string name="pif_import_error">Erro de importação: %1$s</string>
+    <string name="pif_show_props_title">Propriedades atuais</string>
+    <string name="pif_no_props">Nenhuma propriedade carregada</string>
+    <string name="pif_current_props_title">Propriedades PIF ativas</string>
+    <string name="pif_fetching">Buscando PIF…</string>
+    <string name="pif_fetch_success">Atualizado para %1$s</string>
+    <string name="pif_fetch_failed">A busca falhou: %1$s</string>
     <!-- Google Photos spoofing -->
-    <string name="pif_options_category">PIF Options</string>
-    <string name="pif_spoof_photos_title">Spoof Google Photos</string>
-    <string name="pif_spoof_photos_summary">Appear as Pixel XL for unlimited original quality backup</string>
+    <string name="pif_options_category">Opções do PIF</string>
+    <string name="pif_spoof_photos_title">Falsificar Google Fotos</string>
+    <string name="pif_spoof_photos_summary">Aparecer como Pixel XL para backup ilimitado na qualidade original</string>
     <!-- Keybox & TrickyStore -->
     <string name="keybox_category_title">Keybox (TrickyStore)</string>
     <string name="keybox_import_title">Import Keybox</string>
@@ -226,13 +226,13 @@
     <string name="selected_count">%1$d selected</string>
     <string name="loading_apps">Loading apps…</string>
     <!-- App spoofing -->
-    <string name="app_spoof_screen_title">App Spoofing</string>
-    <string name="app_spoof_category_title">App Spoofing</string>
-    <string name="app_spoof_manage_title">Manage App Spoofing</string>
+    <string name="app_spoof_screen_title">Falsificação de aplicativos</string>
+    <string name="app_spoof_category_title">Falsificação de aplicativos</string>
+    <string name="app_spoof_manage_title">Gerenciar falsificação de aplicativos</string>
     <string name="app_spoof_manage_summary">Spoof device properties per app</string>
-    <string name="app_spoof_enabled_title">Enable app spoofing</string>
-    <string name="app_spoof_enabled_summary">Apply Build property overrides per-app</string>
-    <string name="app_spoof_add_app">Add app</string>
+    <string name="app_spoof_enabled_title">Habilitar Falsificação de Aplicativo</string>
+    <string name="app_spoof_enabled_summary">Sobrescrever propriedades do dispositivo para aplicativos configurados</string>
+    <string name="app_spoof_add_app">Adicionar aplicativo</string>
     <string name="app_spoof_add_app_summary">Choose an app and assign a device profile</string>
     <string name="app_spoof_configured_apps">Configured Apps</string>
     <string name="app_spoof_no_apps">No apps configured</string>
