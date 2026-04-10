@@ -173,130 +173,57 @@
     <!-- Spoofing -->
     <string name="spoof_screen_title">Giả mạo</string>
     <string name="spoof_screen_summary">Giả mạo các thuộc tính hệ thống để vượt qua hạn chế của ứng dụng</string>
-    <!-- Play Integrity Fix -->
+    <!-- Play Integrity Fix — categories -->
     <string name="pif_category_title">Play Integrity Fix</string>
-    <string name="pif_fetch_title">Tải PIF</string>
-    <string name="pif_fetch_summary">Tải PIF mới nhất từ máy chủ</string>
-    <string name="pif_fetch_select_source">Chọn nguồn</string>
-    <string name="pif_source_google">Google (Beta)</string>
+    <string name="pif_options_category">PIF Options</string>
+    <!-- PIF Fetch Section -->
+    <string name="pif_fetch_title">Fetch PIF Properties</string>
+    <string name="pif_fetch_summary">Download and apply pif from online sources</string>
+    <string name="pif_fetch_select_source">Select Source</string>
+    <string name="pif_source_google">Google Beta OTA (random)</string>
     <string name="pif_source_hertzify">HertzifyOS</string>
-    <string name="pif_import_title">Nhập tệp cấu hình</string>
-    <string name="pif_import_summary">Tải tệp pif.json hoặc pif.prop tùy chỉnh</string>
-    <string name="pif_import_success">Nhập cấu hình thành công</string>
-    <string name="pif_import_failed">Nhập cấu hình thất bại</string>
-    <string name="pif_import_error">Lỗi khi nhập: %1$s</string>
-    <string name="pif_show_props_title">Thuộc tính hiện tại</string>
-    <string name="pif_no_props">Chưa có thuộc tính nào</string>
-    <string name="pif_current_props_title">Thuộc tính PIF đang dùng</string>
-    <string name="pif_fetching">Đang tải PIF...</string>
-    <string name="pif_fetch_success">Đã cập nhật sang %1$s</string>
-    <string name="pif_fetch_failed">Lấy thất bại: %1$s</string>
-    <!-- Google Photos spoofing -->
-    <string name="pif_options_category">Tùy chọn PIF</string>
-    <string name="pif_spoof_photos_title">Giả mạo Photos</string>
-    <string name="pif_spoof_photos_summary">Giả mạo Pixel XL để sao lưu ảnh gốc không giới hạn</string>
+    <!-- PIF Import Section -->
+    <string name="pif_import_file_title">Import PIF File</string>
+    <string name="pif_import_file_summary">Load configuration from a .json or .prop file</string>
+    <!-- PIF Management -->
+    <string name="pif_show_props_title">Current Properties</string>
+    <string name="pif_no_props">No active configuration found</string>
+    <string name="pif_delete_title">Delete current PIF</string>
+    <string name="pif_delete_summary">Remove current PIF file and reset to default</string>
+    <string name="pif_delete_confirm">Do you want to delete %1$s and reset to default?</string>
+    <!-- Photos Spoof -->
+    <string name="pif_spoof_photos_title">Unlimited Photos Storage</string>
+    <string name="pif_spoof_photos_summary">Spoof device as Pixel XL to enable unlimited backup</string>
+    <!-- Status Messages -->
+    <string name="pif_fetch_success">Applied PIF: %1$s</string>
+    <string name="pif_fetch_error">Error: %1$s</string>
+    <string name="pif_import_success">Imported %1$s successfully</string>
+    <string name="pif_import_failed">Failed to import configuration</string>
+    <string name="pif_no_valid_ota">No valid beta OTA found</string>
     <!-- Keybox & TrickyStore -->
     <string name="keybox_category_title">Keybox (TrickyStore)</string>
-    <string name="keybox_import_title">Nhập Keybox</string>
-    <string name="keybox_loaded">Đã tải Keybox ✓</string>
-    <string name="keybox_not_found">Không tìm thấy keybox</string>
-    <string name="keybox_import_success">Nhập keybox thành công</string>
-    <string name="keybox_import_failed">Nhập keybox thất bại: %1$s</string>
-    <string name="keybox_delete_pref_title">Xóa Keybox</string>
-    <string name="keybox_delete_summary">Xóa tệp keybox.xml hiện tại</string>
-    <string name="keybox_delete_title">Xóa Keybox?</string>
-    <string name="keybox_delete_message">Tệp keybox.xml sẽ bị xóa vĩnh viễn. Attestation sẽ quay về mặc định hệ thống.</string>
-    <string name="keybox_deleted">Keybox đã xóa</string>
+    <string name="keybox_import_title">Import Keybox</string>
+    <string name="keybox_loaded">Keybox loaded ✓</string>
+    <string name="keybox_not_found">No keybox found</string>
+    <string name="keybox_import_success">Keybox imported successfully</string>
+    <string name="keybox_import_failed">Import failed: %1$s</string>
+    <string name="keybox_delete_pref_title">Delete Keybox</string>
+    <string name="keybox_delete_summary">Remove the current keybox.xml file</string>
+    <string name="keybox_delete_title">Delete Keybox?</string>
+    <string name="keybox_delete_message">The keybox file will be permanently removed. Attestation will fall back to the system default.</string>
+    <string name="keybox_delete_success">Keybox deleted successfully</string>
+    <string name="delete">Delete</string>
     <!-- Target apps -->
-    <string name="target_category_title">Ứng dụng mục tiêu (TrickyStore)</string>
-    <string name="target_screen_title">Ứng dụng mục tiêu</string>
-    <string name="target_manage_title">Quản lý ứng dụng mục tiêu</string>
-    <string name="target_no_apps">Chưa có ứng dụng nào</string>
-    <string name="target_apps_count">Đã cấu hình %1$d ứng dụng</string>
-    <string name="target_import_title">Nhập target.txt</string>
-    <string name="target_import_summary">Tải danh sách ứng dụng mục tiêu từ tệp</string>
-    <string name="target_import_success">Đã nhập danh sách mục tiêu</string>
-    <string name="target_import_failed">Nhập thất bại: %1$s</string>
+    <string name="target_category_title">Target Apps (TrickyStore)</string>
+    <string name="target_screen_title">Target Apps</string>
+    <string name="target_manage_title">Manage Target Apps</string>
+    <string name="target_no_apps">No apps configured</string>
+    <string name="target_apps_count">%1$d apps configured</string>
+    <string name="target_import_title">Import target.txt</string>
+    <string name="target_import_summary">Import app list from a text file</string>
+    <string name="target_import_success">Target list updated successfully</string>
     <!-- Target app modes -->
-    <string name="target_mode_auto">Tự động</string>
-    <string name="target_mode_leaf_hack">Leaf ?</string>
-    <string name="target_mode_cert_gen">Gen !</string>
-    <!-- Target apps screen -->
-    <string name="show_system_apps">Hiển thị ứng dụng hệ thống</string>
-    <string name="selected_count">%1$d đã chọn</string>
-    <string name="loading_apps">Đang tải ứng dụng...</string>
-    <!-- App spoofing -->
-    <string name="app_spoof_screen_title">Giả mạo ứng dụng</string>
-    <string name="app_spoof_category_title">Giả mạo ứng dụng</string>
-    <string name="app_spoof_manage_title">Quản lý giả mạo ứng dụng</string>
-    <string name="app_spoof_manage_summary">Giả mạo thuộc tính thiết bị cho từng ứng dụng</string>
-    <string name="app_spoof_enabled_title">Bật giả mạo ứng dụng</string>
-    <string name="app_spoof_enabled_summary">Ghi đè thuộc tính thiết bị cho các ứng dụng đã cấu hình</string>
-    <string name="app_spoof_add_app">Thêm ứng dụng</string>
-    <string name="app_spoof_add_app_summary">Chọn ứng dụng và gán hồ sơ thiết bị</string>
-    <string name="app_spoof_configured_apps">Ứng dụng đã cấu hình</string>
-    <string name="app_spoof_no_apps">Chưa có ứng dụng nào</string>
-    <string name="app_spoof_select_app">Chọn ứng dụng</string>
-    <string name="app_spoof_select_profile">Chọn hồ sơ thiết bị</string>
-    <string name="app_spoof_app_added">Đã thêm %1$s</string>
-    <string name="app_spoof_change_profile">Đổi hồ sơ</string>
-    <string name="app_spoof_removed">Đã xóa ứng dụng</string>
-    <string name="app_spoof_no_profiles">Không có hồ sơ nào. Hãy thêm trước.</string>
-    <string name="app_spoof_custom_profile">Tùy chỉnh</string>
-    <!-- Profile management -->
-    <string name="app_spoof_manage_profiles_title">Quản lý hồ sơ</string>
-    <string name="app_spoof_manage_profiles_summary">Thêm, sửa hoặc xóa hồ sơ thiết bị</string>
-    <string name="app_spoof_profile_add">Thêm hồ sơ</string>
-    <string name="app_spoof_profile_edit">Sửa hồ sơ</string>
-    <string name="app_spoof_profile_delete">Xóa hồ sơ</string>
-    <string name="app_spoof_profile_name_hint">Tên hồ sơ</string>
-    <string name="app_spoof_profile_name_empty">Tên hồ sơ không được để trống</string>
-    <string name="app_spoof_profile_delete_confirm_title">Xóa hồ sơ</string>
-    <string name="app_spoof_profile_delete_confirm_msg">Xóa hồ sơ \"%1$s\"?</string>
-    <string name="app_spoof_profile_deleted">Đã xóa hồ sơ</string>
-    <string name="app_spoof_profile_saved">Đã lưu hồ sơ \"%1$s\"</string>
-    <string name="app_spoof_profile_updated">Đã cập nhật hồ sơ \"%1$s\"</string>
-    <string name="app_spoof_add_prop">+ Thêm thuộc tính</string>
-    <!-- Sidebar -->
-    <string name="sidebar_title">Thanh bên</string>
-    <string name="sidebar_summary">Mở nhanh ứng dụng trong cửa sổ nổi</string>
-    <!-- SystemUI restart dialog -->
-    <string name="systemui_restart_title">Cần khởi động lại SystemUI</string>
-    <string name="systemui_restart_message">Để áp dụng thay đổi, cần khởi động lại SystemUI. Khởi động lại ngay?</string>
-    <string name="systemui_restart_yes">Có</string>
-    <string name="systemui_restart_not_now">Để sau</string>
-    <string name="systemui_restart_process">Đang khởi động lại SystemUI để áp dụng thay đổi...</string>
-    <!-- Smartspace -->
-    <string name="lockscreen_smartspace_title">Smartspace</string>
-    <string name="lockscreen_smartspace_summary">Hiển thị Smartspace của Google khi khả dụng</string>
-    <!-- Weather -->
-    <string name="weather_settings_title">Cài đặt thời tiết</string>
-    <string name="weather_settings_summary">Thiết lập gói biểu tượng và dịch vụ thời tiết</string>
-    <string name="lockscreen_weather_category">Thời tiết</string>
-    <string name="lockscreen_weather_title">Cập nhật thời tiết</string>
-    <string name="lockscreen_weather_summary">Hiển thị thông tin thời tiết hiện tại</string>
-    <string name="lockscreen_weather_enabled_info">Yêu cầu cấu hình dịch vụ thời tiết tùy chỉnh và tắt Smartspace</string>
-    <string name="lockscreen_weather_location_title">Vị trí hiện tại</string>
-    <string name="lockscreen_weather_location_summary">Hiển thị vị trí thời tiết hiện tại</string>
-    <string name="lockscreen_weather_text_title">Tình trạng hiện tại</string>
-    <string name="lockscreen_weather_text_summary">Hiển thị mô tả tình trạng thời tiết hiện tại</string>
-    <string name="lockscreen_weather_wind_info_title">Thông tin gió</string>
-    <string name="lockscreen_weather_wind_info_summary">Hiển thị tốc độ và hướng gió hiện tại</string>
-    <string name="lockscreen_weather_humidity_info_title">Độ ẩm</string>
-    <string name="lockscreen_weather_humidity_info_summary">Hiển thị độ ẩm hiện tại (phần trăm)</string>
-    <!-- System font -->
-    <string name="system_font_title">Phông chữ hệ thống</string>
-    <string name="system_font_summary">Thiết lập kiểu phông chữ hệ thống</string>
-    <!-- Custom clock style -->
-    <string name="lockscreen_custom_clock_style_title">Kiểu đồng hồ tùy chỉnh</string>
-    <string name="lockscreen_custom_clock_style_summary">Cấu hình kiểu đồng hồ màn hình khóa</string>
-    <string name="lockscreen_custom_clock_font_title">Phông chữ đồng hồ</string>
-    <string name="lockscreen_custom_clock_font_summary">Thiết lập phông chữ đồng hồ màn hình khóa</string>
-    <string name="lockscreen_custom_clock_style_highlight_text">Vuốt sang trái hoặc phải để xem trước các kiểu đồng hồ</string>
-    <string name="lockscreen_custom_clock_style_info">Kiểu đồng hồ tùy chỉnh sẽ thay thế đồng hồ AOSP bằng các kiểu tùy chỉnh. Smartspace sẽ bị tắt. Bạn có thể bật và sử dụng thời tiết tùy chỉnh thay thế.</string>
-    <string name="lockscreen_custom_clock_opacity_title">Độ trong suốt đồng hồ</string>
-    <string name="lockscreen_custom_clock_opacity_summary">Điều chỉnh độ trong suốt của đồng hồ</string>
-    <string name="lockscreen_custom_clock_frame_margin_top_title">Chiều cao đồng hồ</string>
-    <string name="lockscreen_custom_clock_frame_margin_top_summary">Điều chỉnh vị trí/chiều cao của đồng hồ</string>
-    <string name="lockscreen_custom_clock_color_mode_title">Chế độ màu đồng hồ</string>
+    <string name="target_mode_auto">Auto</string>
+    <string name="target_mode_leaf_hack">Leaf Hack</string>
+    <string name="target_mode_cert_gen">Cert Gen</string>
 </resources>
