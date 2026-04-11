@@ -226,4 +226,20 @@
     <string name="target_mode_auto">Auto</string>
     <string name="target_mode_leaf_hack">Leaf Hack</string>
     <string name="target_mode_cert_gen">Cert Gen</string>
+    <!-- App Spoof -->
+    <string name="app_spoof_title">Per-App spoofing</string>
+    <string name="app_spoof_summary">Spoof device model and manufacturer on a per-app basis</string>
+    <string name="app_spoof_settings">App Spoof Settings</string>
+    <string name="app_spoof_enable">Enable App Spoofing</string>
+    <string name="app_spoof_add_app">Add App</string>
+    <string name="app_spoof_select_app">Select App</string>
+    <string name="app_spoof_no_apps">No apps configured</string>
+    <string name="app_spoof_change_profile">Change Profile</string>
+    <string name="app_spoof_manage_profiles">Manage Profiles</string>
+    <string name="app_spoof_profile_add">Add Profile</string>
+    <string name="app_spoof_profile_edit">Edit</string>
+    <string name="app_spoof_profile_delete">Delete</string>
+    <string name="app_spoof_enabled">Enabled</string>
+    <string name="app_spoof_disabled">Disabled</string>
+    <string name="app_spoof_count_summary">%1$s (%2$d apps)</string>
 </resources>
