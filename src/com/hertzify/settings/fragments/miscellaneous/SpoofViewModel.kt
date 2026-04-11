@@ -16,6 +16,7 @@ class SpoofViewModel(application: Application) : AndroidViewModel(application) {
     private val pifManager = PifManager(application)
     private val repository = PifRepository()
     private val trickyController = TrickyStoreController(application)
+    private val appSpoofController = AppSpoofController(application)
 
     private val _isFetching = MutableLiveData(false)
     val isFetching: LiveData<Boolean> = _isFetching
@@ -32,9 +33,13 @@ class SpoofViewModel(application: Application) : AndroidViewModel(application) {
     private val _targetAppCount = MutableLiveData<Int>()
     val targetAppCount: LiveData<Int> = _targetAppCount
 
+    private val _appSpoofStatus = MutableLiveData<String>()
+    val appSpoofStatus: LiveData<String> = _appSpoofStatus
+
     init {
         refreshSummary()
         refreshTrickyStatus()
+        refreshAppSpoofStatus()
     }
 
     fun fetchAndApply(source: PifRepository.Source) {
@@ -93,6 +98,24 @@ class SpoofViewModel(application: Application) : AndroidViewModel(application) {
         }
         _keyboxStatus.postValue(status)
         _targetAppCount.postValue(trickyController.getTargetAppCount())
+    }
+
+    fun refreshAppSpoofStatus() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val enabled = appSpoofController.isEnabled()
+            val count = appSpoofController.getAppCount()
+            val context = getApplication<Application>()
+            
+            val description = context.getString(R.string.app_spoof_summary)
+            
+            val status = if (enabled) {
+                val enabledText = context.getString(R.string.app_spoof_enabled)
+                context.getString(R.string.app_spoof_count_summary, enabledText, count)
+            } else {
+                context.getString(R.string.app_spoof_disabled)
+            }
+            _appSpoofStatus.postValue("$description - $status")
+        }
     }
 
     fun importKeybox(uri: Uri) {

@@ -43,6 +43,7 @@ class SpoofFragment : SettingsPreferenceFragment() {
 
         setupPifPreferences()
         setupTrickyStorePreferences()
+        setupAppSpoofPreference()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -110,6 +111,17 @@ class SpoofFragment : SettingsPreferenceFragment() {
         }
     }
 
+    private fun setupAppSpoofPreference() {
+        findPreference<Preference>("app_device_spoofing")?.setOnPreferenceClickListener {
+            com.android.settings.core.SubSettingLauncher(requireContext())
+                .setDestination(AppSpoofFragment::class.java.name)
+                .setSourceMetricsCategory(metricsCategory)
+                .setTitleRes(R.string.app_spoof_title)
+                .launch()
+            true
+        }
+    }
+
     private fun observeViewModel() {
         viewModel.isFetching.observe(viewLifecycleOwner) { fetching ->
             findPreference<Preference>("pif_fetch")?.isEnabled = !fetching
@@ -136,6 +148,10 @@ class SpoofFragment : SettingsPreferenceFragment() {
             } else {
                 getString(R.string.target_no_apps)
             }
+        }
+
+        viewModel.appSpoofStatus.observe(viewLifecycleOwner) { status ->
+            findPreference<Preference>("app_device_spoofing")?.summary = status
         }
 
         viewModel.toastEvent.observe(viewLifecycleOwner) { event ->
@@ -220,6 +236,7 @@ class SpoofFragment : SettingsPreferenceFragment() {
         super.onResume()
         activity?.title = getString(R.string.spoof_screen_title)
         viewModel.refreshTrickyStatus()
+        viewModel.refreshAppSpoofStatus()
     }
 
     override fun getMetricsCategory(): Int = MetricsProto.MetricsEvent.HERTZIFY

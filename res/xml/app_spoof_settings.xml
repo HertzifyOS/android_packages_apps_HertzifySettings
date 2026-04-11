@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        android:title="Settings"
+        android:key="app_spoof_settings_category">
+
+        <SwitchPreferenceCompat
+            android:key="app_spoof_enabled"
+            android:title="@string/app_spoof_enable"
+            android:summary="Enable device property spoofing for selected apps"
+            android:defaultValue="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Configured Apps"
+        android:key="app_spoof_app_list_category" />
+
+</PreferenceScreen>
