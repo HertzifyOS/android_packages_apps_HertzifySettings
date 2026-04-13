@@ -9,6 +9,13 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/miscellaneous_title">
 
+    <!-- Play Integrity Fix -->
+    <Preference
+        android:key="play_integrity_fix"
+        android:title="@string/spoof_pif_title"
+        android:summary="@string/spoof_pif_summary"
+        android:fragment="com.hertzify.settings.fragments.miscellaneous.PlayIntegrityFix" />
+
     <!-- Hide developer status in about phone -->
     <Preference
         android:key="hide_developer_status_settings"
