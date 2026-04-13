@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/spoof_ts_title">
+
+    <PreferenceCategory
+        android:key="spoof_ts_keybox_category"
+        android:title="@string/spoof_ts_keybox_management">
+
+        <Preference
+            android:key="spoof_ts_import_keybox"
+            android:title="@string/spoof_ts_import_keybox"
+            android:summary="@string/spoof_ts_no_keybox" />
+
+        <Preference
+            android:key="spoof_ts_delete_keybox"
+            android:title="@string/spoof_ts_delete_keybox"
+            android:summary="@string/spoof_ts_delete_keybox_summary" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="spoof_ts_target_category"
+        android:title="@string/spoof_ts_target_configuration">
+
+        <Preference
+            android:key="spoof_ts_manage_targets"
+            android:title="@string/spoof_ts_manage_target_apps"
+            android:summary="@string/spoof_ts_no_targets" />
+
+        <Preference
+            android:key="spoof_ts_import_targets"
+            android:title="@string/spoof_ts_import_target_list"
+            android:summary="@string/spoof_ts_import_target_list_summary" />
+
+        <Preference
+            android:key="spoof_ts_clear_targets"
+            android:title="@string/spoof_ts_clear_targets_title"
+            android:summary="@string/spoof_ts_clear_targets_summary" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
