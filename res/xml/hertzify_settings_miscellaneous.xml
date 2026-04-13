@@ -16,6 +16,13 @@
         android:summary="@string/pif_summary"
         android:fragment="com.hertzify.settings.fragments.miscellaneous.PlayIntegrityFix" />
 
+    <!-- TrickyStore -->
+    <Preference
+        android:key="tricky_store"
+        android:title="@string/ts_title"
+        android:summary="@string/ts_summary"
+        android:fragment="com.hertzify.settings.fragments.miscellaneous.TrickyStore" />
+
     <!-- Hide developer status in about phone -->
     <Preference
         android:key="hide_developer_status_settings"
