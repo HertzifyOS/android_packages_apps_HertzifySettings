@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/pif_title">
+
+    <PreferenceCategory
+        android:key="pif_category"
+        android:title="@string/pif_category">
+
+        <Preference
+            android:key="pif_fetch_config"
+            android:title="@string/pif_fetch_title"
+            android:summary="@string/pif_fetch_summary" />
+
+        <Preference
+            android:key="pif_import_config"
+            android:title="@string/pif_import_title"
+            android:summary="@string/pif_import_summary" />
+
+        <Preference
+            android:key="pif_delete_config"
+            android:title="@string/pif_delete_active_title"
+            android:summary="@string/pif_delete_active_summary"
+            android:enabled="false" />
+
+        <Preference
+            android:key="pif_properties"
+            android:title="@string/pif_properties"
+            android:summary="@string/pif_no_config"
+            android:enabled="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="pif_options_category"
+        android:title="@string/pif_options_category">
+
+        <SwitchPreferenceCompat
+            android:key="pif_spoof_photos"
+            android:title="@string/pif_spoof_photos_title"
+            android:summary="@string/pif_spoof_photos_summary" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
