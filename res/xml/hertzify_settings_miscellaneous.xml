@@ -16,4 +16,10 @@
         android:summary="@string/spoof_pif_summary"
         android:fragment="com.hertzify.settings.fragments.miscellaneous.PlayIntegrityFix" />
 
+    <!-- TrickyStore -->
+    <Preference
+        android:key="tricky_store"
+        android:title="@string/spoof_ts_title"
+        android:summary="@string/spoof_ts_summary"
+        android:fragment="com.hertzify.settings.fragments.miscellaneous.TrickyStore" />
 </PreferenceScreen>
