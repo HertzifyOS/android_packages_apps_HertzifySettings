@@ -397,4 +397,37 @@
     <string name="spoof_pif_photos_title">Spoof Google Photos</string>
     <string name="spoof_pif_photos_summary">Enable unlimited original quality backup</string>
     <string name="spoof_pif_failed">PIF Error: %s</string>
+
+    <!-- TrickyStore -->
+    <string name="spoof_ts_title">TrickyStore</string>
+    <string name="spoof_ts_summary">Manage keybox and target apps for attestation</string>
+    <string name="spoof_ts_keybox_management">Keybox management</string>
+    <string name="spoof_ts_import_keybox">Import keybox</string>
+    <string name="spoof_ts_no_keybox">No keybox installed</string>
+    <string name="spoof_ts_keybox_installed">Keybox installed</string>
+    <string name="spoof_ts_keybox_imported">Keybox imported successfully</string>
+    <string name="spoof_ts_delete_keybox">Delete keybox</string>
+    <string name="spoof_ts_delete_keybox_summary">Remove keybox file</string>
+    <string name="spoof_ts_delete_keybox_title">Delete keybox?</string>
+    <string name="spoof_ts_delete_keybox_message">The keybox file will be permanently removed.</string>
+    <string name="spoof_ts_delete">Delete</string>
+    <string name="spoof_ts_keybox_deleted">Keybox deleted</string>
+    <string name="spoof_ts_target_configuration">Target configuration</string>
+    <string name="spoof_ts_manage_target_apps">Manage target apps</string>
+    <string name="spoof_ts_no_targets">No target apps configured</string>
+    <string name="spoof_ts_target_apps_count">%d apps configured</string>
+    <string name="spoof_ts_import_target_list">Import target list</string>
+    <string name="spoof_ts_import_target_list_summary">Import target.txt from a file</string>
+    <string name="spoof_ts_target_list_imported">Target list imported</string>
+    <string name="spoof_ts_search_apps">Search apps...</string>
+    <string name="spoof_ts_save">Save</string>
+    <string name="spoof_ts_targets_saved">Target list saved</string>
+    <string name="spoof_ts_failed">Failed: %s</string>
+    <string name="spoof_ts_target_mode_auto" translatable="false">Auto</string>
+    <string name="spoof_ts_target_mode_leaf" translatable="false">Leaf</string>
+    <string name="spoof_ts_target_mode_cert" translatable="false">Cert</string>
+    <string name="spoof_ts_clear_targets_title">Clear target list</string>
+    <string name="spoof_ts_clear_targets_summary">Remove all apps from the spoofing list</string>
+    <string name="spoof_ts_clear_targets_msg">Are you sure you want to remove all applications from the target list?</string>
+    <string name="spoof_ts_targets_cleared">Target list cleared successfully</string>
 </resources>
