@@ -111,4 +111,15 @@
         <item>accent</item>
         <item>custom</item>
     </string-array>
+
+    <!-- PIF Source -->
+    <string-array name="pif_source_entries">
+        <item>@string/pif_source_google</item>
+        <item>@string/pif_source_official</item>
+    </string-array>
+
+    <string-array name="pif_source_values">
+        <item>google</item>
+        <item>official</item>
+    </string-array>
 </resources>
