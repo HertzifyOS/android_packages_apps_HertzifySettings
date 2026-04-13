@@ -1,0 +1,716 @@
+package com.hertzify.settings.fragments.miscellaneous
+
+import android.app.Activity
+import android.app.ActivityManager
+import android.content.Context
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.Typeface
+import android.graphics.drawable.GradientDrawable
+import android.os.Bundle
+import android.util.Log
+import android.util.TypedValue
+import android.view.View
+import android.view.View.MeasureSpec
+import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.view.ContextThemeWrapper
+import androidx.core.widget.NestedScrollView
+import androidx.lifecycle.lifecycleScope
+import androidx.preference.Preference
+import androidx.preference.SwitchPreferenceCompat
+import com.android.internal.logging.nano.MetricsProto
+import com.android.settings.R
+import com.android.settings.SettingsPreferenceFragment
+import com.android.settingslib.Utils
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.json.JSONObject
+import java.io.File
+import java.net.URL
+import java.nio.charset.StandardCharsets
+import com.google.android.material.R as MaterialR
+
+class PlayIntegrityFix : SettingsPreferenceFragment() {
+
+    companion object {
+        private const val TAG = "PlayIntegrityFix"
+        private const val PIF_PATH = "/data/adb/playintegrityfix"
+        private val PIF_FILES = listOf("custom.pif.prop", "custom.pif.json", "pif.prop", "pif.json")
+        private const val GOOGLE_URL = "https://developer.android.com"
+        private const val FLASH_URL = "https://flash.android.com"
+        private const val FLASH_API = "https://content-flashstation-pa.googleapis.com/v1/builds"
+        private const val PIXEL_BULLETIN_URL = "https://source.android.com/docs/security/bulletin/pixel"
+        private const val DROIDGUARD_PACKAGE = "com.google.android.gms.unstable"
+        private const val GMS_PACKAGE = "com.google.android.gms"
+        private const val VENDING_PACKAGE = "com.android.vending"
+        private const val PHOTOS_PACKAGE = "com.google.android.apps.photos"
+
+        private sealed class PifFetchResult {
+            data class Success(val model: String, val pifData: JSONObject) : PifFetchResult()
+            data class Error(val resId: Int, val message: String? = null) : PifFetchResult()
+        }
+
+        private data class PifDevice(val product: String, val device: String, val model: String)
+
+        private fun readConfigData(file: File): Map<String, String> {
+            if (!file.exists()) return emptyMap()
+
+            return try {
+                val content = file.readText()
+                val result = mutableMapOf<String, String>()
+
+                if (file.name.endsWith(".json")) {
+                    val json = JSONObject(content)
+                    json.keys().forEach { key ->
+                        result[key] = json.optString(key, "")
+                    }
+                } else {
+                    content.lines().forEach { line ->
+                        val trimmed = line.trim()
+                        if (trimmed.isNotEmpty() && !trimmed.startsWith("#") && !trimmed.startsWith("//")) {
+                            val eqIndex = trimmed.indexOf('=')
+                            if (eqIndex > 0) {
+                                val key = trimmed.substring(0, eqIndex).trim()
+                                val value = trimmed.substring(eqIndex + 1).trim()
+                                result[key] = value
+                            }
+                        }
+                    }
+                }
+
+                result
+            } catch (e: Exception) {
+                Log.e(TAG, "Failed to read config: ${e.message}")
+                emptyMap()
+            }
+        }
+
+        private fun fetchAvailableDevices(): List<PifDevice> {
+            try {
+                Log.d(TAG, "Fetching Pixel Canary metadata...")
+
+                val versionsHtml = URL("$GOOGLE_URL/about/versions").readText(StandardCharsets.UTF_8)
+                val latestVersion = Regex("""https://developer\.android\.com/about/versions/(\d+)""")
+                    .findAll(versionsHtml)
+                    .mapNotNull { it.groupValues[1].toIntOrNull() }
+                    .toSortedSet()
+                    .maxOrNull()
+                    ?: return emptyList()
+
+                val latestHtml = URL("$GOOGLE_URL/about/versions/$latestVersion").readText(StandardCharsets.UTF_8)
+                val qprPath = Regex("""href="(/about/versions/$latestVersion/qpr(\d+)/download-ota)"""")
+                    .findAll(latestHtml)
+                    .map { (it.groupValues[2].toIntOrNull() ?: 0) to it.groupValues[1] }
+                    .maxByOrNull { it.first }
+                    ?.second
+                    ?: return emptyList()
+
+                val fiHtml = URL("$GOOGLE_URL$qprPath").readText(StandardCharsets.UTF_8)
+                val rowPattern = Regex(
+                    """<tr id="([^"]+)">\s*<td[^>]*>([^<]+)</td>""",
+                    RegexOption.DOT_MATCHES_ALL
+                )
+                
+                val devices = rowPattern.findAll(fiHtml)
+                    .map { 
+                        PifDevice(
+                            product = "${it.groupValues[1]}_beta",
+                            device = it.groupValues[1],
+                            model = it.groupValues[2].trim()
+                        )
+                    }
+                    .toList()
+
+                if (devices.isEmpty()) {
+                    Log.d(TAG, "No canary devices found on page")
+                }
+                
+                return devices
+
+            } catch (e: Exception) {
+                Log.e(TAG, "Error fetching available devices", e)
+                return emptyList()
+            }
+        }
+
+        private fun buildPifFromDevice(pifDevice: PifDevice): PifFetchResult {
+            try {
+                val flashHtml = URL(FLASH_URL).readText(StandardCharsets.UTF_8)
+                val apiKey = Regex("""AIza[0-9A-Za-z_-]{35}""").find(flashHtml)?.value
+                    ?: return PifFetchResult.Error(R.string.spoof_pif_failed, "Failed to extract Flash Tool API key")
+
+                val buildsUrl = "$FLASH_API?product=${pifDevice.product}&key=$apiKey"
+                val buildsConn = URL(buildsUrl).openConnection().apply {
+                    setRequestProperty("Referer", FLASH_URL)
+                    setRequestProperty("X-Goog-Api-Key", apiKey)
+                    connectTimeout = 15000
+                    readTimeout = 15000
+                }
+                val buildsJson = buildsConn.getInputStream().use { it.readBytes().toString(StandardCharsets.UTF_8) }
+
+                val root = JSONObject(buildsJson)
+                val buildsArray = root.optJSONArray("flashstationBuild")
+                    ?: return PifFetchResult.Error(R.string.spoof_pif_failed, "No flashstationBuild array in Flash Tool response")
+
+                var id: String? = null
+                var incremental: String? = null
+                var androidVersion = ""
+                var canaryId: String? = null
+
+                for (i in buildsArray.length() - 1 downTo 0) {
+                    val b = buildsArray.optJSONObject(i) ?: continue
+                    val meta = b.optJSONObject("previewMetadata") ?: continue
+                    if (!meta.optBoolean("canary")) continue
+
+                    val rc = b.optString("releaseCandidateName")
+                    val bid = b.optString("buildId")
+                    if (rc.isEmpty() || bid.isEmpty()) continue
+
+                    id = rc
+                    incremental = bid
+                    androidVersion = meta.optString("releaseTrackVersionName")
+                    canaryId = meta.optString("id").takeIf { it.contains("canary-") }
+                    break
+                }
+
+                if (id == null || incremental == null) {
+                    return PifFetchResult.Error(R.string.spoof_pif_failed, "No canary build found for ${pifDevice.product}")
+                }
+
+                val fingerprint = "google/${pifDevice.product}/${pifDevice.device}:CANARY/$id/$incremental:user/release-keys"
+                Log.d(TAG, "Fingerprint: $fingerprint (Android $androidVersion)")
+
+                val canaryMonth = canaryId?.let {
+                    Regex("""canary-(\d{4})(\d{2})""").find(it)?.let { m ->
+                        "${m.groupValues[1]}-${m.groupValues[2]}"
+                    }
+                } ?: return PifFetchResult.Error(R.string.spoof_pif_failed, "Failed to derive canary month id")
+
+                val securityPatch = try {
+                    val bulletinHtml = URL(PIXEL_BULLETIN_URL).readText(StandardCharsets.UTF_8)
+                    Regex("""<td>($canaryMonth-\d{2})</td>""").find(bulletinHtml)?.groupValues?.get(1)
+                        ?: "$canaryMonth-05"
+                } catch (e: Exception) {
+                    Log.d(TAG, "Bulletin fetch failed, using estimated patch: ${e.message}")
+                    "$canaryMonth-05"
+                }
+
+                Log.d(TAG, "Security Patch: $securityPatch")
+
+                val pifJson = JSONObject().apply {
+                    put("MANUFACTURER", "Google")
+                    put("MODEL", pifDevice.model)
+                    put("PRODUCT", pifDevice.product)
+                    put("DEVICE", pifDevice.device)
+                    put("FINGERPRINT", fingerprint)
+                    put("SECURITY_PATCH", securityPatch)
+                    put("DEVICE_INITIAL_SDK_INT", "32")
+                }
+
+                return PifFetchResult.Success(pifDevice.model, pifJson)
+
+            } catch (e: Exception) {
+                Log.e(TAG, "Canary fetch failed", e)
+                return PifFetchResult.Error(R.string.spoof_pif_failed, "Failed to fetch canary PIF: ${e.message}")
+            }
+        }
+    }
+
+    private var activeConfigFileName: String? = null
+    private var activeConfigData: Map<String, String> = emptyMap()
+
+    private val importLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            result.data?.data?.let { uri ->
+                val isPhotosEnabled = findPreference<SwitchPreferenceCompat>("spoof_pif_photos")?.isChecked ?: false
+                lifecycleScope.launch {
+                    try {
+                        val pifDir = File(PIF_PATH)
+                        val fileName = uri.lastPathSegment?.substringAfterLast('/') ?: "pif.prop"
+                        val isJson = fileName.endsWith(".json", ignoreCase = true)
+                        val targetName = if (isJson) "custom.pif.json" else "custom.pif.prop"
+
+                        val content = withContext(Dispatchers.IO) {
+                            requireContext().contentResolver.openInputStream(uri)?.bufferedReader()?.use { it.readText() }
+                        } ?: return@launch
+
+                        val finalContent = if (isPhotosEnabled) {
+                            if (isJson) {
+                                try {
+                                    val json = JSONObject(content)
+                                    json.put("spoofPhotos", "true")
+                                    json.toString(2)
+                                } catch (e: Exception) { content }
+                            } else {
+                                val lines = content.lines().filter { !it.trim().startsWith("spoofPhotos=") }.toMutableList()
+                                lines.add("spoofPhotos=true")
+                                lines.joinToString("\n")
+                            }
+                        } else {
+                            content
+                        }
+
+                        withContext(Dispatchers.IO) {
+                            val targetFile = File(pifDir, targetName)
+                            targetFile.writeText(finalContent)
+                            targetFile.setReadable(true, false)
+                        }
+                        killGms()
+                        toast(getString(R.string.spoof_pif_imported_success))
+                        refreshStatus()
+                    } catch (e: Exception) {
+                        toast(getString(R.string.spoof_pif_failed, e.message ?: ""))
+                    }
+                }
+            }
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        addPreferencesFromResource(R.xml.play_integrity_fix)
+
+        findPreference<Preference>("spoof_pif_fetch_config")?.setOnPreferenceClickListener {
+            fetchPifFromGoogle()
+            true
+        }
+
+        findPreference<Preference>("spoof_pif_import_config")?.setOnPreferenceClickListener {
+            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+                addCategory(Intent.CATEGORY_OPENABLE)
+                type = "*/*"
+            }
+            importLauncher.launch(intent)
+            true
+        }
+
+        findPreference<Preference>("spoof_pif_delete_config")?.setOnPreferenceClickListener {
+            showDeleteDialog()
+            true
+        }
+
+        findPreference<Preference>("spoof_pif_properties")?.setOnPreferenceClickListener {
+            if (activeConfigData.isNotEmpty()) showConfigDetailsDialog(activeConfigData)
+            true
+        }
+
+        findPreference<SwitchPreferenceCompat>("spoof_pif_photos")?.apply {
+            val activeData = findActiveConfig().second
+            isChecked = activeData["spoofPhotos"]?.let { it == "true" || it == "1" } ?: false
+            setOnPreferenceChangeListener { _, newValue ->
+                val enabled = newValue as Boolean
+                updateConfigValue("spoofPhotos", enabled.toString())
+                killPackage(PHOTOS_PACKAGE)
+                true
+            }
+        }
+
+        refreshStatus()
+    }
+
+    private fun updateConfigValue(key: String, value: String) {
+        val fileName = activeConfigFileName ?: if (value == "true" || value == "1") "custom.pif.json" else null
+        
+        lifecycleScope.launch {
+            if (fileName != null) {
+                withContext(Dispatchers.IO) {
+                    val pifDir = File(PIF_PATH)
+                    val file = File(pifDir, fileName)
+
+                    try {
+                        if (fileName.endsWith(".json")) {
+                            val content = if (file.exists()) file.readText() else "{}"
+                            val json = JSONObject(content)
+                            json.put(key, value)
+                            file.writeText(json.toString(2))
+                        } else {
+                            val lines = if (file.exists()) file.readLines().toMutableList() else mutableListOf()
+                            val keyStr = "$key="
+                            val idx = lines.indexOfFirst { it.trim().startsWith(keyStr) }
+                            if (idx != -1) {
+                                lines[idx] = "$key=$value"
+                            } else {
+                                lines.add("$key=$value")
+                            }
+                            file.writeText(lines.joinToString("\n"))
+                        }
+                        file.setReadable(true, false)
+                    } catch (e: Exception) {
+                        Log.e(TAG, "Failed to update config value", e)
+                    }
+                }
+            }
+            refreshStatus()
+        }
+    }
+
+    private fun findActiveConfig(): Pair<String?, Map<String, String>> {
+        for (fileName in PIF_FILES) {
+            val file = File(PIF_PATH, fileName)
+            if (file.exists()) {
+                return fileName to readConfigData(file)
+            }
+        }
+        return null to emptyMap()
+    }
+
+    private fun refreshStatus() {
+        lifecycleScope.launch {
+            var foundActive: String? = null
+            var activeData: Map<String, String> = emptyMap()
+
+            withContext(Dispatchers.IO) {
+                for (fileName in PIF_FILES) {
+                    val file = File(PIF_PATH, fileName)
+                    if (file.exists()) {
+                        foundActive = fileName
+                        activeData = readConfigData(file)
+                        break
+                    }
+                }
+            }
+
+            activeConfigFileName = foundActive
+            activeConfigData = activeData
+
+            val viewPref = findPreference<Preference>("spoof_pif_properties")
+            val deletePref = findPreference<Preference>("spoof_pif_delete_config")
+
+            if (foundActive != null) {
+                val model = activeData["MODEL"] ?: getString(android.R.string.unknownName)
+                viewPref?.summary = "$foundActive — $model"
+                viewPref?.isEnabled = true
+                deletePref?.isEnabled = true
+            } else {
+                viewPref?.summary = getString(R.string.spoof_pif_no_config)
+                viewPref?.isEnabled = false
+                deletePref?.isEnabled = false
+            }
+        }
+    }
+
+    private fun fetchPifFromGoogle() {
+        val fetchPref = findPreference<Preference>("spoof_pif_fetch_config") ?: return
+        updateFetchState(fetchPref, getString(R.string.spoof_pif_fetching), false)
+
+        val isPhotosEnabled = findPreference<SwitchPreferenceCompat>("spoof_pif_photos")?.isChecked ?: false
+
+        lifecycleScope.launch {
+            try {
+                val devices = withContext(Dispatchers.IO) { fetchAvailableDevices() }
+                if (devices.isEmpty()) {
+                    toast(getString(R.string.spoof_pif_no_canary_devices))
+                    return@launch
+                }
+
+                val bottomSheetDialog = BottomSheetDialog(ContextThemeWrapper(requireContext(), R.style.Theme_Settings))
+                val layout = LinearLayout(requireContext()).apply {
+                    orientation = LinearLayout.VERTICAL
+                    setPadding(0, px(16), 0, 0)
+                    clipChildren = true
+                }
+
+                bottomSheetDialog.setOnShowListener {
+                    val bottomSheet = bottomSheetDialog.findViewById<FrameLayout>(MaterialR.id.design_bottom_sheet)
+                    bottomSheet?.let { sheet ->
+                        val tv = TypedValue()
+                        requireContext().theme.resolveAttribute(android.R.attr.colorBackgroundFloating, tv, true)
+                        
+                        val shape = GradientDrawable().apply {
+                            shape = GradientDrawable.RECTANGLE
+                            setColor(tv.data)
+                            val r = 28f * resources.displayMetrics.density
+                            cornerRadii = floatArrayOf(r, r, r, r, 0f, 0f, 0f, 0f)
+                        }
+                        sheet.background = shape
+                        sheet.clipToOutline = true
+                        
+                        val behavior = BottomSheetBehavior.from(sheet)
+                        behavior.state = BottomSheetBehavior.STATE_EXPANDED
+                    }
+                }
+
+                val titleView = TextView(requireContext()).apply {
+                    text = getString(R.string.spoof_pif_select_device)
+                    textSize = 20f
+                    setTypeface(null, Typeface.BOLD)
+                    setPadding(px(24), px(8), px(24), px(12))
+                    setTextColor(Utils.getColorAttrDefaultColor(requireContext(), android.R.attr.textColorPrimary))
+                }
+                layout.addView(titleView)
+
+                val divider = View(requireContext()).apply {
+                    layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Math.max(1, px(1))).apply {
+                        setMargins(0, 0, 0, px(4))
+                    }
+                    setBackgroundColor(Color.parseColor("#33888888"))
+                }
+                layout.addView(divider)
+
+                val displayMetrics = resources.displayMetrics
+                val maxScrollViewHeight = (displayMetrics.heightPixels * 0.6).toInt()
+
+                val scrollView = object : NestedScrollView(requireContext()) {
+                    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+                        val maxSpec = MeasureSpec.makeMeasureSpec(maxScrollViewHeight, MeasureSpec.AT_MOST)
+                        super.onMeasure(widthMeasureSpec, maxSpec)
+                    }
+                }.apply {
+                    clipToOutline = true
+                    clipChildren = true
+                }
+
+                val itemsLayout = LinearLayout(requireContext()).apply {
+                    orientation = LinearLayout.VERTICAL
+                }
+
+                val outValue = TypedValue()
+                requireContext().theme.resolveAttribute(android.R.attr.selectableItemBackground, outValue, true)
+
+                devices.forEach { device ->
+                    val itemView = TextView(requireContext()).apply {
+                        text = device.model
+                        textSize = 16f
+                        setPadding(px(24), px(16), px(24), px(16))
+                        setBackgroundResource(outValue.resourceId)
+                        isClickable = true
+                        setTextColor(Utils.getColorAttrDefaultColor(requireContext(), android.R.attr.textColorPrimary))
+                        setOnClickListener {
+                            generateAndSavePif(device, isPhotosEnabled)
+                            bottomSheetDialog.dismiss()
+                        }
+                    }
+                    itemsLayout.addView(itemView)
+                }
+
+                scrollView.addView(itemsLayout)
+                layout.addView(scrollView)
+                bottomSheetDialog.setContentView(layout)
+                bottomSheetDialog.show()
+            } catch (e: Exception) {
+                toast(getString(R.string.spoof_pif_failed, e.message ?: ""))
+            } finally {
+                updateFetchState(fetchPref, getString(R.string.spoof_pif_fetch_summary), true)
+            }
+        }
+    }
+
+    private fun generateAndSavePif(device: PifDevice, isPhotosEnabled: Boolean = false) {
+        val fetchPref = findPreference<Preference>("spoof_pif_fetch_config") ?: return
+        updateFetchState(fetchPref, getString(R.string.spoof_pif_generating), false)
+
+        lifecycleScope.launch {
+            try {
+                val result = withContext(Dispatchers.IO) { buildPifFromDevice(device) }
+                when (result) {
+                    is PifFetchResult.Success -> {
+                        if (isPhotosEnabled) {
+                            result.pifData.put("spoofPhotos", "true")
+                        }
+                        savePifJson(result.pifData, result.model)
+                    }
+                    is PifFetchResult.Error -> {
+                        val msg = if (result.message != null) getString(result.resId, result.message) else getString(result.resId)
+                        toast(msg)
+                    }
+                }
+            } catch (e: Exception) {
+                toast(getString(R.string.spoof_pif_failed, e.message ?: ""))
+            } finally {
+                updateFetchState(fetchPref, getString(R.string.spoof_pif_fetch_summary), true)
+            }
+        }
+    }
+
+    private fun savePifJson(json: JSONObject, modelName: String) {
+        lifecycleScope.launch {
+            try {
+                withContext(Dispatchers.IO) {
+                    val file = File(PIF_PATH, "pif.json")
+                    file.writeText(json.toString(2))
+                    file.setReadable(true, false)
+                }
+                killGms()
+                toast(getString(R.string.spoof_pif_fetched_model, modelName))
+                refreshStatus()
+            } catch (e: Exception) {
+                toast(getString(R.string.spoof_pif_failed, e.message ?: ""))
+            }
+        }
+    }
+
+    private fun showConfigDetailsDialog(data: Map<String, String>) {
+        val bottomSheetDialog = BottomSheetDialog(ContextThemeWrapper(requireContext(), R.style.Theme_Settings))
+        
+        val layout = LinearLayout(requireContext()).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(0, px(16), 0, 0)
+            clipChildren = true
+        }
+
+        bottomSheetDialog.setOnShowListener {
+            val bottomSheet = bottomSheetDialog.findViewById<FrameLayout>(MaterialR.id.design_bottom_sheet)
+            bottomSheet?.let { sheet ->
+                val tv = TypedValue()
+                requireContext().theme.resolveAttribute(android.R.attr.colorBackgroundFloating, tv, true)
+                
+                val shape = GradientDrawable().apply {
+                    shape = GradientDrawable.RECTANGLE
+                    setColor(tv.data)
+                    val r = 28f * resources.displayMetrics.density
+                    cornerRadii = floatArrayOf(r, r, r, r, 0f, 0f, 0f, 0f)
+                }
+                sheet.background = shape
+                sheet.clipToOutline = true
+                
+                val behavior = BottomSheetBehavior.from(sheet)
+                behavior.state = BottomSheetBehavior.STATE_EXPANDED
+            }
+        }
+
+        val titleView = TextView(requireContext()).apply {
+            text = getString(R.string.spoof_pif_config_details)
+            textSize = 20f
+            setTypeface(null, Typeface.BOLD)
+            setPadding(px(24), px(8), px(24), px(12))
+            setTextColor(Utils.getColorAttrDefaultColor(requireContext(), android.R.attr.textColorPrimary))
+        }
+        layout.addView(titleView)
+
+        val divider = View(requireContext()).apply {
+            layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Math.max(1, px(1))).apply {
+                setMargins(0, 0, 0, px(4))
+            }
+            setBackgroundColor(Color.parseColor("#33888888"))
+        }
+        layout.addView(divider)
+
+        val displayMetrics = resources.displayMetrics
+        val maxScrollViewHeight = (displayMetrics.heightPixels * 0.6).toInt()
+
+        val scrollView = object : NestedScrollView(requireContext()) {
+            override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+                val maxSpec = MeasureSpec.makeMeasureSpec(maxScrollViewHeight, MeasureSpec.AT_MOST)
+                super.onMeasure(widthMeasureSpec, maxSpec)
+            }
+        }.apply {
+            clipToOutline = true
+            clipChildren = true
+        }
+
+        val itemsLayout = LinearLayout(requireContext()).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(px(24), 0, px(24), px(16))
+        }
+
+        val importantKeys = listOf("MANUFACTURER", "MODEL", "PRODUCT", "DEVICE", "FINGERPRINT", "SECURITY_PATCH")
+        val sortedKeys = data.keys.sortedWith { a, b ->
+            val indexA = importantKeys.indexOf(a).takeIf { it != -1 } ?: Int.MAX_VALUE
+            val indexB = importantKeys.indexOf(b).takeIf { it != -1 } ?: Int.MAX_VALUE
+            if (indexA != indexB) indexA.compareTo(indexB) else a.compareTo(b)
+        }
+
+        sortedKeys.forEach { key ->
+            val value = data[key]
+            if (!value.isNullOrEmpty()) {
+                val propContainer = LinearLayout(requireContext()).apply {
+                    orientation = LinearLayout.VERTICAL
+                    setPadding(0, px(8), 0, px(12))
+                }
+                
+                val keyView = TextView(requireContext()).apply {
+                    text = key
+                    textSize = 12f
+                    alpha = 0.7f
+                    setTypeface(null, Typeface.BOLD)
+                    setTextColor(Utils.getColorAttrDefaultColor(requireContext(), android.R.attr.textColorSecondary))
+                }
+                
+                val valueView = TextView(requireContext()).apply {
+                    text = value
+                    textSize = 16f
+                    setTextIsSelectable(true)
+                    setTextColor(Utils.getColorAttrDefaultColor(requireContext(), android.R.attr.textColorPrimary))
+                }
+                
+                propContainer.addView(keyView)
+                propContainer.addView(valueView)
+                itemsLayout.addView(propContainer)
+            }
+        }
+
+        scrollView.addView(itemsLayout)
+        layout.addView(scrollView)
+        bottomSheetDialog.setContentView(layout)
+        bottomSheetDialog.show()
+    }
+
+    private fun showDeleteDialog() {
+        val fileName = activeConfigFileName ?: return
+        AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.spoof_pif_delete_confirm_title))
+            .setMessage(R.string.spoof_pif_delete_confirm_message)
+            .setPositiveButton(R.string.spoof_pif_delete_button) { _, _ ->
+                lifecycleScope.launch {
+                    try {
+                        val isPhotosEnabled = findPreference<SwitchPreferenceCompat>("spoof_pif_photos")?.isChecked ?: false
+                        
+                        val newActiveFile = withContext(Dispatchers.IO) {
+                            File(PIF_PATH, fileName).delete()
+                            findActiveConfig().first
+                        }
+                        
+                        activeConfigFileName = newActiveFile
+                        
+                        if (isPhotosEnabled || newActiveFile != null) {
+                            updateConfigValue("spoofPhotos", isPhotosEnabled.toString())
+                        }
+                        
+                        killGms()
+                        toast(getString(R.string.spoof_pif_delete_success))
+                        
+                        refreshStatus()
+                    } catch (e: Exception) {
+                        toast(getString(R.string.spoof_pif_failed, e.message ?: ""))
+                    }
+                }
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .show()
+    }
+
+    private fun updateFetchState(pref: Preference, summary: String, enabled: Boolean) {
+        pref.summary = summary
+        pref.isEnabled = enabled
+    }
+
+    private fun killGms() {
+        killPackage(DROIDGUARD_PACKAGE)
+        killPackage(GMS_PACKAGE)
+        killPackage(VENDING_PACKAGE)
+    }
+
+    private fun killPackage(packageName: String) {
+        try {
+            val am = requireContext().getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+            am.forceStopPackage(packageName)
+        } catch (_: Exception) {}
+    }
+
+    private fun toast(msg: String) =
+        Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+
+    override fun getMetricsCategory(): Int =
+        MetricsProto.MetricsEvent.HERTZIFY
+
+    private fun px(dp: Int) = (dp * resources.displayMetrics.density).toInt()
+}
