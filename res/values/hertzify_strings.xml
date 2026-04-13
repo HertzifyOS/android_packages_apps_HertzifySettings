@@ -366,4 +366,32 @@
     <!-- Status bar icon order -->
     <string name="status_bar_icon_order_title">Status bar icon order</string>
     <string name="status_bar_icon_order_summary">Enable legacy status bar icon order</string>
+
+    <!-- Play Integrity Fix -->
+    <string name="spoof_pif_title">Play Integrity Fix</string>
+    <string name="spoof_pif_summary">Manage configuration and device fingerprints for PIF</string>
+    <string name="spoof_pif_category">PIF Configuration</string>
+    <string name="spoof_pif_options_category">PIF Options</string>
+    <string name="spoof_pif_fetch_title">Fetch PIF</string>
+    <string name="spoof_pif_fetch_summary">Download Canary PIF data from Google</string>
+    <string name="spoof_pif_fetching">Fetching data from Google…</string>
+    <string name="spoof_pif_generating">Generating PIF…</string>
+    <string name="spoof_pif_select_device">Select device to fetch</string>
+    <string name="spoof_pif_fetched_model">Applied PIF config for: %s</string>
+    <string name="spoof_pif_no_canary_devices">No Canary devices found</string>
+    <string name="spoof_pif_import_title">Import PIF</string>
+    <string name="spoof_pif_import_summary">Import PIF config from file</string>
+    <string name="spoof_pif_imported_success">PIF imported successfully</string>
+    <string name="spoof_pif_delete_title">Delete PIF</string>
+    <string name="spoof_pif_delete_summary">Remove current active PIF</string>
+    <string name="spoof_pif_delete_confirm_title">Delete active PIF?</string>
+    <string name="spoof_pif_delete_confirm_message">This PIF will be permanently deleted.</string>
+    <string name="spoof_pif_delete_button">Delete</string>
+    <string name="spoof_pif_delete_success">PIF deleted successfully</string>
+    <string name="spoof_pif_properties">PIF Properties</string>
+    <string name="spoof_pif_no_config">No PIF configuration loaded</string>
+    <string name="spoof_pif_config_details">PIF Details</string>
+    <string name="spoof_pif_photos_title">Spoof Google Photos</string>
+    <string name="spoof_pif_photos_summary">Enable unlimited original quality backup</string>
+    <string name="spoof_pif_failed">PIF Error: %s</string>
 </resources>
