@@ -322,4 +322,65 @@
     <string name="ts_target_mode_auto" translatable="false">Auto</string>
     <string name="ts_target_mode_leaf" translatable="false">Leaf</string>
     <string name="ts_target_mode_cert" translatable="false">Cert</string>
+
+    <!-- App Spoofing -->
+    <string name="as_title">App spoofing</string>
+    <string name="as_summary">Spoof device properties for specific apps</string>
+    <string name="as_enable">Enable app spoofing</string>
+    <string name="as_enable_summary">Spoof device properties for configured apps</string>
+    <string name="as_add_app">Add app</string>
+    <string name="as_add_app_summary">Select an app and device profile to spoof</string>
+    <string name="as_configured_apps">Configured apps</string>
+    <string name="as_no_apps">No apps configured</string>
+    <string name="as_no_apps_summary">Tap \"Add app\" to get started</string>
+    <string name="as_select_app">Select app</string>
+    <string name="as_select_profile">Select device profile</string>
+    <string name="as_edit_props">Edit properties</string>
+    <string name="as_change_profile">Change device profile</string>
+    <string name="as_remove">Remove</string>
+    <string name="as_remove_title">Remove app?</string>
+    <string name="as_remove_message">Remove %s from app spoofing?</string>
+    <string name="as_edit_app">Edit %s</string>
+    <string name="as_key">Key</string>
+    <string name="as_value">Value</string>
+    <string name="as_save">Save</string>
+    <string name="as_config_saved">Configuration saved</string>
+    <string name="as_failed">Failed: %s</string>
+    <string name="as_manage_profiles">Manage Profiles</string>
+    <string name="as_manage_profiles_summary">Add, edit or delete device profiles</string>
+    <string name="as_add_profile">Add Profile</string>
+    <string name="as_save_profile">Save Profile</string>
+    <string name="as_profile_name">Profile Name</string>
+    <string name="as_hint_profile_name">e.g. Galaxy S24 Ultra</string>
+    <string name="as_key_model">Model</string>
+    <string name="as_key_manufacturer">Manufacturer</string>
+    <string name="as_hint_model">e.g. SM-S928B</string>
+    <string name="as_hint_manufacturer">e.g. samsung</string>
+    <string name="as_add_prop">Add properties</string>
+    <string name="as_use_profile">Use Profile</string>
+    <string name="as_no_profiles">No profiles available</string>
+    <string name="as_required">Required</string>
+    <string name="as_search_apps">Search apps...</string>
+    <string name="as_show_system">System</string>
+    <string name="as_required_fields">Required fields are missing</string>
+    <string name="as_save_as_profile">Save as Profile</string>
+    <string name="as_save_profile_short">Save Profile</string>
+    <string name="as_profile_saved">Profile saved successfully</string>
+    <string name="as_error_empty_name">Profile name cannot be empty</string>
+    <string name="as_error_duplicate_name">Profile name \"%s\" already exists</string>
+    <string name="as_error_duplicate_props">Properties match an existing profile: %s</string>
+    <string name="as_error_no_props">Please add at least one property</string>
+    <string name="as_duplicate_config_title">Duplicate Configuration</string>
+    <string name="as_duplicate_config_message">This configuration is identical to \"%1$s\". What would you like to do?</string>
+    <string name="as_keep_both">Keep both</string>
+    <string name="as_overwrite_existing">Overwrite existing</string>
+    <string name="as_backup_manage_title">Backup &amp; Restore</string>
+    <string name="as_backup_manage_summary">Import or export your configurations</string>
+    <string name="as_backup_dialog_title">Choose action</string>
+    <string name="as_backup_export">Export to JSON</string>
+    <string name="as_backup_import">Import from JSON</string>
+    <string name="as_export_success">Exported successfully</string>
+    <string name="as_export_error">Export failed</string>
+    <string name="as_import_success">Imported and merged successfully</string>
+    <string name="as_import_error">Import failed</string>
 </resources>

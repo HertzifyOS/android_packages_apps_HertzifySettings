@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/as_title">
+
+    <SwitchPreferenceCompat
+        android:key="as_enabled"
+        android:title="@string/as_enable"
+        android:summary="@string/as_enable_summary"
+        android:defaultValue="false" />
+
+    <Preference
+        android:key="as_add_app"
+        android:title="@string/as_add_app"
+        android:summary="@string/as_add_app_summary" />
+
+    <Preference
+        android:key="as_manage_profiles"
+        android:title="@string/as_manage_profiles"
+        android:summary="@string/as_manage_profiles_summary" />
+
+    <Preference
+        android:key="as_backup_manage"
+        android:title="@string/as_backup_manage_title"
+        android:summary="@string/as_backup_manage_summary" />
+        
+    <PreferenceCategory
+        android:key="as_apps_category"
+        android:title="@string/as_configured_apps" />
+
+</PreferenceScreen>
