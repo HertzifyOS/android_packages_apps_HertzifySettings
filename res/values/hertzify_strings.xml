@@ -166,4 +166,33 @@
     <string name="spoof_ts_target_mode_auto" translatable="false">Auto</string>
     <string name="spoof_ts_target_mode_leaf" translatable="false">Leaf</string>
     <string name="spoof_ts_target_mode_cert" translatable="false">Cert</string>
+
+    <!-- App Spoofing -->
+    <string name="spoof_ap_title">App spoofing</string>
+    <string name="spoof_ap_summary">Spoof device properties for specific apps</string>
+    <string name="spoof_ap_disabled">Spoofing disabled</string>
+    <string name="spoof_ap_configured_apps">Configured • %d apps</string>
+    <string name="spoof_ap_no_apps">No apps configured</string>
+    <string name="spoof_ap_search_apps">Search apps...</string>
+    <string name="spoof_ap_configured">Configured</string>
+    <string name="spoof_ap_manage_profiles">Manage profiles</string>
+    <string name="spoof_ap_manage_profiles_summary">Create, edit, or delete custom device profiles</string>
+    <string name="spoof_ap_add_profile">Add profile</string>
+    <string name="spoof_ap_edit_profile">Edit profile</string>
+    <string name="spoof_ap_profile_name">Profile Name</string>
+    <string name="spoof_ap_hint_profile_name">e.g. My Custom Phone</string>
+    <string name="spoof_ap_key_model">Model</string>
+    <string name="spoof_ap_hint_model">e.g. SM-S928B</string>
+    <string name="spoof_ap_key_manufacturer">Manufacturer</string>
+    <string name="spoof_ap_hint_manufacturer">e.g. samsung</string>
+    <string name="spoof_ap_key">Key</string>
+    <string name="spoof_ap_value">Value</string>
+    <string name="spoof_ap_add_prop">Add Custom Property</string>
+    <string name="spoof_ap_use_profile">Use Profile</string>
+    <string name="spoof_ap_no_profiles">No profiles available</string>
+    <string name="spoof_ap_select_profile">Select Profile</string>
+    <string name="spoof_ap_required">Required</string>
+    <string name="spoof_ap_error_empty_name">Name cannot be empty</string>
+    <string name="spoof_ap_profile_saved">Profile saved</string>
+    <string name="spoof_ap_save">Save</string>
 </resources>
