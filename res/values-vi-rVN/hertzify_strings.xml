@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2026 HertzifyOS
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Hertzify -->
+    <string name="hertzify_dashboard_title">Cài đặt Hertzify</string>
+    <string name="hertzify_dashboard_summary">Tinh chỉnh hệ thống của bạn đến đúng tần số</string>
+    <!-- Categories -->
+    <string name="status_bar_title">Thanh trạng thái</string>
+    <string name="status_bar_summary">Cử chỉ, biểu tượng, chỉ báo quyền riêng tư</string>
+    <string name="quick_settings_title">Cài đặt nhanh</string>
+    <string name="quick_settings_summary">Giao diện, màn hình khoá</string>
+    <string name="notifications_title">Thông báo</string>
+    <string name="notifications_summary">Cảnh báo, giao diện</string>
+    <string name="user_interface_title">Giao diện người dùng</string>
+    <string name="user_interface_summary">Tùy chỉnh giao diện và trải nghiệm sử dụng thiết bị của bạn</string>
+    <string name="lock_screen_title">Màn hình khoá</string>
+    <string name="lock_screen_summary">Giao diện, mục khác</string>
+    <string name="miscellaneous_title">Khác</string>
+    <string name="miscellaneous_summary">Tùy chọn nhà phát triển, spoofing</string>
+    <string name="about_title">Giới thiệu</string>
+    <string name="about_summary">Về HertzifyOS</string>
+    <!-- About -->
+    <string name="about_info">HertzifyOS được thiết kế để giữ cho hệ thống của bạn vận hành nhịp nhàng — mang đến trải nghiệm AOSP thuần với khả năng tùy chỉnh mạnh mẽ ngay trong tầm tay</string>
+    <string name="about_website_title">Website</string>
+    <string name="about_website_summary">Hãy ghé thăm website của chúng tôi</string>
+    <string name="about_telegram_summary">Tham gia Telegram của chúng tôi</string>
+    <string name="about_github_summary">Xem GitHub của chúng tôi</string>
+    <string name="about_contributors_title">Những người đóng góp</string>
+    <!-- Custom seekbar -->
+    <string name="custom_seekbar_value">Giá trị: <xliff:g id="v">%s</xliff:g></string>
+    <string name="custom_seekbar_default_value">theo mặc định</string>
+    <string name="custom_seekbar_default_value_to_set">Giá trị mặc định: <xliff:g id="v">%s</xliff:g>\nNhấn giữ để đặt</string>
+    <string name="custom_seekbar_default_value_is_set">Giá trị mặc định đã được đặt</string>
+    <!-- Color Picker -->
+    <string name="dialog_color_picker">Bộ chọn màu</string>
+    <string name="press_color_to_apply">Nhấn vào màu bên dưới để áp dụng</string>
+    <string name="set">Đặt</string>
+    <string name="color_default">Mặc định</string>
+    <string name="accent_color">Màu nhấn</string>
+    <string name="rainbow_color">Màu cầu vồng</string>
+    <string name="custom_color">Màu tùy chỉnh</string>
+    <!-- Proper seekbar -->
+    <string name="proper_seekbar_value">Giá trị: <xliff:g id="v">%s</xliff:g></string>
+    <string name="proper_seekbar_default_value">Mặc định</string>
+    <string name="proper_seekbar_default_value_to_set">Giá trị mặc định: <xliff:g id="v">%s</xliff:g>\nNhấn giữ để đặt</string>
+    <string name="proper_seekbar_default_value_is_set">Giá trị mặc định đã được đặt</string>
+    <!-- General -->
+    <string name="enable">Bật</string>
+    <string name="disable">Tắt</string>
+    <string name="default_value">Mặc định</string>
+    <string name="top">Trên</string>
+    <string name="bottom">Dưới</string>
+    <string name="reset">Đặt lại</string>
+    <string name="delete_message">Xóa mục đã chọn?</string>
+    <string name="choose_app">Chọn ứng dụng</string>
+    <string name="search">Tìm kiếm</string>
+    <string name="search_apps">Tìm kiếm ứng dụng</string>
+    <string name="apply">Áp dụng</string>
+    <!-- Units -->
+    <string name="unit_hz">Hz</string>
+    <string name="unit_milliseconds">mili giây</string>
+    <string name="unit_seconds">giây</string>
+    <!-- Status bar Icon Manager -->
+    <string name="icon_manager_title">Mục trong thanh trạng thái</string>
+    <string name="icon_manager_summary">Điều khiển hiển thị của các biểu tượng</string>
+    <!-- Heads-up -->
+    <string name="heads_up_notifications_enabled_title">Thông báo nổi</string>
+    <string name="heads_up_notifications_enabled_summary">Hiển thị thông báo ưu tiên trong cửa sổ nổi</string>
+    <!-- Wake on plug -->
+    <string name="wake_when_plugged_or_unplugged_title">Bật màn hình khi sạc</string>
+    <string name="wake_when_plugged_or_unplugged_summary">Bật màn hình khi kết nối hoặc ngắt kết nối nguồn điện</string>
+    <!-- Global Actions -->
+    <string name="global_actions_advanced_reboot_title">Khởi động nâng cao</string>
+    <string name="global_actions_advanced_reboot_summary">Hiển thị các tùy chọn khởi động khác trong menu nguồn</string>
+    <!-- Floating rotation button -->
+    <string name="floating_rotation_button_title">Nút xoay nổi</string>
+    <string name="floating_rotation_button_summary">Hiển thị nút xoay nổi khi thiết bị được xoay</string>
+    <!-- Notifications/Compact Heads-up -->
+    <string name="compact_heads_up_notifications_enabled_title">Thông báo nổi thu gọn</string>
+    <string name="compact_heads_up_notifications_enabled_summary">Hiển thị thông báo nổi ở dạng nhỏ gọn</string>
+    <!-- Brightness Slider -->
+    <string name="status_bar_brightness_slider_title">Thanh trượt độ sáng</string>
+    <string name="status_bar_brightness_slider_summary">Điều chỉnh độ sáng từ Cài đặt nhanh</string>
+    <string name="status_bar_brightness_slider_position_title">Vị trí thanh trượt độ sáng</string>
+    <string name="status_bar_brightness_slider_position_top">Trên cùng</string>
+    <string name="status_bar_brightness_slider_position_bottom">Dưới cùng</string>
+    <string name="status_bar_brightness_slider_auto_title">Nút độ sáng tự động</string>
+    <string name="status_bar_brightness_slider_auto_summary">Hiển thị nút chuyển đổi cho độ sáng thích ứng gần thanh trượt</string>
+    <!-- Hide screen capture status -->
+    <string name="hide_screen_capture_status_title">Ẩn trạng thái chụp màn hình</string>
+    <string name="hide_screen_capture_status_summary">Ẩn trạng thái chụp màn hình và quay màn hình khỏi mọi ứng dụng. Có thể tiện lợi nhưng tiềm ẩn rủi ro rò rỉ quyền riêng tư.</string>
+    <!-- No storage restrict -->
+    <string name="no_storage_restrict_title">Bỏ giới hạn lưu trữ</string>
+    <string name="no_storage_restrict_summary">Gỡ giới hạn khi chọn thư mục qua Storage Access Framework. Có thể tiện nhưng tiềm ẩn rò rỉ quyền riêng tư.</string>
+    <!-- Unlimit screenrecord -->
+    <string name="unlimit_screenrecord_title">Không giới hạn quay màn hình</string>
+    <string name="unlimit_screenrecord_summary">Gỡ bỏ giới hạn kích thước tệp 15GiB\nCó thể dẫn đến tệp đầu ra lớn hơn mức cần thiết</string>
+    <!-- Ignore window secure -->
+    <string name="ignore_window_secure_title">Bỏ qua cờ bảo mật cửa sổ</string>
+    <string name="ignore_window_secure_summary">Gỡ bỏ giới hạn chụp màn hình và quay màn hình cho tất cả ứng dụng. Điều này có thể thuận tiện trong một số trường hợp nhưng có thể dẫn đến rò rỉ quyền riêng tư.</string>
+    <!-- Hide developer status -->
+    <string name="hide_developer_status_title">Ẩn trạng thái nhà phát triển</string>
+    <string name="hide_developer_status_summary">Ẩn trạng thái nhà phát triển khỏi các ứng dụng</string>
+    <!-- Hide applist -->
+    <string name="hide_applist_title">Ẩn danh sách ứng dụng</string>
+    <string name="hide_applist_summary">Ngăn ứng dụng kiểm tra các ứng dụng được chọn trong danh sách</string>
+    <string name="menu_show_overlay">Hiện overlay</string>
+    <string name="menu_hide_overlay">Ẩn overlay</string>
+    <!-- Double tap to sleep on status bar or lockscreen -->
+    <string name="status_bar_double_tap_to_sleep_title">Chạm để tắt màn hình</string>
+    <string name="status_bar_double_tap_to_sleep_summary">Chạm hai lần vào thanh trạng thái hoặc màn hình khóa để tắt màn hình</string>
+    <!-- Lockscreen battery info indicator -->
+    <string name="lockscreen_battery_info_title">Thông tin sạc trên màn hình khóa</string>
+    <string name="lockscreen_battery_info_summary">Hiển thị dòng điện, điện áp, công suất và nhiệt độ khi đang sạc</string>
+    <!-- Colored icons -->
+    <string name="status_bar_colored_icons_title">Biểu tượng có màu</string>
+    <string name="status_bar_colored_icons_summary">Dùng biểu tượng của launcher cho thông báo ứng dụng</string>
+    <!-- Notification counter -->
+    <string name="status_bar_notif_count_title">Đếm thông báo</string>
+    <string name="status_bar_notif_count_summary">Hiển thị số lượng thông báo chưa đọc trên biểu tượng ứng dụng</string>
+    <!-- Disable QS -->
+    <string name="quick_settings_secure_lock_screen_title">QS trên màn hình khoá</string>
+    <string name="quick_settings_secure_lock_screen_summary">Cho phép vuốt xuống để mở Quick Settings khi màn hình khoá</string>
+    <!-- Lock screen media art -->
+    <string name="ls_media_art_title">Ảnh bìa media</string>
+    <string name="ls_media_art_summary">Hiển thị ảnh bìa media khi có</string>
+    <!-- Lock screen media art on Ambient Display -->
+    <string name="ambient_media_art_title">Ảnh bìa media trên màn hình chờ</string>
+    <string name="ambient_media_art_summary">Hiển thị ảnh bìa media trên màn hình chờ khi có</string>
+    <!-- Lock screen album art filter -->
+    <string name="ls_media_art_filter_title">Bộ lọc ảnh bìa media</string>
+    <string name="ls_media_art_filter_none">Không</string>
+    <string name="ls_media_art_filter_blur">Làm mờ</string>
+    <string name="ls_media_art_filter_grayscale">Xám</string>
+    <string name="ls_media_art_filter_sepia">Sepia</string>
+    <string name="ls_media_art_filter_tint">Tô màu theo màu nhấn</string>
+    <string name="ls_media_art_filter_invert">Đảo màu</string>
+    <string name="ls_media_art_filter_grayblur">Xám và mờ</string>
+    <!-- Lock screen media art fade level -->
+    <string name="ls_media_art_fade_level_title">Mức độ mờ ảnh bìa media</string>
+    <string name="ls_media_art_fade_level_summary">Đặt mức độ mờ cho ảnh bìa media</string>
+    <!-- Lock screen media art blur level -->
+    <string name="ls_media_art_blur_level_title">Mức độ làm mờ media art</string>
+    <string name="ls_media_art_blur_level_summary">Cường độ làm mờ khi bộ lọc mờ được áp dụng</string>
+    <!-- Pulse music visualizer -->
+    <string name="pulse_settings_title">Pulse Visualizer</string>
+    <string name="pulse_settings_summary">Hiển thị thanh visualizer trên màn hình khóa khi phát nhạc</string>
+    <string name="ambient_pulse_enabled_title">Ambient Pulse</string>
+    <string name="ambient_pulse_enabled_summary">Hiển thị visualizer trên màn hình Ambient</string>
+    <string name="pulse_rounded_bars_title">Thanh bo tròn</string>
+    <string name="pulse_rounded_bars_summary">Hiển thị thanh visualizer với góc bo tròn</string>
+    <string name="pulse_color">Màu visualizer</string>
+    <string name="pulse_color_lavalamp">Lavalamp</string>
+    <string name="pulse_color_album">Ảnh album</string>
+    <string name="pulse_color_accent">Màu nhấn</string>
+    <string name="pulse_bar_count_title">Số lượng thanh</string>
+    <string name="pulse_bar_count_summary">Thiết lập số thanh hiển thị trong visualizer</string>
+    <string name="pulse_bar_count_units">thanh</string>
+    <string name="pulse_renderer">Kiểu visualizer</string>
+    <string name="pulse_renderer_solid">Đường liền</string>
+    <string name="pulse_renderer_fading">Khối mờ dần</string>
+    <string name="pulse_renderer_neon_glow">Neon glow</string>
+    <string name="pulse_renderer_retro_vu_meter">VU meter retro</string>
+    <string name="pulse_renderer_minimal_wave">Minimal wave</string>
+    <string name="pulse_renderer_sparkle">Sparkle</string>
+    <string name="pulse_renderer_matrix">Matrix</string>
+    <!-- Notification bubbles -->
+    <string name="notification_bubble_apps_title">Bong bóng thông báo</string>
+    <string name="notification_bubble_apps_summary">Khởi chaỵ ứng dụng dưới dạng bong bóng khi nhấn vào thông báo</string>
+    <!-- Sidebar -->
+    <string name="sidebar_title">Thanh bên</string>
+    <string name="sidebar_summary">Mở nhanh ứng dụng trong cửa sổ nổi</string>
+    <!-- SystemUI restart dialog -->
+    <string name="systemui_restart_title">Cần khởi động lại SystemUI</string>
+    <string name="systemui_restart_message">Để áp dụng thay đổi, cần khởi động lại SystemUI. Khởi động lại ngay?</string>
+    <string name="systemui_restart_yes">Có</string>
+    <string name="systemui_restart_not_now">Để sau</string>
+    <string name="systemui_restart_process">Đang khởi động lại SystemUI để áp dụng thay đổi...</string>
+    <!-- Smartspace -->
+    <string name="lockscreen_smartspace_title">Smartspace</string>
+    <string name="lockscreen_smartspace_summary">Hiển thị Google Smartspace khi khả dụng</string>
+    <!-- Weather -->
+    <string name="weather_settings_title">Cài đặt thời tiết</string>
+    <string name="weather_settings_summary">Thiết lập gói biểu tượng và dịch vụ thời tiết</string>
+    <string name="lockscreen_weather_category">Thời tiết</string>
+    <string name="lockscreen_weather_title">Cập nhật thời tiết</string>
+    <string name="lockscreen_weather_summary">Hiển thị thông tin thời tiết hiện tại</string>
+    <string name="lockscreen_weather_enabled_info">Yêu cầu cấu hình dịch vụ thời tiết tùy chỉnh và tắt Smartspace</string>
+    <string name="lockscreen_weather_location_title">Vị trí hiện tại</string>
+    <string name="lockscreen_weather_location_summary">Hiển thị vị trí thời tiết hiện tại</string>
+    <string name="lockscreen_weather_text_title">Tình trạng hiện tại</string>
+    <string name="lockscreen_weather_text_summary">Hiển thị mô tả thời tiết hiện tại</string>
+    <string name="lockscreen_weather_wind_info_title">Gió</string>
+    <string name="lockscreen_weather_wind_info_summary">Hiển thị tốc độ và hướng gió hiện tại</string>
+    <string name="lockscreen_weather_humidity_info_title">Độ ẩm</string>
+    <string name="lockscreen_weather_humidity_info_summary">Hiển thị độ ẩm hiện tại (%)</string>
+    <!-- System font -->
+    <string name="system_font_title">Phông chữ hệ thống</string>
+    <string name="system_font_summary">Đặt kiểu phông chữ hệ thống</string>
+    <!-- Custom clock style -->
+    <string name="lockscreen_custom_clock_style_title">Kiểu đồng hồ tùy chỉnh</string>
+    <string name="lockscreen_custom_clock_style_summary">Cấu hình kiểu đồng hồ màn hình khóa</string>
+    <string name="lockscreen_custom_clock_font_title">Phông chữ đồng hồ</string>
+    <string name="lockscreen_custom_clock_font_summary">Đặt phông chữ đồng hồ màn hình khóa</string>
+    <string name="lockscreen_custom_clock_style_highlight_text">Vuốt sang trái hoặc phải để xem trước kiểu đồng hồ</string>
+    <string name="lockscreen_custom_clock_style_info">Kiểu đồng hồ tùy chỉnh sẽ thay thế đồng hồ AOSP bằng đồng hồ tùy chỉnh. Smartspace sẽ bị tắt. Bạn có thể bật và dùng thời tiết tùy chỉnh thay thế.</string>
+    <string name="lockscreen_custom_clock_opacity_title">Độ mờ đồng hồ</string>
+    <string name="lockscreen_custom_clock_opacity_summary">Điều chỉnh độ trong suốt của đồng hồ tùy chỉnh</string>
+    <string name="lockscreen_custom_clock_frame_margin_top_title">Chiều cao đồng hồ</string>
+    <string name="lockscreen_custom_clock_frame_margin_top_summary">Điều chỉnh vị trí theo chiều dọc của đồng hồ</string>
+    <string name="lockscreen_custom_clock_color_mode_title">Chế độ màu đồng hồ</string>
+    <!-- Play Integrity Fix -->
+    <string name="pif_title">Play Integrity Fix</string>
+    <string name="pif_summary">Manage PIF configuration and device fingerprints</string>
+    <string name="pif_category">PIF</string>
+    <string name="pif_options_category">PIF Options</string>
+    <string name="pif_properties">Current build properties</string>
+    <string name="pif_no_config">No configuration loaded</string>
+    <string name="pif_fetch_title">Fetch PIF</string>
+    <string name="pif_fetch_summary">Fetch from Google or HertzifyOS servers</string>
+    <string name="pif_import_title">Import PIF</string>
+    <string name="pif_import_summary">Import .json or .prop PIF file</string>
+    <string name="pif_delete_active_title">Delete active PIF</string>
+    <string name="pif_delete_active_summary">Delete the active PIF configuration used for spoofing</string>
+    <string name="pif_select_source_title">Select update source</string>
+    <string name="pif_source_google">Google Beta OTA (Auto-generate)</string>
+    <string name="pif_source_official">HertzifyOS</string>
+    <string name="pif_fetching">Fetching data from Google\u2026</string>
+    <string name="pif_fetching_official">Connecting to Hertzify\u2026</string>
+    <string name="pif_generating">Generating PIF file\u2026</string>
+    <string name="pif_select_device">Select device</string>
+    <string name="pif_fetched_model">Applied config (PIF): %s</string>
+    <string name="pif_imported_as">Imported as %s</string>
+    <string name="pif_delete_success">Configuration deleted successfully</string>
+    <string name="pif_fetch_official_error">Failed to fetch official config: %s</string>
+    <string name="pif_config_details">Configuration details</string>
+    <string name="pif_failed">Failed: %s</string>
+    <string name="pif_no_beta_devices">No beta devices found</string>
+    <string name="pif_delete_title">Delete %s?</string>
+    <string name="pif_delete_message">This configuration file will be permanently removed from the system.</string>
+    <string name="pif_delete">Delete</string>
+    <string name="pif_spoof_photos_title">Unlimited Photos Storage</string>
+    <string name="pif_spoof_photos_summary">Spoof device as Pixel XL to enable unlimited backup</string>
+    <!-- TrickyStore -->
+    <string name="ts_title">TrickyStore</string>
+    <string name="ts_summary">Manage keybox and target apps for attestation</string>
+    <string name="ts_keybox_management">Keybox management</string>
+    <string name="ts_import_keybox">Import keybox</string>
+    <string name="ts_no_keybox">No keybox installed</string>
+    <string name="ts_keybox_installed">Keybox installed</string>
+    <string name="ts_keybox_imported">Keybox imported successfully</string>
+    <string name="ts_delete_keybox">Delete keybox</string>
+    <string name="ts_delete_keybox_summary">Remove keybox file</string>
+    <string name="ts_delete_keybox_title">Delete keybox?</string>
+    <string name="ts_delete_keybox_message">The keybox file will be permanently removed.</string>
+    <string name="ts_delete">Delete</string>
+    <string name="ts_keybox_deleted">Keybox deleted</string>
+    <string name="ts_target_configuration">Target configuration</string>
+    <string name="ts_manage_target_apps">Manage target apps</string>
+    <string name="ts_no_targets">No target apps configured</string>
+    <string name="ts_target_apps_count">%d apps configured</string>
+    <string name="ts_import_target_list">Import target list</string>
+    <string name="ts_import_target_list_summary">Import target.txt from a file</string>
+    <string name="ts_target_list_imported">Target list imported</string>
+    <string name="ts_search_apps">Search apps...</string>
+    <string name="ts_loading_apps">Loading apps\u2026</string>
+    <string name="ts_save">Save</string>
+    <string name="ts_targets_saved">Target list saved</string>
+    <string name="ts_failed">Failed: %s</string>
+    <string name="ts_target_mode_auto">Auto</string>
+    <string name="ts_target_mode_leaf">Leaf</string>
+    <string name="ts_target_mode_cert">Cert</string>
+    <!-- App Spoofing -->
+    <string name="as_title">App spoofing</string>
+    <string name="as_summary">Spoof device properties for specific apps</string>
+    <string name="as_enable">Enable app spoofing</string>
+    <string name="as_enable_summary">Spoof device properties for configured apps</string>
+    <string name="as_add_app">Add app</string>
+    <string name="as_add_app_summary">Select an app and device profile to spoof</string>
+    <string name="as_configured_apps">Configured apps</string>
+    <string name="as_no_apps">No apps configured</string>
+    <string name="as_no_apps_summary">Tap \"Add app\" to get started</string>
+    <string name="as_select_app">Select app</string>
+    <string name="as_select_profile">Select device profile</string>
+    <string name="as_edit_props">Edit properties</string>
+    <string name="as_change_profile">Change device profile</string>
+    <string name="as_remove">Remove</string>
+    <string name="as_remove_title">Remove app?</string>
+    <string name="as_remove_message">Remove %s from app spoofing?</string>
+    <string name="as_edit_app">Edit %s</string>
+    <string name="as_key">Key</string>
+    <string name="as_value">Value</string>
+    <string name="as_save">Save</string>
+    <string name="as_config_saved">Configuration saved</string>
+    <string name="as_loading_apps">Loading apps\u2026</string>
+    <string name="as_failed">Failed: %s</string>
+    <string name="as_manage_profiles">Manage Profiles</string>
+    <string name="as_manage_profiles_summary">Add, edit or delete device profiles</string>
+    <string name="as_add_profile">Add Profile</string>
+    <string name="as_save_profile">Save Profile</string>
+    <string name="as_profile_name">Profile Name</string>
+    <string name="as_hint_profile_name">e.g. Galaxy S24 Ultra</string>
+    <string name="as_key_model">Model</string>
+    <string name="as_key_manufacturer">Manufacturer</string>
+    <string name="as_hint_model">e.g. SM-S928B</string>
+    <string name="as_hint_manufacturer">e.g. samsung</string>
+    <string name="as_add_prop">Add properties</string>
+    <string name="as_use_profile">Use Profile</string>
+    <string name="as_no_profiles">No profiles available</string>
+    <string name="as_required">Required</string>
+    <string name="as_search_apps">Search apps...</string>
+    <string name="as_show_system">System</string>
+    <string name="as_required_fields">Required fields are missing</string>
+    <string name="as_save_as_profile">Save as Profile</string>
+    <string name="as_save_profile_short">Save Profile</string>
+    <string name="as_profile_saved">Profile saved successfully</string>
+    <string name="as_error_empty_name">Profile name cannot be empty</string>
+    <string name="as_error_duplicate_name">Profile name \"%s\" already exists</string>
+    <string name="as_error_duplicate_props">Properties match an existing profile: %s</string>
+    <string name="as_error_no_props">Please add at least one property</string>
+    <string name="as_duplicate_config_title">Duplicate Configuration</string>
+    <string name="as_duplicate_config_message">This configuration is identical to \"%1$s\". What would you like to do?</string>
+    <string name="as_keep_both">Keep both</string>
+    <string name="as_overwrite_existing">Overwrite existing</string>
+    <string name="as_backup_manage_title">Backup &amp; Restore</string>
+    <string name="as_backup_manage_summary">Import or export your configurations</string>
+    <string name="as_backup_dialog_title">Choose action</string>
+    <string name="as_backup_export">Export to JSON</string>
+    <string name="as_backup_import">Import from JSON</string>
+    <string name="as_export_success">Exported successfully</string>
+    <string name="as_export_error">Export failed</string>
+    <string name="as_import_success">Imported and merged successfully</string>
+    <string name="as_import_error">Import failed</string>
+</resources>
