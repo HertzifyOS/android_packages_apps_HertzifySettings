@@ -11,7 +11,7 @@ class AppSpoofController(private val context: Context) {
 
     companion object {
         private const val TAG            = "AppSpoofController"
-        private const val CONFIG_DIR     = "/data/adb/appprops"
+        private const val CONFIG_DIR     = "/data/system/appprops"
         private const val CONFIG_FILE    = "appprops.json"
         private const val PROFILES_FILE  = "profiles.json"
     }
