@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/spoof_ap_title">
+
+    <SwitchPreferenceCompat
+        android:key="spoof_ap_enabled"
+        android:title="@string/spoof_ap_enable"
+        android:summary="@string/spoof_ap_enable_summary"
+        android:defaultValue="false" />
+
+    <Preference
+        android:key="spoof_ap_add_app"
+        android:title="@string/spoof_ap_add_app"
+        android:summary="@string/spoof_ap_add_app_summary" />
+
+    <Preference
+        android:key="spoof_ap_manage_profiles"
+        android:title="@string/spoof_ap_manage_profiles"
+        android:summary="@string/spoof_ap_manage_profiles_summary" />
+
+    <PreferenceCategory
+        android:key="spoof_ap_apps_category"
+        android:title="@string/spoof_ap_configured_apps" />
+
+</PreferenceScreen>
