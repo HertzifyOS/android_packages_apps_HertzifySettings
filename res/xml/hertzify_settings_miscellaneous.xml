@@ -22,6 +22,13 @@
         android:title="@string/spoof_ts_title"
         android:summary="@string/spoof_ts_summary"
         android:fragment="com.hertzify.settings.fragments.miscellaneous.TrickyStore" />
+
+    <!-- App Spoofing -->
+    <Preference
+        android:key="app_spoofing"
+        android:title="@string/spoof_ap_title"
+        android:summary="@string/spoof_ap_summary"
+        android:fragment="com.hertzify.settings.fragments.miscellaneous.AppSpoofing" />
         
     <!-- Allow application downgrade -->
     <com.hertzify.settings.preferences.GlobalSettingSwitchPreference
