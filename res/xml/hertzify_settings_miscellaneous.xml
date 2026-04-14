@@ -23,6 +23,13 @@
         android:summary="@string/ts_summary"
         android:fragment="com.hertzify.settings.fragments.miscellaneous.TrickyStore" />
 
+    <!-- App Spoofing -->
+    <Preference
+        android:key="app_spoofing"
+        android:title="@string/as_title"
+        android:summary="@string/as_summary"
+        android:fragment="com.hertzify.settings.fragments.miscellaneous.AppSpoofing" />
+
     <!-- Hide developer status in about phone -->
     <Preference
         android:key="hide_developer_status_settings"
