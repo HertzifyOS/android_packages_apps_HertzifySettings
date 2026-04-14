@@ -422,4 +422,50 @@
     <string name="spoof_ts_target_mode_auto" translatable="false">Auto</string>
     <string name="spoof_ts_target_mode_leaf" translatable="false">Leaf</string>
     <string name="spoof_ts_target_mode_cert" translatable="false">Cert</string>
+
+    <!-- App Profile Spoofing -->
+    <string name="spoof_ap_title">App Profile Spoof</string>
+    <string name="spoof_ap_summary">Spoof device model and properties per application</string>
+    <string name="spoof_ap_disabled">Disabled</string>
+    <string name="spoof_ap_no_apps">No applications configured</string>
+    <string name="spoof_ap_configured_apps">%d apps configured</string>
+    <string name="spoof_ap_configured">Configured</string>
+    <string name="spoof_ap_saved_disabled">Saved (Disabled)</string>
+    <string name="spoof_ap_import">Import</string>
+    <string name="spoof_ap_manage_profiles">Profiles</string>
+    <string name="spoof_ap_manage_profiles_summary">Manage custom device profiles</string>
+    <string name="spoof_ap_search_apps">Search apps...</string>
+    <string name="spoof_ap_system_apps">System</string>
+    <string name="spoof_ap_auto">Auto</string>
+    <string name="spoof_ap_loading_apps">Loading applications…</string>
+    <string name="spoof_ap_use_profile">Use Profile</string>
+    <string name="spoof_ap_save">Save</string>
+    <string name="spoof_ap_select_profile">Select profile</string>
+    <string name="spoof_ap_no_profiles">No custom profiles</string>
+    <string name="spoof_ap_add_profile">Add profile</string>
+    <string name="spoof_ap_edit_profile">Edit profile</string>
+    <string name="spoof_ap_profile_name">Profile Name</string>
+    <string name="spoof_ap_hint_profile_name">e.g. My Custom Phone</string>
+    <string name="spoof_ap_key_manufacturer">MANUFACTURER</string>
+    <string name="spoof_ap_hint_manufacturer">e.g. asus</string>
+    <string name="spoof_ap_key_model">MODEL</string>
+    <string name="spoof_ap_hint_model">e.g. ASUS_AI2401_A</string>
+    <string name="spoof_ap_key">Key</string>
+    <string name="spoof_ap_value">Value</string>
+    <string name="spoof_ap_add_prop">Add property</string>
+    <string name="spoof_ap_required">Manufacturer and Model are required</string>
+    <string name="spoof_ap_error_empty_name">Profile name cannot be empty</string>
+    <string name="spoof_ap_profile_saved">Profile saved</string>
+    <string name="spoof_ap_cannot_edit_builtin">Built-in profiles cannot be edited</string>
+    <string name="spoof_ap_import_success">Configuration imported successfully</string>
+    <string name="spoof_ap_import_failed">Import failed: %s</string>
+    <string name="spoof_ap_import_apps_and_profiles">Imported %1$d apps and %2$d profiles</string>
+    <string name="spoof_ap_import_profiles_success">Imported %d profiles</string>
+    <string name="spoof_ap_import_no_valid_data">No valid apps or profiles found</string>
+    <string name="spoof_ap_auto_synced">Auto sync completed</string>
+    <string name="spoof_ap_failed">Failed: %s</string>
+    <string name="spoof_ap_no_targets_available">No targets available</string>
+    <string name="spoof_ap_clear_search_desc">Clear search</string>
+    <string name="spoof_ap_delete_desc">Delete</string>
+    <string name="spoof_ap_back_desc">Back</string>
 </resources>
