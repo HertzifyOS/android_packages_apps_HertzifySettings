@@ -236,4 +236,17 @@
         <item>EEEE MM/dd</item>
         <item>@string/status_bar_date_format_custom</item>
     </string-array>
+
+    <!-- Status Bar Battery Percent -->
+    <string-array name="status_bar_battery_percent_entries" translatable="false">
+        <item>@string/status_bar_battery_percent_hidden</item>
+        <item>@string/status_bar_battery_percent_text_inside</item>
+        <item>@string/status_bar_battery_percent_text_next</item>
+    </string-array>
+
+    <string-array name="status_bar_battery_percent_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
 </resources>
