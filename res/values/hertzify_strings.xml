@@ -229,4 +229,10 @@
     <string name="hide_applist_summary">Prevent apps from checking selected apps from appslist</string>
     <string name="menu_show_overlay">Show overlay</string>
     <string name="menu_hide_overlay">Hide overlay</string>
+
+    <!-- Status Bar Battery Percent -->
+    <string name="status_bar_battery_percent_title">Battery percent</string>
+    <string name="status_bar_battery_percent_hidden">Hidden</string>
+    <string name="status_bar_battery_percent_text_inside">Inside the icon</string>
+    <string name="status_bar_battery_percent_text_next">Next to the icon</string> 
 </resources>
