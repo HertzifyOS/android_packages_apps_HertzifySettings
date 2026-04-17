@@ -100,4 +100,10 @@
     <string name="qs_brightness_slider_position_bottom">Bottom</string>
     <string name="status_bar_brightness_slider_auto_title">Auto brightness button</string>
     <string name="status_bar_brightness_slider_auto_summary">Show toggle for adaptive brightness near the slider</string>
+
+    <!-- Status Bar Battery Percent -->
+    <string name="status_bar_battery_percent_title">Battery percent</string>
+    <string name="status_bar_battery_percent_hidden">Hidden</string>
+    <string name="status_bar_battery_percent_text_inside">Inside the icon</string>
+    <string name="status_bar_battery_percent_text_next">Next to the icon</string> 
 </resources>
