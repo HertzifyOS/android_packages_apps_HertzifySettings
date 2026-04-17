@@ -329,4 +329,10 @@
     <string name="status_bar_clock_date_position">Date position</string>
     <string name="status_bar_clock_date_right">Right of time</string>
     <string name="status_bar_clock_date_left">Left of time</string>
+
+    <!-- Status Bar Battery Percent -->
+    <string name="status_bar_battery_percent_title">Battery percent</string>
+    <string name="status_bar_battery_percent_hidden">Hidden</string>
+    <string name="status_bar_battery_percent_text_inside">Inside the icon</string>
+    <string name="status_bar_battery_percent_text_next">Next to the icon</string> 
 </resources>
