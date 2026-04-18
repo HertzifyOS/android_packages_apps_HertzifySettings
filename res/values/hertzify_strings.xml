@@ -477,4 +477,8 @@
     <string name="system_restart_message">For changes to take effect, a system restart is required. Restart now?</string>
     <string name="system_restart_yes">Yes</string>
     <string name="system_restart_not_now">Not now</string>
+
+    <!-- Emoji style -->
+    <string name="emoji_style_title">Emoji style</string>
+    <string name="emoji_style_summary">Choose the system emoji pack without changing text fonts</string>
 </resources>
