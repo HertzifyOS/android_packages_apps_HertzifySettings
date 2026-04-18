@@ -15,6 +15,14 @@
         android:title="@string/system_font_title"
         android:summary="@string/system_font_summary" />
 
+    <com.hertzify.settings.preferences.SystemSettingListPreference
+        android:key="emoji_style"
+        android:title="@string/emoji_style_title"
+        android:summary="%s"
+        android:entries="@array/emoji_style_entries"
+        android:entryValues="@array/emoji_style_values"
+        android:defaultValue="android" />
+
     <!-- Wake when plugged or unplugged -->
     <com.hertzify.settings.preferences.GlobalSettingSwitchPreference
         android:key="wake_when_plugged_or_unplugged"

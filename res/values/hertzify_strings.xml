@@ -486,4 +486,8 @@
     <!-- Allow application downgrade -->
     <string name="miscellaneous_app_downgrade_title">Allow application downgrade</string>
     <string name="miscellaneous_app_downgrade_summary">Allow downgrading system applications, which may result in crashes and data loss</string>
+
+    <!-- Emoji style -->
+    <string name="emoji_style_title">Emoji style</string>
+    <string name="emoji_style_summary">Choose the system emoji pack without changing text fonts</string>
 </resources>
