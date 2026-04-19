@@ -266,7 +266,6 @@
     <string name="ts_import_target_list_summary">Nhập file target.txt từ tệp</string>
     <string name="ts_target_list_imported">Đã nhập danh sách mục tiêu</string>
     <string name="ts_search_apps">Tìm ứng dụng...</string>
-    <string name="ts_loading_apps">Đang tải ứng dụng…</string>
     <string name="ts_save">Lưu</string>
     <string name="ts_targets_saved">Đã lưu danh sách mục tiêu</string>
     <string name="ts_failed">Thất bại: %s</string>
@@ -292,7 +291,6 @@
     <string name="as_value">Giá trị</string>
     <string name="as_save">Lưu</string>
     <string name="as_config_saved">Đã lưu cấu hình</string>
-    <string name="as_loading_apps">Đang tải ứng dụng…</string>
     <string name="as_failed">Thất bại: %s</string>
     <string name="as_manage_profiles">Quản lý Profile</string>
     <string name="as_manage_profiles_summary">Thêm, sửa hoặc xóa profile thiết bị</string>
