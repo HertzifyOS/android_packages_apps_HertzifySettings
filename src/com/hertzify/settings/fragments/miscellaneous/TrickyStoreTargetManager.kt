@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.os.Process
+import android.provider.Settings
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -24,14 +25,12 @@ import android.widget.LinearLayout
 import android.widget.RadioGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.settings.R
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.R as MaterialR
-import java.io.File
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -40,8 +39,6 @@ import kotlinx.coroutines.withContext
 class TrickyStoreTargetManager(
     private val context: Context,
     private val scope: CoroutineScope,
-    private val storePath: String,
-    private val targetFileName: String,
     private val onSaved: () -> Unit
 ) {
 
@@ -53,6 +50,10 @@ class TrickyStoreTargetManager(
         "com.google.android.apps.nbu.paisa.user",
         "com.google.android.apps.walletnfcrel"
     )
+
+    companion object {
+        private const val TS_TARGET_KEY = "spoof_trickystore_target"
+    }
 
     enum class TargetMode(val symbol: String) {
         AUTO(""),
@@ -258,19 +259,17 @@ class TrickyStoreTargetManager(
     }
 
     private suspend fun readTargetMap(): Map<String, TargetMode> = withContext(Dispatchers.IO) {
-        val file = File(storePath, targetFileName)
-        if (!file.exists()) return@withContext emptyMap()
+        val content = Settings.Secure.getString(context.contentResolver, TS_TARGET_KEY) ?: return@withContext emptyMap()
         try {
-            file.readLines().filter { it.isNotBlank() && !it.startsWith("#") }
+            content.lines().filter { it.isNotBlank() && !it.startsWith("#") }
                 .associate { TargetMode.fromLine(it.trim()) }
         } catch (e: Exception) { emptyMap() }
     }
 
     private suspend fun saveTargetMap(map: Map<String, TargetMode>) = withContext(Dispatchers.IO) {
         try {
-            val file = File(storePath, targetFileName)
-            file.writeText(map.map { "${it.key}${it.value.symbol}" }.joinToString("\n"))
-            file.setReadable(true, false)
+            val text = map.map { "${it.key}${it.value.symbol}" }.joinToString("\n")
+            Settings.Secure.putString(context.contentResolver, TS_TARGET_KEY, text)
         } catch (e: Exception) { Log.e("TSManager", "Save error", e) }
     }
 
