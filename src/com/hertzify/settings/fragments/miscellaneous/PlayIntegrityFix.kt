@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
@@ -34,7 +35,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
-import java.io.File
 import java.net.URL
 import java.nio.charset.StandardCharsets
 import com.google.android.material.R as MaterialR
@@ -43,8 +43,7 @@ class PlayIntegrityFix : SettingsPreferenceFragment() {
 
     companion object {
         private const val TAG = "PlayIntegrityFix"
-        private const val PIF_PATH = "/data/adb/playintegrityfix"
-        private val PIF_FILES = listOf("custom.pif.prop", "custom.pif.json", "pif.prop", "pif.json")
+        private const val PIF_CONFIG_KEY = "spoof_pif_config"
         private const val GOOGLE_URL = "https://developer.android.com"
         private const val FLASH_URL = "https://flash.android.com"
         private const val FLASH_API = "https://content-flashstation-pa.googleapis.com/v1/builds"
@@ -61,37 +60,45 @@ class PlayIntegrityFix : SettingsPreferenceFragment() {
 
         private data class PifDevice(val product: String, val device: String, val model: String)
 
-        private fun readConfigData(file: File): Map<String, String> {
-            if (!file.exists()) return emptyMap()
-
+        private fun readConfigData(content: String): Map<String, String> {
             return try {
-                val content = file.readText()
                 val result = mutableMapOf<String, String>()
-
-                if (file.name.endsWith(".json")) {
-                    val json = JSONObject(content)
-                    json.keys().forEach { key ->
-                        result[key] = json.optString(key, "")
-                    }
+                val trimmed = content.trim()
+                if (trimmed.startsWith("{")) {
+                    val json = JSONObject(trimmed)
+                    json.keys().forEach { key -> result[key] = json.optString(key, "") }
                 } else {
-                    content.lines().forEach { line ->
-                        val trimmed = line.trim()
-                        if (trimmed.isNotEmpty() && !trimmed.startsWith("#") && !trimmed.startsWith("//")) {
-                            val eqIndex = trimmed.indexOf('=')
-                            if (eqIndex > 0) {
-                                val key = trimmed.substring(0, eqIndex).trim()
-                                val value = trimmed.substring(eqIndex + 1).trim()
-                                result[key] = value
-                            }
+                    trimmed.lines().forEach { line ->
+                        val l = line.trim()
+                        if (l.isNotEmpty() && !l.startsWith("#") && !l.startsWith("//")) {
+                            val eq = l.indexOf('=')
+                            if (eq > 0) result[l.substring(0, eq).trim()] = l.substring(eq + 1).trim()
                         }
                     }
                 }
-
                 result
             } catch (e: Exception) {
                 Log.e(TAG, "Failed to read config: ${e.message}")
                 emptyMap()
             }
+        }
+
+        private fun normalizePifPayload(raw: String): String {
+            val trimmed = raw.trim()
+            if (trimmed.isEmpty()) return "{}"
+            if (trimmed.startsWith("{")) return trimmed
+            val json = JSONObject()
+            trimmed.lines().forEach { line ->
+                val stripped = line.trim()
+                if (stripped.isEmpty() || stripped.startsWith("#") || stripped.startsWith("//")) return@forEach
+                val eq = stripped.indexOf('=')
+                if (eq > 0) {
+                    val key = stripped.substring(0, eq).trim()
+                    val value = stripped.substring(eq + 1).trim().substringBefore('#').trim()
+                    if (key.isNotEmpty()) json.put(key, value)
+                }
+            }
+            return json.toString(2)
         }
 
         private fun fetchAvailableDevices(): List<PifDevice> {
@@ -225,7 +232,6 @@ class PlayIntegrityFix : SettingsPreferenceFragment() {
         }
     }
 
-    private var activeConfigFileName: String? = null
     private var activeConfigData: Map<String, String> = emptyMap()
 
     private val importLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -234,36 +240,22 @@ class PlayIntegrityFix : SettingsPreferenceFragment() {
                 val isPhotosEnabled = findPreference<SwitchPreferenceCompat>("spoof_pif_photos")?.isChecked ?: false
                 lifecycleScope.launch {
                     try {
-                        val pifDir = File(PIF_PATH)
-                        val fileName = uri.lastPathSegment?.substringAfterLast('/') ?: "pif.prop"
-                        val isJson = fileName.endsWith(".json", ignoreCase = true)
-                        val targetName = if (isJson) "custom.pif.json" else "custom.pif.prop"
-
-                        val content = withContext(Dispatchers.IO) {
-                            requireContext().contentResolver.openInputStream(uri)?.bufferedReader()?.use { it.readText() }
-                        } ?: return@launch
-
-                        val finalContent = if (isPhotosEnabled) {
-                            if (isJson) {
-                                try {
-                                    val json = JSONObject(content)
-                                    json.put("spoofPhotos", "true")
-                                    json.toString(2)
-                                } catch (e: Exception) { content }
-                            } else {
-                                val lines = content.lines().filter { !it.trim().startsWith("spoofPhotos=") }.toMutableList()
-                                lines.add("spoofPhotos=true")
-                                lines.joinToString("\n")
-                            }
-                        } else {
-                            content
+                        val raw = withContext(Dispatchers.IO) {
+                            requireContext().contentResolver.openInputStream(uri)?.use {
+                                it.readBytes().toString(StandardCharsets.UTF_8)
+                            } ?: ""
                         }
 
-                        withContext(Dispatchers.IO) {
-                            val targetFile = File(pifDir, targetName)
-                            targetFile.writeText(finalContent)
-                            targetFile.setReadable(true, false)
-                        }
+                        val normalized = normalizePifPayload(raw)
+                        val json = try { JSONObject(normalized) } catch (e: Exception) { JSONObject() }
+                        json.put("spoofPhotos", isPhotosEnabled.toString())
+
+                        Settings.Secure.putString(
+                            requireContext().contentResolver,
+                            PIF_CONFIG_KEY,
+                            json.toString(2)
+                        )
+
                         killGms()
                         toast(getString(R.string.spoof_pif_imported_success))
                         refreshStatus()
@@ -304,8 +296,6 @@ class PlayIntegrityFix : SettingsPreferenceFragment() {
         }
 
         findPreference<SwitchPreferenceCompat>("spoof_pif_photos")?.apply {
-            val activeData = findActiveConfig().second
-            isChecked = activeData["spoofPhotos"]?.let { it == "true" || it == "1" } ?: false
             setOnPreferenceChangeListener { _, newValue ->
                 val enabled = newValue as Boolean
                 updateConfigValue("spoofPhotos", enabled.toString())
@@ -318,76 +308,36 @@ class PlayIntegrityFix : SettingsPreferenceFragment() {
     }
 
     private fun updateConfigValue(key: String, value: String) {
-        val fileName = activeConfigFileName ?: if (value == "true" || value == "1") "custom.pif.json" else null
-        
         lifecycleScope.launch {
-            if (fileName != null) {
-                withContext(Dispatchers.IO) {
-                    val pifDir = File(PIF_PATH)
-                    val file = File(pifDir, fileName)
-
-                    try {
-                        if (fileName.endsWith(".json")) {
-                            val content = if (file.exists()) file.readText() else "{}"
-                            val json = JSONObject(content)
-                            json.put(key, value)
-                            file.writeText(json.toString(2))
-                        } else {
-                            val lines = if (file.exists()) file.readLines().toMutableList() else mutableListOf()
-                            val keyStr = "$key="
-                            val idx = lines.indexOfFirst { it.trim().startsWith(keyStr) }
-                            if (idx != -1) {
-                                lines[idx] = "$key=$value"
-                            } else {
-                                lines.add("$key=$value")
-                            }
-                            file.writeText(lines.joinToString("\n"))
-                        }
-                        file.setReadable(true, false)
-                    } catch (e: Exception) {
-                        Log.e(TAG, "Failed to update config value", e)
-                    }
-                }
-            }
-            refreshStatus()
-        }
-    }
-
-    private fun findActiveConfig(): Pair<String?, Map<String, String>> {
-        for (fileName in PIF_FILES) {
-            val file = File(PIF_PATH, fileName)
-            if (file.exists()) {
-                return fileName to readConfigData(file)
+            try {
+                val existing = Settings.Secure.getString(requireContext().contentResolver, PIF_CONFIG_KEY)
+                val json = try { JSONObject(existing ?: "") } catch (e: Exception) { JSONObject() }
+                json.put(key, value)
+                Settings.Secure.putString(
+                    requireContext().contentResolver,
+                    PIF_CONFIG_KEY,
+                    json.toString(2)
+                )
+                refreshStatus()
+            } catch (e: Exception) {
+                Log.e(TAG, "Failed to update config value", e)
             }
         }
-        return null to emptyMap()
     }
 
     private fun refreshStatus() {
         lifecycleScope.launch {
-            var foundActive: String? = null
-            var activeData: Map<String, String> = emptyMap()
-
-            withContext(Dispatchers.IO) {
-                for (fileName in PIF_FILES) {
-                    val file = File(PIF_PATH, fileName)
-                    if (file.exists()) {
-                        foundActive = fileName
-                        activeData = readConfigData(file)
-                        break
-                    }
-                }
-            }
-
-            activeConfigFileName = foundActive
-            activeConfigData = activeData
+            val content = Settings.Secure.getString(requireContext().contentResolver, PIF_CONFIG_KEY)
+            activeConfigData = if (!content.isNullOrEmpty()) readConfigData(content) else emptyMap()
+            val hasValidPifData = activeConfigData.keys.any { it != "spoofPhotos" && it != "DEBUG" && !it.startsWith("spoof") }
 
             val viewPref = findPreference<Preference>("spoof_pif_properties")
             val deletePref = findPreference<Preference>("spoof_pif_delete_config")
+            val photosPref = findPreference<SwitchPreferenceCompat>("spoof_pif_photos")
 
-            if (foundActive != null) {
-                val model = activeData["MODEL"] ?: getString(android.R.string.unknownName)
-                viewPref?.summary = "$foundActive — $model"
+            if (hasValidPifData) {
+                val model = activeConfigData["MODEL"] ?: getString(android.R.string.unknownName)
+                viewPref?.summary = "$model"
                 viewPref?.isEnabled = true
                 deletePref?.isEnabled = true
             } else {
@@ -395,6 +345,8 @@ class PlayIntegrityFix : SettingsPreferenceFragment() {
                 viewPref?.isEnabled = false
                 deletePref?.isEnabled = false
             }
+
+            photosPref?.isChecked = activeConfigData["spoofPhotos"]?.let { it == "true" || it == "1" } ?: false
         }
     }
 
@@ -513,10 +465,16 @@ class PlayIntegrityFix : SettingsPreferenceFragment() {
                 val result = withContext(Dispatchers.IO) { buildPifFromDevice(device) }
                 when (result) {
                     is PifFetchResult.Success -> {
-                        if (isPhotosEnabled) {
-                            result.pifData.put("spoofPhotos", "true")
-                        }
-                        savePifJson(result.pifData, result.model)
+                        result.pifData.put("spoofPhotos", isPhotosEnabled.toString())
+                        
+                        Settings.Secure.putString(
+                            requireContext().contentResolver,
+                            PIF_CONFIG_KEY,
+                            result.pifData.toString(2)
+                        )
+                        killGms()
+                        toast(getString(R.string.spoof_pif_fetched_model, result.model))
+                        refreshStatus()
                     }
                     is PifFetchResult.Error -> {
                         val msg = if (result.message != null) getString(result.resId, result.message) else getString(result.resId)
@@ -527,23 +485,6 @@ class PlayIntegrityFix : SettingsPreferenceFragment() {
                 toast(getString(R.string.spoof_pif_failed, e.message ?: ""))
             } finally {
                 updateFetchState(fetchPref, getString(R.string.spoof_pif_fetch_summary), true)
-            }
-        }
-    }
-
-    private fun savePifJson(json: JSONObject, modelName: String) {
-        lifecycleScope.launch {
-            try {
-                withContext(Dispatchers.IO) {
-                    val file = File(PIF_PATH, "pif.json")
-                    file.writeText(json.toString(2))
-                    file.setReadable(true, false)
-                }
-                killGms()
-                toast(getString(R.string.spoof_pif_fetched_model, modelName))
-                refreshStatus()
-            } catch (e: Exception) {
-                toast(getString(R.string.spoof_pif_failed, e.message ?: ""))
             }
         }
     }
@@ -655,7 +596,6 @@ class PlayIntegrityFix : SettingsPreferenceFragment() {
     }
 
     private fun showDeleteDialog() {
-        val fileName = activeConfigFileName ?: return
         AlertDialog.Builder(requireContext())
             .setTitle(getString(R.string.spoof_pif_delete_confirm_title))
             .setMessage(R.string.spoof_pif_delete_confirm_message)
@@ -664,16 +604,17 @@ class PlayIntegrityFix : SettingsPreferenceFragment() {
                     try {
                         val isPhotosEnabled = findPreference<SwitchPreferenceCompat>("spoof_pif_photos")?.isChecked ?: false
                         
-                        val newActiveFile = withContext(Dispatchers.IO) {
-                            File(PIF_PATH, fileName).delete()
-                            findActiveConfig().first
+                        val newJsonString = if (isPhotosEnabled) {
+                            JSONObject().apply { put("spoofPhotos", "true") }.toString(2)
+                        } else {
+                            null
                         }
-                        
-                        activeConfigFileName = newActiveFile
-                        
-                        if (isPhotosEnabled || newActiveFile != null) {
-                            updateConfigValue("spoofPhotos", isPhotosEnabled.toString())
-                        }
+
+                        Settings.Secure.putString(
+                            requireContext().contentResolver,
+                            PIF_CONFIG_KEY,
+                            newJsonString
+                        )
                         
                         killGms()
                         toast(getString(R.string.spoof_pif_delete_success))
