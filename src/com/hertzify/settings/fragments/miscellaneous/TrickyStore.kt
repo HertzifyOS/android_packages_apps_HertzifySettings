@@ -5,6 +5,8 @@ import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
+import android.util.Base64
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -13,10 +15,10 @@ import androidx.preference.Preference
 import com.android.internal.logging.nano.MetricsProto
 import com.android.settings.R
 import com.android.settings.SettingsPreferenceFragment
-import java.io.File
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.nio.charset.StandardCharsets
 
 class TrickyStore : SettingsPreferenceFragment() {
 
@@ -31,11 +33,9 @@ class TrickyStore : SettingsPreferenceFragment() {
                     try {
                         val resolver = requireContext().contentResolver
                         withContext(Dispatchers.IO) {
-                            val keyboxFile = File(TRICKYSTORE_PATH, KEYBOX_FILE)
-                            resolver.openInputStream(uri)?.use { input ->
-                                keyboxFile.outputStream().use { output -> input.copyTo(output) }
-                            }
-                            keyboxFile.setReadable(true, false)
+                            val bytes = resolver.openInputStream(uri)?.use { it.readBytes() } ?: ByteArray(0)
+                            val encoded = Base64.encodeToString(bytes, Base64.NO_WRAP)
+                            Settings.Secure.putString(resolver, TS_KEYBOX_KEY, encoded)
                         }
                         
                         killGms()
@@ -58,11 +58,10 @@ class TrickyStore : SettingsPreferenceFragment() {
                     try {
                         val resolver = requireContext().contentResolver
                         withContext(Dispatchers.IO) {
-                            val targetFile = File(TRICKYSTORE_PATH, TARGET_FILE)
-                            resolver.openInputStream(uri)?.use { input ->
-                                targetFile.outputStream().use { output -> input.copyTo(output) }
-                            }
-                            targetFile.setReadable(true, false)
+                            val text = resolver.openInputStream(uri)?.use { input ->
+                                input.readBytes().toString(StandardCharsets.UTF_8)
+                            } ?: ""
+                            Settings.Secure.putString(resolver, TS_TARGET_KEY, text)
                         }
                         
                         toast(getString(R.string.spoof_ts_target_list_imported))
@@ -82,8 +81,6 @@ class TrickyStore : SettingsPreferenceFragment() {
         targetManager = TrickyStoreTargetManager(
             context = requireContext(),
             scope = lifecycleScope, 
-            storePath = TRICKYSTORE_PATH,
-            targetFileName = TARGET_FILE,
             onSaved = {
                 refreshStatus()
                 toast(getString(R.string.spoof_ts_targets_saved))
@@ -128,23 +125,25 @@ class TrickyStore : SettingsPreferenceFragment() {
 
     private fun refreshStatus() {
         lifecycleScope.launch {
+            val resolver = requireContext().contentResolver
+            
             val (keyboxExists, targetCount) = withContext(Dispatchers.IO) {
-                val hasKeybox = File(TRICKYSTORE_PATH, KEYBOX_FILE).exists()
-                val targetFile = File(TRICKYSTORE_PATH, TARGET_FILE)
-                val count = if (targetFile.exists()) {
+                val hasKeybox = !Settings.Secure.getString(resolver, TS_KEYBOX_KEY).isNullOrEmpty()
+                val targetContent = Settings.Secure.getString(resolver, TS_TARGET_KEY)
+                val count = if (!targetContent.isNullOrEmpty()) {
                     val installedPackages = requireContext().packageManager
-                        .getInstalledApplications(PackageManager.GET_META_DATA)
+                        .getInstalledPackages(0)
                         .map { it.packageName }
                         .toHashSet()
                         
-                    targetFile.readLines()
+                    targetContent.lines()
                         .filter { it.isNotBlank() && !it.startsWith("#") }
                         .map { line ->
                             TrickyStoreTargetManager.TargetMode.fromLine(line.trim()).first 
                         }
                         .count { it in installedPackages }
                 } else 0
-
+                
                 Pair(hasKeybox, count)
             }
 
@@ -165,8 +164,9 @@ class TrickyStore : SettingsPreferenceFragment() {
             .setPositiveButton(R.string.spoof_ts_delete) { _, _ ->
                 lifecycleScope.launch {
                     try {
+                        val resolver = requireContext().contentResolver
                         withContext(Dispatchers.IO) {
-                            File(TRICKYSTORE_PATH, KEYBOX_FILE).delete()
+                            Settings.Secure.putString(resolver, TS_KEYBOX_KEY, null)
                         }
                         killGms()
                         toast(getString(R.string.spoof_ts_keybox_deleted))
@@ -187,8 +187,9 @@ class TrickyStore : SettingsPreferenceFragment() {
             .setPositiveButton(R.string.spoof_ts_delete) { _, _ ->
                 lifecycleScope.launch {
                     try {
+                        val resolver = requireContext().contentResolver
                         withContext(Dispatchers.IO) {
-                            File(TRICKYSTORE_PATH, TARGET_FILE).delete()
+                            Settings.Secure.putString(resolver, TS_TARGET_KEY, null)
                         }
                         toast(getString(R.string.spoof_ts_targets_cleared))
                         refreshStatus()
@@ -221,11 +222,10 @@ class TrickyStore : SettingsPreferenceFragment() {
     override fun getMetricsCategory(): Int = MetricsProto.MetricsEvent.HERTZIFY
 
     companion object {
-        private const val TRICKYSTORE_PATH = "/data/adb/tricky_store"
-        private const val KEYBOX_FILE = "keybox.xml"
-        private const val TARGET_FILE = "target.txt"
         private const val DROIDGUARD_PACKAGE = "com.google.android.gms.unstable"
         private const val GMS_PACKAGE = "com.google.android.gms"
         private const val VENDING_PACKAGE = "com.android.vending"
+        private const val TS_KEYBOX_KEY = "spoof_trickystore_keybox"
+        private const val TS_TARGET_KEY = "spoof_trickystore_target"
     }
 }
