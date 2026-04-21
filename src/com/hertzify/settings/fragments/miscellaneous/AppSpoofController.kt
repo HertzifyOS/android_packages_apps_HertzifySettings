@@ -7,25 +7,20 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
-import java.io.File
 
 class AppSpoofController(private val context: Context) {
 
     companion object {
-        private const val TAG         = "AppSpoofController"
-        private const val CONFIG_DIR  = "/data/adb/appprops"
-        private const val CONFIG_FILE = "appprops.json"
-        const val PRESETS_KEY         = "app_spoofing_user_presets"
+        private const val TAG        = "AppSpoofController"
+        private const val CONFIG_KEY = "spoof_appprops_config"
+        const val PRESETS_KEY        = "app_spoofing_user_presets"
     }
 
-    private val configFile = File(CONFIG_DIR, CONFIG_FILE)
-
     suspend fun readConfig(): Pair<Boolean, List<AppConfig>> = withContext(Dispatchers.IO) {
-        if (!configFile.exists()) return@withContext false to emptyList()
-        return@withContext try {
-            val content = configFile.readText()
-            if (content.isBlank()) return@withContext false to emptyList()
+        val content = Settings.Secure.getString(context.contentResolver, CONFIG_KEY)
+            ?: return@withContext false to emptyList()
 
+        return@withContext try {
             val json    = JSONObject(content)
             val enabled = json.optBoolean("enabled", false)
             val appsObj = json.optJSONObject("apps") ?: return@withContext enabled to emptyList()
@@ -56,25 +51,14 @@ class AppSpoofController(private val context: Context) {
                 put("enabled", enabled)
                 put("apps", appsObj)
             }
-            writeAtomic(configFile, json.toString(2))
+            
+            Settings.Secure.putString(
+                context.contentResolver,
+                CONFIG_KEY,
+                json.toString(2)
+            )
         } catch (e: Exception) {
             Log.e(TAG, "writeConfig error", e)
-        }
-    }
-
-    private fun writeAtomic(dest: File, content: String) {
-        val tmp = File(dest.parent, "${dest.name}.tmp")
-        try {
-            tmp.writeText(content)
-            tmp.setReadable(true, false)
-            if (!tmp.renameTo(dest)) {
-                dest.writeText(content)
-                dest.setReadable(true, false)
-                tmp.delete()
-            }
-        } catch (e: Exception) {
-            if (tmp.exists()) tmp.delete()
-            Log.e(TAG, "writeAtomic failed: ${dest.name}", e)
         }
     }
 
@@ -87,13 +71,8 @@ class AppSpoofController(private val context: Context) {
                 val obj = jsonArray.getJSONObject(i)
                 val name = obj.getString("name")
                 val propsObj = obj.getJSONObject("props")
-                val props = mutableMapOf<String, String>()
-                val keys = propsObj.keys()
-                while (keys.hasNext()) {
-                    val key = keys.next()
-                    props[key] = propsObj.getString(key)
-                }
-                profiles.add(DeviceProfile(name, props))
+                val props = propsObj.keys().asSequence().associateWith { propsObj.getString(it) }
+                profiles.add(DeviceProfile(name, props.toMutableMap()))
             }
         } catch (e: Exception) {
             Log.e(TAG, "Failed to load custom presets", e)
