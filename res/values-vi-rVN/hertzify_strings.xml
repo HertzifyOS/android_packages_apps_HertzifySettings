@@ -416,4 +416,10 @@
     <string name="spoof_ap_remove_profile_message">Xóa %s?</string>
     <string name="spoof_ap_save">Lưu</string>
     <string name="spoof_ap_profile_applied">Đã áp dụng: %1$s</string>
+    <!-- Block PairIP -->
+    <string name="miscellaneous_pairip_activity_block_title">Chặn xác minh giấy phép PairIP</string>
+    <string name="miscellaneous_pairip_activity_block_summary">Ngăn chặn các ứng dụng trên Cửa hàng Play khởi chạy màn hình \"Tải ứng dụng này từ Play\" khi chúng không được cài đặt từ Cửa hàng Play</string>
+    <!-- Allow application downgrade -->
+    <string name="miscellaneous_app_downgrade_title">Allow application downgrade</string>
+    <string name="miscellaneous_app_downgrade_summary">Allow downgrading system applications, which may result in crashes and data loss</string>
 </resources>
