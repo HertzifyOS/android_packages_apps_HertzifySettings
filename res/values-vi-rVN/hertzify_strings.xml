@@ -420,6 +420,6 @@
     <string name="miscellaneous_pairip_activity_block_title">Chặn xác minh giấy phép PairIP</string>
     <string name="miscellaneous_pairip_activity_block_summary">Ngăn chặn các ứng dụng trên Cửa hàng Play khởi chạy màn hình \"Tải ứng dụng này từ Play\" khi chúng không được cài đặt từ Cửa hàng Play</string>
     <!-- Allow application downgrade -->
-    <string name="miscellaneous_app_downgrade_title">Allow application downgrade</string>
-    <string name="miscellaneous_app_downgrade_summary">Allow downgrading system applications, which may result in crashes and data loss</string>
+    <string name="miscellaneous_app_downgrade_title">Cho phép hạ bản cập nhập ứng dụng</string>
+    <string name="miscellaneous_app_downgrade_summary">Cho phép hạ cấp ứng dụng hệ thống, có thể dẫn đến sự cố và mất dữ liệu</string>
 </resources>
