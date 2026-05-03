@@ -471,4 +471,10 @@
     <!-- Allow application downgrade -->
     <string name="miscellaneous_app_downgrade_title">Allow application downgrade</string>
     <string name="miscellaneous_app_downgrade_summary">Allow downgrading system applications, which may result in crashes and data loss</string>
+
+    <!-- System restart dialog -->
+    <string name="system_restart_title">System restart required</string>
+    <string name="system_restart_message">For changes to take effect, a system restart is required. Restart now?</string>
+    <string name="system_restart_yes">Yes</string>
+    <string name="system_restart_not_now">Not now</string>
 </resources>
