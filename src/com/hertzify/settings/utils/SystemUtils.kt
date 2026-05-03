@@ -18,11 +18,13 @@ package com.hertzify.settings.utils
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
+import android.os.ServiceManager
 import android.widget.Toast
 
 import androidx.appcompat.app.AlertDialog
 
 import com.android.settings.R
+import com.android.internal.statusbar.IStatusBarService
 import com.android.internal.util.hertzify.HertzifyUtils
 
 object SystemUtils {
@@ -50,5 +52,26 @@ object SystemUtils {
         Handler(Looper.getMainLooper()).postDelayed({
             HertzifyUtils.restartSystemUI()
         }, 2000) // 2-second delay
+    }
+
+    @JvmStatic
+    fun showSystemRestartDialog(context: Context) {
+        AlertDialog.Builder(context)
+            .setTitle(R.string.system_restart_title)
+            .setMessage(R.string.system_restart_message)
+            .setPositiveButton(R.string.system_restart_yes) { _, _ ->
+                restartSystem(context)
+            }
+            .setNegativeButton(R.string.system_restart_not_now, null)
+            .show()
+    }
+
+    @JvmStatic
+    fun restartSystem(context: Context) {
+        try {
+            val binder = ServiceManager.getService("statusbar")
+            val statusBarService = IStatusBarService.Stub.asInterface(binder)
+            statusBarService.reboot(false, null)
+        } catch (e: Exception) {}
     }
 } 
