@@ -215,27 +215,13 @@
     <string name="lockscreen_custom_clock_frame_margin_top_title">Custom clock height</string>
     <string name="lockscreen_custom_clock_frame_margin_top_summary">Adjust the height of custom clock style</string>
     <string name="lockscreen_custom_clock_color_mode_title">Custom clock color mode</string>
+    <string name="lockscreen_custom_clock_size_title">Clock size</string>
+    <string name="lockscreen_custom_clock_size_summary">Scale the lockscreen clock (50–150%)</string>
+    <string name="lockscreen_custom_clock_aod_anim_title">Custom clock AOD animation</string>
+    <string name="lockscreen_custom_clock_aod_anim_summary">Set AOD animation for custom clock style</string>
     <!-- Power menu -->
     <string name="power_menu_lock_screen_secure_title">Show on secure lock screen</string>
     <string name="power_menu_lock_screen_secure_summary">Show the power menu while the device is locked</string>
-    <!-- Smart Pixels -->
-    <string name="smart_pixels_warning_text">Smart pixels is a power saving feature. Depending on how many pixels you decide to turn off, you could see improvement in battery life. Note that in some cases it can result in unresponsive areas on touch screen</string>
-    <string name="smart_pixels_title">Smart Pixels</string>
-    <string name="smart_pixels_summary">Save battery by shutting off extra pixels</string>
-    <string name="smart_pixels_on_power_save_title">Auto-enable on battery saver</string>
-    <string name="smart_pixels_on_power_save_summary">Enable Smart Pixels when battery saver is enabled</string>
-    <string name="smart_pixels_percent">Percent of pixels to disable</string>
-    <string name="smart_pixels_shift_title">Burn-in protection</string>
-    <string name="smart_pixels_shift_summary">Prevents burn-in on OLED devices by shifting pixels every so often</string>
-    <string name="smart_pixels_timeout_summary_15secs">15 seconds</string>
-    <string name="smart_pixels_timeout_summary_30secs">30 seconds</string>
-    <string name="smart_pixels_timeout_summary_1min">1 minute</string>
-    <string name="smart_pixels_timeout_summary_2mins">2 minutes</string>
-    <string name="smart_pixels_timeout_summary_5mins">5 minutes</string>
-    <string name="smart_pixels_timeout_summary_10mins">10 minutes</string>
-    <string name="smart_pixels_timeout_summary_20mins">20 minutes</string>
-    <string name="smart_pixels_timeout_summary_30mins">30 minutes</string>
-    <string name="smart_pixels_timeout_summary_1hour">1 hour</string>
     <!-- Notifications -->
     <string name="notifications_sounds_vibration_category">Sounds &amp; vibration</string>
     <string name="notifications_alert_display_on_title">Alert while display on</string>
@@ -423,4 +409,20 @@
     <!-- Allow application downgrade -->
     <string name="miscellaneous_app_downgrade_title">Allow application downgrade</string>
     <string name="miscellaneous_app_downgrade_summary">Allow downgrading system applications, which may result in crashes and data loss</string>
+    <!-- System restart dialog -->
+    <string name="system_restart_title">System restart required</string>
+    <string name="system_restart_message">For changes to take effect, a system restart is required. Restart now?</string>
+    <string name="system_restart_yes">Yes</string>
+    <string name="system_restart_not_now">Not now</string>
+    <!-- Emoji style -->
+    <string name="emoji_style_title">Emoji style</string>
+    <string name="emoji_style_summary">Choose the system emoji pack without changing text fonts</string>
+    <!-- QS media player -->
+    <string name="qs_show_media_player_title">QS Media player</string>
+    <string name="qs_show_media_player_summary">Display media controls in Quick Settings</string>
+    <!-- Smart Pixels -->
+    <string name="smart_pixels_warning_text">Smart pixels is a power saving feature. Depending on how many pixels you decide to turn off, you could see improvement in battery life. Note that in some cases it can result in unresponsive areas on touch screen</string>
+    <string name="smart_pixels_title">Smart Pixels</string>
+    <string name="smart_pixels_summary">Save battery by shutting off extra pixels</string>
+    <string name="smart_pixels_percent">Percent of pixels to disable</string>
 </resources>
