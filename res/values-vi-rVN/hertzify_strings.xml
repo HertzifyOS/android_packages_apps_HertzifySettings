@@ -214,27 +214,13 @@
     <string name="lockscreen_custom_clock_frame_margin_top_title">Chiều cao đồng hồ</string>
     <string name="lockscreen_custom_clock_frame_margin_top_summary">Điều chỉnh vị trí theo chiều dọc của đồng hồ</string>
     <string name="lockscreen_custom_clock_color_mode_title">Chế độ màu đồng hồ</string>
+    <string name="lockscreen_custom_clock_size_title">Kích thước đồng hồ</string>
+    <string name="lockscreen_custom_clock_size_summary">Kích thước đồng hồ (50–150%)</string>
+    <string name="lockscreen_custom_clock_aod_anim_title">Hiệu ứng đồng hồ AOD bật</string>
+    <string name="lockscreen_custom_clock_aod_anim_summary">Thiết lập hiệu ứng đồng hồ trên AOD</string>
     <!-- Power menu -->
     <string name="power_menu_lock_screen_secure_title">Hiện khi khóa bảo mật</string>
     <string name="power_menu_lock_screen_secure_summary">Hiển thị menu nguồn khi thiết bị bị khóa</string>
-    <!-- Smart Pixels -->
-    <string name="smart_pixels_warning_text">Điểm ảnh thông minh là một tính năng tiết kiệm pin. Tùy thuộc vào số điểm ảnh bạn quyết định tắt, bạn có thể thấy thời lượng pin được cải thiện. Lưu ý rằng trong một số trường hợp, nó có thể dẫn đến các khu vực không phản hồi trên màn hình cảm ứng</string>
-    <string name="smart_pixels_title">Điểm ảnh thông minh</string>
-    <string name="smart_pixels_summary">Tiết kiệm pin bằng cách tắt các điểm ảnh phụ</string>
-    <string name="smart_pixels_on_power_save_title">Tự động bật khi bật trình tiết kiệm pin</string>
-    <string name="smart_pixels_on_power_save_summary">Tự động bật Điểm ảnh thông minh khi trình tiết kiệm pin được bật</string>
-    <string name="smart_pixels_percent">Phần trăm điểm ảnh bị tắt</string>
-    <string name="smart_pixels_shift_title">Ngăn ngừa lưu ảnh màn hình</string>
-    <string name="smart_pixels_shift_summary">Tránh lỗi lưu ảnh trên màn OLED bằng cách di chuyển các pixel thường xuyên</string>
-    <string name="smart_pixels_timeout_summary_15secs">15 giây</string>
-    <string name="smart_pixels_timeout_summary_30secs">30 giây</string>
-    <string name="smart_pixels_timeout_summary_1min">1 phút</string>
-    <string name="smart_pixels_timeout_summary_2mins">2 phút</string>
-    <string name="smart_pixels_timeout_summary_5mins">5 phút</string>
-    <string name="smart_pixels_timeout_summary_10mins">10 phút</string>
-    <string name="smart_pixels_timeout_summary_20mins">20 phút</string>
-    <string name="smart_pixels_timeout_summary_30mins">30 phút</string>
-    <string name="smart_pixels_timeout_summary_1hour">1 giờ</string>
     <!-- Notifications -->
     <string name="notifications_sounds_vibration_category">Âm thanh &amp; rung</string>
     <string name="notifications_alert_display_on_title">Cảnh báo khi màn hình sáng</string>
@@ -422,4 +408,20 @@
     <!-- Allow application downgrade -->
     <string name="miscellaneous_app_downgrade_title">Cho phép hạ bản cập nhập ứng dụng</string>
     <string name="miscellaneous_app_downgrade_summary">Cho phép hạ cấp ứng dụng hệ thống, có thể dẫn đến sự cố và mất dữ liệu</string>
+    <!-- System restart dialog -->
+    <string name="system_restart_title">Yêu cầu khởi động lại hệ thống</string>
+    <string name="system_restart_message">Để tất cả thay đổi có hiệu lực, cần khởi động lại hệ thống. Khởi động lại hệ thống ngay bây giờ?</string>
+    <string name="system_restart_yes">Đồng ý</string>
+    <string name="system_restart_not_now">Để sau</string>
+    <!-- Emoji style -->
+    <string name="emoji_style_title">Phong cách biểu tượng cảm xúc</string>
+    <string name="emoji_style_summary">Chọn gói biểu tượng cảm xúc của hệ thống mà không cần thay đổi phông chữ</string>
+    <!-- QS media player -->
+    <string name="qs_show_media_player_title">Trình phát đa phương tiện trên QS</string>
+    <string name="qs_show_media_player_summary">Hiển thị điều khiển đa phương tiện trong Cài đặt nhanh (Quick Settings)</string>
+    <!-- Smart Pixels -->
+    <string name="smart_pixels_warning_text">Điểm ảnh thông minh là một tính năng tiết kiệm pin. Tùy thuộc vào số điểm ảnh bạn quyết định tắt, bạn có thể thấy thời lượng pin được cải thiện. Lưu ý rằng trong một số trường hợp, nó có thể dẫn đến các khu vực không phản hồi trên màn hình cảm ứng</string>
+    <string name="smart_pixels_title">Điểm ảnh thông minh</string>
+    <string name="smart_pixels_summary">Tiết kiệm pin bằng cách tắt các điểm ảnh phụ</string>
+    <string name="smart_pixels_percent">Phần trăm điểm ảnh bị tắt</string>
 </resources>
