@@ -55,6 +55,7 @@
     <string name="accent_color">Accent color</string>
     <string name="rainbow_color">Rainbow color</string>
     <string name="custom_color">Custom color</string>
+    <string name="custom_color_summary">Custom color some clock styles</string>
 
     <!-- Proper seekbar -->
     <string name="proper_seekbar_value">Value: <xliff:g id="v">%s</xliff:g></string>
