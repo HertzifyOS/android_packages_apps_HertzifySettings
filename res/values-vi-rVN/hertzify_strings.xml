@@ -424,4 +424,9 @@
     <string name="smart_pixels_title">Điểm ảnh thông minh</string>
     <string name="smart_pixels_summary">Tiết kiệm pin bằng cách tắt các điểm ảnh phụ</string>
     <string name="smart_pixels_percent">Phần trăm điểm ảnh bị tắt</string>
+    <!-- StatusBar Brightness control -->
+    <string name="status_bar_toggle_brightness_title">Điều chỉnh độ sáng</string>
+    <string name="status_bar_toggle_brightness_summary">Điều chỉnh độ sáng bằng cách trượt trên thanh trạng thái</string>
+    <string name="status_bar_toggle_brightness_lockscreen_title">Điều chỉnh độ sáng ở màn hình khoá</string>
+    <string name="status_bar_toggle_brightness_lockscreen_summary">Điều chỉnh độ sáng bằng cách trượt trên thanh trạng thái ở màn hình khoá</string>
 </resources>
