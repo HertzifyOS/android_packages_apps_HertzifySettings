@@ -273,4 +273,8 @@
     <string name="lockscreen_custom_clock_size_summary">Scale the lockscreen clock (50–150%)</string>
     <string name="lockscreen_custom_clock_aod_anim_title">Custom clock AOD animation</string>
     <string name="lockscreen_custom_clock_aod_anim_summary">Set AOD animation for custom clock style</string>
+
+    <!-- Lockscreen clock: album art color override -->
+    <string name="clock_album_art_color_title">Album art color clocks</string>
+    <string name="clock_album_art_color_summary">Override clock color with the album art palette when media is playing</string>
 </resources>
