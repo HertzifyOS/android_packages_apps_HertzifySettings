@@ -42,7 +42,7 @@
     <string name="accent_color">Màu nhấn</string>
     <string name="rainbow_color">Màu cầu vồng</string>
     <string name="custom_color">Màu tùy chỉnh</string>
-    <string name="custom_color_summary">Custom color some clock styles</string>
+    <string name="custom_color_summary">Màu tùy chỉnh cho một số kiểu đồng hồ</string>
     <!-- Proper seekbar -->
     <string name="proper_seekbar_value">Giá trị: <xliff:g id="v">%s</xliff:g></string>
     <string name="proper_seekbar_default_value">Mặc định</string>
@@ -225,8 +225,8 @@
     <string name="lockscreen_custom_clock_aod_anim_title">Hiệu ứng đồng hồ AOD bật</string>
     <string name="lockscreen_custom_clock_aod_anim_summary">Thiết lập hiệu ứng đồng hồ trên AOD</string>
     <!-- Lockscreen clock: album art color override -->
-    <string name="clock_album_art_color_title">Album art color clocks</string>
-    <string name="clock_album_art_color_summary">Override clock color with the album art palette when media is playing</string>
+    <string name="clock_album_art_color_title">Đồng hồ theo màu bìa album</string>
+    <string name="clock_album_art_color_summary">Sử dụng bảng màu từ ảnh bìa album để đổi màu đồng hồ khi đang phát nhạc</string>
     <!-- Power menu -->
     <string name="power_menu_lock_screen_secure_title">Hiện khi khóa bảo mật</string>
     <string name="power_menu_lock_screen_secure_summary">Hiển thị menu nguồn khi thiết bị bị khóa</string>
