@@ -65,4 +65,10 @@
         android:title="@string/smart_pixels_title" 
         android:summary="@string/smart_pixels_summary" 
         android:fragment="com.hertzify.settings.fragments.miscellaneous.SmartPixels" />
+
+    <com.hertzify.settings.preferences.SystemSettingSwitchPreference
+        android:key="screenshot_clipboard_only"
+        android:title="@string/screenshot_clipboard_only_title"
+        android:summary="@string/screenshot_clipboard_only_summary"
+        android:defaultValue="false" />
 </PreferenceScreen>
