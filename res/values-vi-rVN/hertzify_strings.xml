@@ -203,6 +203,11 @@
     <!-- System font -->
     <string name="system_font_title">Phông chữ hệ thống</string>
     <string name="system_font_summary">Đặt kiểu phông chữ hệ thống</string>
+    <!-- System restart dialog -->
+    <string name="system_restart_title">Yêu cầu khởi động lại hệ thống</string>
+    <string name="system_restart_message">Để tất cả thay đổi có hiệu lực, cần khởi động lại hệ thống. Khởi động lại hệ thống ngay bây giờ?</string>
+    <string name="system_restart_yes">Đồng ý</string>
+    <string name="system_restart_not_now">Để sau</string>
     <!-- Custom clock style -->
     <string name="lockscreen_custom_clock_style_title">Kiểu đồng hồ tùy chỉnh</string>
     <string name="lockscreen_custom_clock_style_summary">Cấu hình kiểu đồng hồ màn hình khóa</string>
@@ -412,11 +417,6 @@
     <!-- Allow application downgrade -->
     <string name="miscellaneous_app_downgrade_title">Cho phép hạ bản cập nhập ứng dụng</string>
     <string name="miscellaneous_app_downgrade_summary">Cho phép hạ cấp ứng dụng hệ thống, có thể dẫn đến sự cố và mất dữ liệu</string>
-    <!-- System restart dialog -->
-    <string name="system_restart_title">Yêu cầu khởi động lại hệ thống</string>
-    <string name="system_restart_message">Để tất cả thay đổi có hiệu lực, cần khởi động lại hệ thống. Khởi động lại hệ thống ngay bây giờ?</string>
-    <string name="system_restart_yes">Đồng ý</string>
-    <string name="system_restart_not_now">Để sau</string>
     <!-- Emoji style -->
     <string name="emoji_style_title">Phong cách biểu tượng cảm xúc</string>
     <string name="emoji_style_summary">Chọn gói biểu tượng cảm xúc của hệ thống mà không cần thay đổi phông chữ</string>
