@@ -203,6 +203,11 @@
     <!-- System font -->
     <string name="system_font_title">System font</string>
     <string name="system_font_summary">Set system font style</string>
+    <!-- System restart dialog -->
+    <string name="system_restart_title">System restart required</string>
+    <string name="system_restart_message">For changes to take effect, a system restart is required. Restart now?</string>
+    <string name="system_restart_yes">Yes</string>
+    <string name="system_restart_not_now">Not now</string>
     <!-- Custom clock style -->
     <string name="lockscreen_custom_clock_style_title">Custom clock style</string>
     <string name="lockscreen_custom_clock_style_summary">Configure lock screen clock styles</string>
@@ -412,11 +417,6 @@
     <!-- Allow application downgrade -->
     <string name="miscellaneous_app_downgrade_title">Allow application downgrade</string>
     <string name="miscellaneous_app_downgrade_summary">Allow downgrading system applications, which may result in crashes and data loss</string>
-    <!-- System restart dialog -->
-    <string name="system_restart_title">System restart required</string>
-    <string name="system_restart_message">For changes to take effect, a system restart is required. Restart now?</string>
-    <string name="system_restart_yes">Yes</string>
-    <string name="system_restart_not_now">Not now</string>
     <!-- Emoji style -->
     <string name="emoji_style_title">Emoji style</string>
     <string name="emoji_style_summary">Choose the system emoji pack without changing text fonts</string>
