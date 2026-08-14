@@ -34,10 +34,11 @@
         android:key="spoof_pif_options_category"
         android:title="@string/spoof_pif_options_category">
 
-        <SwitchPreferenceCompat
+        <com.hertzify.settings.preferences.SecureSettingSwitchPreference
             android:key="spoof_pif_photos"
             android:title="@string/spoof_pif_photos_title"
-            android:summary="@string/spoof_pif_photos_summary" />
+            android:summary="@string/spoof_pif_photos_summary"
+            android:defaultValue="true" />
 
     </PreferenceCategory>
 

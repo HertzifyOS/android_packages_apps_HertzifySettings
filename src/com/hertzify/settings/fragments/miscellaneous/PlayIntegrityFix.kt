@@ -236,7 +236,6 @@ class PlayIntegrityFix : SettingsPreferenceFragment() {
     private val importLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             result.data?.data?.let { uri ->
-                val isPhotosEnabled = findPreference<SwitchPreferenceCompat>("spoof_pif_photos")?.isChecked ?: false
                 lifecycleScope.launch {
                     try {
                         val raw = withContext(Dispatchers.IO) {
@@ -247,7 +246,6 @@ class PlayIntegrityFix : SettingsPreferenceFragment() {
 
                         val normalized = normalizePifPayload(raw)
                         val json = try { JSONObject(normalized) } catch (e: Exception) { JSONObject() }
-                        json.put("spoofPhotos", isPhotosEnabled.toString())
 
                         Settings.Secure.putString(
                             requireContext().contentResolver,
@@ -294,9 +292,7 @@ class PlayIntegrityFix : SettingsPreferenceFragment() {
             true
         }
 
-        findPreference<SwitchPreferenceCompat>("spoof_pif_photos")?.setOnPreferenceChangeListener { _, newValue ->
-            val enabled = newValue as Boolean
-            updateConfigValue("spoofPhotos", enabled.toString())
+        findPreference<SwitchPreferenceCompat>("spoof_pif_photos")?.setOnPreferenceChangeListener { _, _ ->
             killPackage(PHOTOS_PACKAGE)
             true
         }
@@ -304,33 +300,14 @@ class PlayIntegrityFix : SettingsPreferenceFragment() {
         refreshStatus()
     }
 
-    private fun updateConfigValue(key: String, value: String) {
-        lifecycleScope.launch {
-            try {
-                val existing = Settings.Secure.getString(requireContext().contentResolver, PIF_CONFIG_KEY)
-                val json = try { JSONObject(existing ?: "") } catch (e: Exception) { JSONObject() }
-                json.put(key, value)
-                Settings.Secure.putString(
-                    requireContext().contentResolver,
-                    PIF_CONFIG_KEY,
-                    json.toString(2)
-                )
-                refreshStatus()
-            } catch (e: Exception) {
-                Log.e(TAG, "Failed to update config value", e)
-            }
-        }
-    }
-
     private fun refreshStatus() {
         lifecycleScope.launch {
             val content = Settings.Secure.getString(requireContext().contentResolver, PIF_CONFIG_KEY)
             activeConfigData = if (!content.isNullOrEmpty()) readConfigData(content) else emptyMap()
-            val hasValidPifData = activeConfigData.keys.any { it != "spoofPhotos" && it != "DEBUG" && !it.startsWith("spoof") }
+            val hasValidPifData = activeConfigData.keys.any { it != "DEBUG" && !it.startsWith("spoof") }
 
             val viewPref = findPreference<Preference>("spoof_pif_properties")
             val deletePref = findPreference<Preference>("spoof_pif_delete_config")
-            val photosPref = findPreference<SwitchPreferenceCompat>("spoof_pif_photos")
 
             if (hasValidPifData) {
                 val model = activeConfigData["MODEL"] ?: getString(android.R.string.unknownName)
@@ -342,8 +319,6 @@ class PlayIntegrityFix : SettingsPreferenceFragment() {
                 viewPref?.isEnabled = false
                 deletePref?.isEnabled = false
             }
-
-            photosPref?.isChecked = activeConfigData["spoofPhotos"]?.let { it == "true" || it == "1" } ?: false
         }
     }
 
@@ -429,8 +404,6 @@ class PlayIntegrityFix : SettingsPreferenceFragment() {
         val fetchPref = findPreference<Preference>("spoof_pif_fetch_config") ?: return
         updateFetchState(fetchPref, getString(R.string.spoof_pif_fetching), false)
 
-        val isPhotosEnabled = findPreference<SwitchPreferenceCompat>("spoof_pif_photos")?.isChecked ?: false
-
         lifecycleScope.launch {
             try {
                 val devices = withContext(Dispatchers.IO) { fetchAvailableDevices(requireContext()) }
@@ -456,7 +429,7 @@ class PlayIntegrityFix : SettingsPreferenceFragment() {
                         isClickable = true
                         setTextColor(Utils.getColorAttrDefaultColor(requireContext(), android.R.attr.textColorPrimary))
                         setOnClickListener {
-                            generateAndSavePif(device, isPhotosEnabled)
+                            generateAndSavePif(device)
                             bottomSheetDialog.dismiss()
                         }
                     }
@@ -473,7 +446,7 @@ class PlayIntegrityFix : SettingsPreferenceFragment() {
         }
     }
 
-    private fun generateAndSavePif(device: PifDevice, isPhotosEnabled: Boolean = false) {
+    private fun generateAndSavePif(device: PifDevice) {
         val fetchPref = findPreference<Preference>("spoof_pif_fetch_config") ?: return
         updateFetchState(fetchPref, getString(R.string.spoof_pif_generating), false)
         val appContext = requireContext()
@@ -483,8 +456,6 @@ class PlayIntegrityFix : SettingsPreferenceFragment() {
                 val result = withContext(Dispatchers.IO) { buildPifFromDevice(appContext, device) }
                 when (result) {
                     is PifFetchResult.Success -> {
-                        result.pifData.put("spoofPhotos", isPhotosEnabled.toString())
-
                         Settings.Secure.putString(
                             requireContext().contentResolver,
                             PIF_CONFIG_KEY,
@@ -560,18 +531,10 @@ class PlayIntegrityFix : SettingsPreferenceFragment() {
             .setPositiveButton(R.string.spoof_pif_delete_button) { _, _ ->
                 lifecycleScope.launch {
                     try {
-                        val isPhotosEnabled = findPreference<SwitchPreferenceCompat>("spoof_pif_photos")?.isChecked ?: false
-
-                        val newJsonString = if (isPhotosEnabled) {
-                            JSONObject().apply { put("spoofPhotos", "true") }.toString(2)
-                        } else {
-                            null
-                        }
-
                         Settings.Secure.putString(
                             requireContext().contentResolver,
                             PIF_CONFIG_KEY,
-                            newJsonString
+                            null
                         )
 
                         killGms()
