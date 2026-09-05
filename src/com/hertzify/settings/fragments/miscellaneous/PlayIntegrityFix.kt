@@ -97,6 +97,7 @@ class PlayIntegrityFix : SettingsPreferenceFragment() {
     companion object {
         const val TAG = "PlayIntegrityFix"
         const val PIF_CONFIG_KEY = "spoof_pif_config"
+        const val PHOTOS_CONFIG_KEY = "spoof_pif_photos"
         const val GOOGLE_URL = "https://developer.android.com"
         const val FLASH_URL = "https://flash.android.com"
         const val FLASH_API = "https://content-flashstation-pa.googleapis.com/v1/builds"
@@ -225,9 +226,12 @@ fun PlayIntegrityFixScreen() {
     val scope = rememberCoroutineScope()
     
     var activeConfig by remember { mutableStateOf<Map<String, String>>(emptyMap()) }
-    var isPhotosSpoofed by remember { mutableStateOf(false) }
-    var isFetching by remember { mutableStateOf(false) }
     
+    var isPhotosSpoofed by remember { 
+        mutableStateOf(Settings.Secure.getInt(context.contentResolver, PlayIntegrityFix.PHOTOS_CONFIG_KEY, 1) != 0) 
+    }
+    
+    var isFetching by remember { mutableStateOf(false) }
     var showDeviceSelector by remember { mutableStateOf<List<PlayIntegrityFix.Companion.PifDevice>?>(null) }
     var showConfigDetails by remember { mutableStateOf(false) }
     var showDeleteConfirm by remember { mutableStateOf(false) }
@@ -240,13 +244,11 @@ fun PlayIntegrityFixScreen() {
                 val map = mutableMapOf<String, String>()
                 json.keys().forEach { map[it] = json.optString(it, "") }
                 activeConfig = map
-                isPhotosSpoofed = map["spoofPhotos"] == "true"
             } catch (e: Exception) {
                 activeConfig = emptyMap()
             }
         } else {
             activeConfig = emptyMap()
-            isPhotosSpoofed = false
         }
     }
 
@@ -262,7 +264,6 @@ fun PlayIntegrityFixScreen() {
                         } ?: "{}"
                         
                         val json = try { JSONObject(raw) } catch (e: Exception) { JSONObject() }
-                        json.put("spoofPhotos", isPhotosSpoofed.toString())
 
                         Settings.Secure.putString(context.contentResolver, PlayIntegrityFix.PIF_CONFIG_KEY, json.toString(2))
                         PlayIntegrityFix.killPackages(context, PlayIntegrityFix.DROIDGUARD_PACKAGE, PlayIntegrityFix.GMS_PACKAGE, PlayIntegrityFix.VENDING_PACKAGE)
@@ -277,7 +278,7 @@ fun PlayIntegrityFixScreen() {
         }
     }
 
-    val hasConfig = activeConfig.keys.any { it != "spoofPhotos" && it != "DEBUG" && !it.startsWith("spoof") }
+    val hasConfig = activeConfig.keys.any { it != "DEBUG" && !it.startsWith("spoof") }
 
     Scaffold(containerColor = Color.Transparent) { paddingValues ->
         LazyColumn(
@@ -419,9 +420,7 @@ fun PlayIntegrityFixScreen() {
                     onCheckedChange = { checked ->
                         isPhotosSpoofed = checked
                         scope.launch(Dispatchers.IO) {
-                            val json = JSONObject(Settings.Secure.getString(context.contentResolver, PlayIntegrityFix.PIF_CONFIG_KEY) ?: "{}")
-                            json.put("spoofPhotos", checked.toString())
-                            Settings.Secure.putString(context.contentResolver, PlayIntegrityFix.PIF_CONFIG_KEY, json.toString(2))
+                            Settings.Secure.putInt(context.contentResolver, PlayIntegrityFix.PHOTOS_CONFIG_KEY, if (checked) 1 else 0)
                             PlayIntegrityFix.killPackages(context, PlayIntegrityFix.PHOTOS_PACKAGE)
                         }
                     }
@@ -452,7 +451,6 @@ fun PlayIntegrityFixScreen() {
                                     scope.launch {
                                         val result = PlayIntegrityFix.buildPifFromDevice(context, device)
                                         if (result is PlayIntegrityFix.Companion.PifFetchResult.Success) {
-                                            result.pifData.put("spoofPhotos", isPhotosSpoofed.toString())
                                             Settings.Secure.putString(context.contentResolver, PlayIntegrityFix.PIF_CONFIG_KEY, result.pifData.toString(2))
                                             PlayIntegrityFix.killPackages(context, PlayIntegrityFix.DROIDGUARD_PACKAGE, PlayIntegrityFix.GMS_PACKAGE, PlayIntegrityFix.VENDING_PACKAGE)
                                             Toast.makeText(context, context.getString(R.string.spoof_pif_fetched_model, result.model), Toast.LENGTH_SHORT).show()
@@ -477,7 +475,7 @@ fun PlayIntegrityFixScreen() {
             text = {
                 Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
                     val importantKeys = listOf("MANUFACTURER", "MODEL", "PRODUCT", "DEVICE", "FINGERPRINT", "SECURITY_PATCH")
-                    val sortedKeys = activeConfig.keys.filter { it != "spoofPhotos" }.sortedBy { importantKeys.indexOf(it).takeIf { idx -> idx >= 0 } ?: 99 }
+                    val sortedKeys = activeConfig.keys.sortedBy { importantKeys.indexOf(it).takeIf { idx -> idx >= 0 } ?: 99 }
 
                     sortedKeys.forEach { key ->
                         Column(modifier = Modifier.padding(vertical = 6.dp)) {
@@ -502,8 +500,7 @@ fun PlayIntegrityFixScreen() {
                 Button(
                     onClick = {
                         scope.launch(Dispatchers.IO) {
-                            val newJson = if (isPhotosSpoofed) JSONObject().apply { put("spoofPhotos", "true") }.toString(2) else null
-                            Settings.Secure.putString(context.contentResolver, PlayIntegrityFix.PIF_CONFIG_KEY, newJson)
+                            Settings.Secure.putString(context.contentResolver, PlayIntegrityFix.PIF_CONFIG_KEY, null)
                             PlayIntegrityFix.killPackages(context, PlayIntegrityFix.DROIDGUARD_PACKAGE, PlayIntegrityFix.GMS_PACKAGE, PlayIntegrityFix.VENDING_PACKAGE)
                             withContext(Dispatchers.Main) {
                                 showDeleteConfirm = false
