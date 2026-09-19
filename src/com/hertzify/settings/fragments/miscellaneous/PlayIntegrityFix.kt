@@ -89,7 +89,7 @@ class PlayIntegrityFix : SettingsPreferenceFragment() {
 
     companion object {
         const val PIF_CONFIG_KEY = "spoof_pif_config"
-        const val PHOTOS_CONFIG_KEY = "spoofPhotos"
+        const val PHOTOS_CONFIG_KEY = "spoof_pif_photos"
         const val PHOTOS_PACKAGE = "com.google.android.apps.photos"
 
         private const val GOOGLE_URL = "https://developer.android.com"
@@ -112,16 +112,15 @@ class PlayIntegrityFix : SettingsPreferenceFragment() {
         }
 
         fun applyPif(context: Context, json: JSONObject?) {
-            val config = (json ?: JSONObject()).apply { if (isPhotosSpoofed(context)) put(PHOTOS_CONFIG_KEY, "true") }
-            Settings.Secure.putString(context.contentResolver, PIF_CONFIG_KEY, config.takeIf { it.length() > 0 }?.toString(2))
+            Settings.Secure.putString(context.contentResolver, PIF_CONFIG_KEY, json?.toString(2))
             killPackages(context, *PIF_PACKAGES)
         }
 
-        fun isPhotosSpoofed(context: Context): Boolean = readConfig(context)[PHOTOS_CONFIG_KEY] == "true"
+        fun isPhotosSpoofed(context: Context): Boolean =
+            Settings.Secure.getInt(context.contentResolver, PHOTOS_CONFIG_KEY, 1) != 0
 
         fun setPhotosSpoofed(context: Context, enabled: Boolean) {
-            val config = JSONObject(readConfig(context)).put(PHOTOS_CONFIG_KEY, enabled.toString())
-            Settings.Secure.putString(context.contentResolver, PIF_CONFIG_KEY, config.toString(2))
+            Settings.Secure.putInt(context.contentResolver, PHOTOS_CONFIG_KEY, if (enabled) 1 else 0)
             killPackages(context, PHOTOS_PACKAGE)
         }
 
