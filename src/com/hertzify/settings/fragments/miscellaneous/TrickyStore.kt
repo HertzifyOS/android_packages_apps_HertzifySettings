@@ -2,13 +2,12 @@
 
 package com.hertzify.settings.fragments.miscellaneous
 
-import android.app.Activity
 import android.app.ActivityManager
 import android.content.Context
-import android.content.Intent
 import android.content.om.OverlayManager
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Process
@@ -22,6 +21,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
@@ -43,15 +43,14 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.EnhancedEncryption
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.EnhancedEncryption
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Checkbox
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.FilterChip
@@ -72,6 +71,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
@@ -95,7 +95,16 @@ import com.android.settingslib.spa.framework.theme.SettingsTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.nio.charset.StandardCharsets
+
+private fun Context.getSecure(key: String): String? = Settings.Secure.getString(contentResolver, key)
+
+private fun Context.putSecure(key: String, value: String?) {
+    Settings.Secure.putString(contentResolver, key, value)
+}
+
+data class TargetApp(val info: ApplicationInfo, val label: String, val isSystem: Boolean) {
+    val pkg: String get() = info.packageName
+}
 
 class TrickyStore : SettingsPreferenceFragment() {
 
@@ -105,21 +114,30 @@ class TrickyStore : SettingsPreferenceFragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View = ComposeView(requireContext()).apply {
         setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-        setContent {
-            SettingsTheme {
-                TrickyStoreScreen()
+        setContent { SettingsTheme { TrickyStoreScreen() } }
+    }
+
+    enum class TargetMode(val symbol: String, @StringRes val labelRes: Int) {
+        AUTO("", R.string.spoof_ts_target_mode_auto),
+        LEAF_HACK("?", R.string.spoof_ts_target_mode_leaf),
+        CERT_GEN("!", R.string.spoof_ts_target_mode_cert);
+
+        companion object {
+            fun fromLine(line: String): Pair<String, TargetMode> {
+                val mode = entries.firstOrNull { it.symbol.isNotEmpty() && line.endsWith(it.symbol) } ?: AUTO
+                return line.removeSuffix(mode.symbol) to mode
             }
         }
     }
 
     companion object {
-        const val TAG = "TrickyStore"
-        const val DROIDGUARD_PACKAGE = "com.google.android.gms.unstable"
-        const val GMS_PACKAGE = "com.google.android.gms"
-        const val VENDING_PACKAGE = "com.android.vending"
         const val TS_KEYBOX_KEY = "spoof_trickystore_keybox"
         const val TS_KEYBOX_NAME_KEY = "spoof_trickystore_keybox_name"
         const val TS_TARGET_KEY = "spoof_trickystore_target"
+
+        private val KILL_PACKAGES = listOf(
+            "com.google.android.gms.unstable", "com.google.android.gms", "com.android.vending"
+        )
 
         val AUTO_SELECT_PACKAGES = setOf(
             "com.google.android.gms",
@@ -130,247 +148,144 @@ class TrickyStore : SettingsPreferenceFragment() {
 
         fun killPackages(context: Context) {
             val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-            listOf(DROIDGUARD_PACKAGE, GMS_PACKAGE, VENDING_PACKAGE).forEach {
-                try { am.forceStopPackage(it) } catch (_: Exception) {}
-            }
+            KILL_PACKAGES.forEach { runCatching { am.forceStopPackage(it) } }
         }
 
-        fun getOverlayPackages(context: Context): Set<String> {
-            return try {
-                val om = context.getSystemService(Context.OVERLAY_SERVICE) as OverlayManager
-                val userHandle = Process.myUserHandle()
-                val targets = listOf("android", "com.android.systemui", "com.android.settings", "com.android.launcher3")
-                targets.flatMap { om.getOverlayInfosForTarget(it, userHandle) }
-                    .map { it.packageName }
-                    .toSet()
-            } catch (_: Exception) {
-                emptySet()
-            }
+        private fun getOverlayPackages(context: Context): Set<String> = runCatching {
+            val om = context.getSystemService(Context.OVERLAY_SERVICE) as OverlayManager
+            val user = Process.myUserHandle()
+            listOf("android", "com.android.systemui", "com.android.settings", "com.android.launcher3")
+                .flatMap { om.getOverlayInfosForTarget(it, user) }
+                .map { it.packageName }
+                .toSet()
+        }.getOrDefault(emptySet())
+
+        fun readTargets(context: Context): Map<String, TargetMode> =
+            context.getSecure(TS_TARGET_KEY).orEmpty().lines()
+                .filter { it.isNotBlank() && !it.startsWith("#") }
+                .associate { TargetMode.fromLine(it.trim()) }
+
+        fun saveTargets(context: Context, targets: Map<String, TargetMode>?) {
+            context.putSecure(TS_TARGET_KEY, targets?.map { "${it.key}${it.value.symbol}" }?.joinToString("\n"))
         }
 
-        suspend fun loadTargetManagerData(context: Context): Pair<List<ApplicationInfo>, Map<String, TargetMode>> =
+        suspend fun loadTargetManagerData(context: Context): Pair<List<TargetApp>, Map<String, TargetMode>> =
             withContext(Dispatchers.IO) {
+                val pm = context.packageManager
                 val overlays = getOverlayPackages(context)
-                val apps = context.packageManager
-                    .getInstalledApplications(PackageManager.GET_META_DATA)
-                    .filter { app ->
-                        val isOverlay = app.packageName in overlays
-                        val isExcluded = app.packageName.contains(".overlay") || app.packageName.contains(".resources")
-                        !isOverlay && !isExcluded
-                    }
-
-                val content = Settings.Secure.getString(context.contentResolver, TS_TARGET_KEY) ?: ""
-                val parsedMap = content.lines()
-                    .filter { it.isNotBlank() && !it.startsWith("#") }
-                    .associate { TargetMode.fromLine(it.trim()) }
-
-                apps to parsedMap
+                val apps = pm.getInstalledApplications(PackageManager.GET_META_DATA)
+                    .filter { it.packageName !in overlays && !it.packageName.contains(".overlay") && !it.packageName.contains(".resources") }
+                    .map { TargetApp(it, it.loadLabel(pm).toString(), (it.flags and ApplicationInfo.FLAG_SYSTEM) != 0) }
+                apps to readTargets(context)
             }
 
         fun getFileNameFromUri(context: Context, uri: Uri): String {
-            var result: String? = null
-            if (uri.scheme == "content") {
-                context.contentResolver.query(uri, null, null, null, null)?.use { cursor ->
-                    if (cursor.moveToFirst()) {
-                        val index = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-                        if (index != -1) result = cursor.getString(index)
-                    }
+            val name = runCatching {
+                context.contentResolver.query(uri, null, null, null, null)?.use {
+                    if (it.moveToFirst()) it.getString(it.getColumnIndexOrThrow(OpenableColumns.DISPLAY_NAME)) else null
                 }
-            }
-            return result ?: uri.path?.substringAfterLast('/') ?: "keybox.xml"
-        }
-    }
-
-    enum class TargetMode(val symbol: String) {
-        AUTO(""),
-        LEAF_HACK("?"),
-        CERT_GEN("!");
-
-        companion object {
-            fun fromLine(line: String): Pair<String, TargetMode> = when {
-                line.endsWith("?") -> line.dropLast(1) to LEAF_HACK
-                line.endsWith("!") -> line.dropLast(1) to CERT_GEN
-                else -> line to AUTO
-            }
+            }.getOrNull()
+            return name ?: uri.path?.substringAfterLast('/') ?: "keybox.xml"
         }
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TrickyStoreScreen() {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
-    
+
     var hasKeybox by remember { mutableStateOf(false) }
     var keyboxName by remember { mutableStateOf("") }
     var targetCount by remember { mutableStateOf(0) }
 
     var showDeleteKeyboxDialog by remember { mutableStateOf(false) }
     var showClearTargetsDialog by remember { mutableStateOf(false) }
-    var showTargetManager by remember { mutableStateOf(false) }
-
     var isLoadingTargetManager by remember { mutableStateOf(false) }
     var targetManagerData by remember {
-        mutableStateOf<Pair<List<ApplicationInfo>, Map<String, TrickyStore.TargetMode>>?>(null)
+        mutableStateOf<Pair<List<TargetApp>, Map<String, TrickyStore.TargetMode>>?>(null)
     }
 
+    fun toast(msg: String) = Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+
     fun refreshState() {
-        scope.launch(Dispatchers.IO) {
-            val resolver = context.contentResolver
-            val keyboxExists = !Settings.Secure.getString(resolver, TrickyStore.TS_KEYBOX_KEY).isNullOrEmpty()
-            val savedKeyboxName = Settings.Secure.getString(resolver, TrickyStore.TS_KEYBOX_NAME_KEY) ?: "keybox.xml"
-            val targetContent = Settings.Secure.getString(resolver, TrickyStore.TS_TARGET_KEY)
-            
-            val count = if (!targetContent.isNullOrEmpty()) {
-                val installedPackages = context.packageManager
-                    .getInstalledPackages(0)
-                    .map { it.packageName }
-                    .toHashSet()
-                    
-                targetContent.lines()
-                    .filter { it.isNotBlank() && !it.startsWith("#") }
-                    .map { TrickyStore.TargetMode.fromLine(it.trim()).first }
-                    .count { it in installedPackages }
-            } else 0
-            
-            withContext(Dispatchers.Main) {
-                hasKeybox = keyboxExists
-                keyboxName = savedKeyboxName
-                targetCount = count
+        scope.launch {
+            val (keybox, name, count) = withContext(Dispatchers.IO) {
+                val installed = context.packageManager.getInstalledPackages(0).map { it.packageName }.toSet()
+                Triple(
+                    !context.getSecure(TrickyStore.TS_KEYBOX_KEY).isNullOrEmpty(),
+                    context.getSecure(TrickyStore.TS_KEYBOX_NAME_KEY) ?: "keybox.xml",
+                    TrickyStore.readTargets(context).keys.count { it in installed }
+                )
             }
+            hasKeybox = keybox
+            keyboxName = name
+            targetCount = count
         }
     }
 
     LaunchedEffect(Unit) { refreshState() }
 
-    val importKeyboxLauncher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            result.data?.data?.let { uri ->
-                val fileName = TrickyStore.getFileNameFromUri(context, uri)
-                scope.launch(Dispatchers.IO) {
-                    try {
-                        val bytes = context.contentResolver.openInputStream(uri)?.use { it.readBytes() } ?: ByteArray(0)
-                        val encoded = Base64.encodeToString(bytes, Base64.NO_WRAP)
-                        Settings.Secure.putString(context.contentResolver, TrickyStore.TS_KEYBOX_KEY, encoded)
-                        Settings.Secure.putString(context.contentResolver, TrickyStore.TS_KEYBOX_NAME_KEY, fileName)
-                        TrickyStore.killPackages(context)
-                        withContext(Dispatchers.Main) {
-                            Toast.makeText(context, context.getString(R.string.spoof_ts_keybox_imported), Toast.LENGTH_SHORT).show()
-                            refreshState()
-                        }
-                    } catch (e: Exception) {
-                        withContext(Dispatchers.Main) {
-                            Toast.makeText(context, context.getString(R.string.spoof_ts_failed, e.message ?: ""), Toast.LENGTH_SHORT).show()
-                        }
-                    }
+    val importKeyboxLauncher = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        uri ?: return@rememberLauncherForActivityResult
+        scope.launch {
+            runCatching {
+                withContext(Dispatchers.IO) {
+                    val bytes = context.contentResolver.openInputStream(uri)?.use { it.readBytes() } ?: ByteArray(0)
+                    context.putSecure(TrickyStore.TS_KEYBOX_KEY, Base64.encodeToString(bytes, Base64.NO_WRAP))
+                    context.putSecure(TrickyStore.TS_KEYBOX_NAME_KEY, TrickyStore.getFileNameFromUri(context, uri))
+                    TrickyStore.killPackages(context)
                 }
-            }
+            }.onSuccess {
+                toast(context.getString(R.string.spoof_ts_keybox_imported))
+                refreshState()
+            }.onFailure { toast(context.getString(R.string.spoof_ts_failed, it.message.orEmpty())) }
         }
     }
 
-    val importTargetLauncher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            result.data?.data?.let { uri ->
-                scope.launch(Dispatchers.IO) {
-                    try {
-                        val text = context.contentResolver.openInputStream(uri)?.use { 
-                            it.readBytes().toString(StandardCharsets.UTF_8) 
-                        } ?: ""
-                        Settings.Secure.putString(context.contentResolver, TrickyStore.TS_TARGET_KEY, text)
-                        withContext(Dispatchers.Main) {
-                            Toast.makeText(context, context.getString(R.string.spoof_ts_target_list_imported), Toast.LENGTH_SHORT).show()
-                            refreshState()
-                        }
-                    } catch (e: Exception) {
-                        withContext(Dispatchers.Main) {
-                            Toast.makeText(context, context.getString(R.string.spoof_ts_failed, e.message ?: ""), Toast.LENGTH_SHORT).show()
-                        }
-                    }
+    val importTargetLauncher = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        uri ?: return@rememberLauncherForActivityResult
+        scope.launch {
+            runCatching {
+                withContext(Dispatchers.IO) {
+                    val text = context.contentResolver.openInputStream(uri)?.use { it.readBytes().decodeToString() }.orEmpty()
+                    context.putSecure(TrickyStore.TS_TARGET_KEY, text)
                 }
-            }
+            }.onSuccess {
+                toast(context.getString(R.string.spoof_ts_target_list_imported))
+                refreshState()
+            }.onFailure { toast(context.getString(R.string.spoof_ts_failed, it.message.orEmpty())) }
         }
     }
 
-    Scaffold(containerColor = Color.Transparent) { paddingValues ->
+    Scaffold(containerColor = Color.Transparent) { padding ->
         LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .padding(horizontal = 16.dp),
+            modifier = Modifier.fillMaxSize().padding(padding).padding(horizontal = 16.dp),
             verticalArrangement = Arrangement.spacedBy(6.dp)
         ) {
-            item { Spacer(modifier = Modifier.height(8.dp)) }
+            item { Spacer(Modifier.height(8.dp)) }
 
             item {
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(24.dp),
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceBright
+                HeaderCard(
+                    title = stringResource(R.string.spoof_ts_title),
+                    lines = listOf(
+                        if (hasKeybox) stringResource(R.string.spoof_ts_keybox_active, keyboxName)
+                        else stringResource(R.string.spoof_ts_no_keybox),
+                        if (targetCount > 0) stringResource(R.string.spoof_ts_target_apps_count, targetCount)
+                        else stringResource(R.string.spoof_ts_no_targets)
                     )
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(20.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .size(48.dp)
-                                .clip(CircleShape)
-                                .background(MaterialTheme.colorScheme.primaryContainer),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Icon(
-                                Icons.Default.EnhancedEncryption,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.onPrimaryContainer,
-                                modifier = Modifier.size(24.dp)
-                            )
-                        }
-                        Spacer(modifier = Modifier.width(16.dp))
-                        Column {
-                            Text(
-                                text = stringResource(R.string.spoof_ts_title),
-                                style = MaterialTheme.typography.titleLarge,
-                                fontWeight = FontWeight.Bold
-                            )
-                            Spacer(modifier = Modifier.height(2.dp))
-                            Text(
-                                text = if (hasKeybox) 
-                                    stringResource(R.string.spoof_ts_header_active, targetCount) 
-                                else 
-                                    stringResource(R.string.spoof_ts_no_keybox),
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
-                    }
-                }
-            }
-
-            item { Spacer(modifier = Modifier.height(12.dp)) }
-
-            item {
-                Text(
-                    text = stringResource(R.string.spoof_ts_keybox_management),
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.padding(start = 8.dp, top = 8.dp, bottom = 4.dp)
                 )
             }
+
+            item { Spacer(Modifier.height(12.dp)) }
+            item { SectionTitle(stringResource(R.string.spoof_ts_keybox_management)) }
+
             item {
                 PrefItem(
                     title = stringResource(R.string.spoof_ts_import_keybox),
-                    summary = if (hasKeybox) stringResource(R.string.spoof_ts_keybox_active, keyboxName) else stringResource(R.string.spoof_ts_no_keybox),
-                    onClick = {
-                        importKeyboxLauncher.launch(Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-                            addCategory(Intent.CATEGORY_OPENABLE)
-                            type = "*/*"
-                        })
-                    }
+                    summary = if (hasKeybox) stringResource(R.string.spoof_ts_keybox_active, keyboxName)
+                    else stringResource(R.string.spoof_ts_no_keybox),
+                    onClick = { importKeyboxLauncher.launch(arrayOf("*/*")) }
                 )
             }
             item {
@@ -382,14 +297,8 @@ fun TrickyStoreScreen() {
                 )
             }
 
-            item {
-                Text(
-                    text = stringResource(R.string.spoof_ts_target_configuration),
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.padding(start = 8.dp, top = 8.dp, bottom = 4.dp)
-                )
-            }
+            item { SectionTitle(stringResource(R.string.spoof_ts_target_configuration)) }
+
             item {
                 PrefItem(
                     title = stringResource(R.string.spoof_ts_manage_target_apps),
@@ -402,10 +311,8 @@ fun TrickyStoreScreen() {
                     onClick = {
                         isLoadingTargetManager = true
                         scope.launch {
-                            val data = TrickyStore.loadTargetManagerData(context)
-                            targetManagerData = data
+                            targetManagerData = TrickyStore.loadTargetManagerData(context)
                             isLoadingTargetManager = false
-                            showTargetManager = true
                         }
                     }
                 )
@@ -414,12 +321,7 @@ fun TrickyStoreScreen() {
                 PrefItem(
                     title = stringResource(R.string.spoof_ts_import_target_list),
                     summary = stringResource(R.string.spoof_ts_import_target_list_summary),
-                    onClick = {
-                        importTargetLauncher.launch(Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-                            addCategory(Intent.CATEGORY_OPENABLE)
-                            type = "text/*"
-                        })
-                    }
+                    onClick = { importTargetLauncher.launch(arrayOf("text/*")) }
                 )
             }
             item {
@@ -431,143 +333,114 @@ fun TrickyStoreScreen() {
                 )
             }
 
-            item { Spacer(modifier = Modifier.height(80.dp)) }
+            item { Spacer(Modifier.height(80.dp)) }
         }
     }
 
     if (showDeleteKeyboxDialog) {
-        AlertDialog(
-            onDismissRequest = { showDeleteKeyboxDialog = false },
-            title = { Text(stringResource(R.string.spoof_ts_delete_keybox_title)) },
-            text = { Text(stringResource(R.string.spoof_ts_delete_keybox_message)) },
-            confirmButton = {
-                Button(onClick = {
-                    scope.launch(Dispatchers.IO) {
-                        Settings.Secure.putString(context.contentResolver, TrickyStore.TS_KEYBOX_KEY, null)
-                        Settings.Secure.putString(context.contentResolver, TrickyStore.TS_KEYBOX_NAME_KEY, null)
+        ConfirmDialog(
+            title = stringResource(R.string.spoof_ts_delete_keybox_title),
+            message = stringResource(R.string.spoof_ts_delete_keybox_message),
+            confirmText = stringResource(R.string.spoof_ts_delete),
+            onDismiss = { showDeleteKeyboxDialog = false },
+            onConfirm = {
+                scope.launch {
+                    withContext(Dispatchers.IO) {
+                        context.putSecure(TrickyStore.TS_KEYBOX_KEY, null)
+                        context.putSecure(TrickyStore.TS_KEYBOX_NAME_KEY, null)
                         TrickyStore.killPackages(context)
-                        withContext(Dispatchers.Main) {
-                            showDeleteKeyboxDialog = false
-                            Toast.makeText(context, context.getString(R.string.spoof_ts_keybox_deleted), Toast.LENGTH_SHORT).show()
-                            refreshState()
-                        }
                     }
-                }) { Text(stringResource(R.string.spoof_ts_delete)) }
-            },
-            dismissButton = {
-                OutlinedButton(onClick = { showDeleteKeyboxDialog = false }) { Text(stringResource(android.R.string.cancel)) }
+                    showDeleteKeyboxDialog = false
+                    toast(context.getString(R.string.spoof_ts_keybox_deleted))
+                    refreshState()
+                }
             }
         )
     }
 
     if (showClearTargetsDialog) {
-        AlertDialog(
-            onDismissRequest = { showClearTargetsDialog = false },
-            title = { Text(stringResource(R.string.spoof_ts_clear_targets_title)) },
-            text = { Text(stringResource(R.string.spoof_ts_clear_targets_msg)) },
-            confirmButton = {
-                Button(onClick = {
-                    scope.launch(Dispatchers.IO) {
-                        Settings.Secure.putString(context.contentResolver, TrickyStore.TS_TARGET_KEY, null)
-                        withContext(Dispatchers.Main) {
-                            showClearTargetsDialog = false
-                            Toast.makeText(context, context.getString(R.string.spoof_ts_targets_cleared), Toast.LENGTH_SHORT).show()
-                            refreshState()
-                        }
-                    }
-                }) { Text(stringResource(R.string.spoof_ts_delete)) }
-            },
-            dismissButton = {
-                OutlinedButton(onClick = { showClearTargetsDialog = false }) { Text(stringResource(android.R.string.cancel)) }
+        ConfirmDialog(
+            title = stringResource(R.string.spoof_ts_clear_targets_title),
+            message = stringResource(R.string.spoof_ts_clear_targets_msg),
+            confirmText = stringResource(R.string.spoof_ts_delete),
+            onDismiss = { showClearTargetsDialog = false },
+            onConfirm = {
+                scope.launch {
+                    withContext(Dispatchers.IO) { TrickyStore.saveTargets(context, null) }
+                    showClearTargetsDialog = false
+                    toast(context.getString(R.string.spoof_ts_targets_cleared))
+                    refreshState()
+                }
             }
         )
     }
 
-    if (showTargetManager) {
-        targetManagerData?.let { (apps, targets) ->
-            TargetManagerBottomSheet(
-                installedApps = apps,
-                initialTargetMap = targets,
-                onDismiss = {
-                    showTargetManager = false
-                    targetManagerData = null
-                    refreshState()
-                }
-            )
-        }
+    targetManagerData?.let { (apps, targets) ->
+        TargetManagerBottomSheet(
+            apps = apps,
+            initialTargets = targets,
+            onChanged = ::refreshState,
+            onDismiss = { targetManagerData = null }
+        )
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TargetManagerBottomSheet(
-    installedApps: List<ApplicationInfo>,
-    initialTargetMap: Map<String, TrickyStore.TargetMode>,
+private fun TargetManagerBottomSheet(
+    apps: List<TargetApp>,
+    initialTargets: Map<String, TrickyStore.TargetMode>,
+    onChanged: () -> Unit,
     onDismiss: () -> Unit
 ) {
     val context = LocalContext.current
-    val pm = context.packageManager
-    val scope = rememberCoroutineScope()
-    
-    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
-    val configuration = LocalConfiguration.current
-    val maxSheetHeight = configuration.screenHeightDp.dp * 0.85f
-    
-    var searchQuery by remember { mutableStateOf("") }
-    var showSystemApps by remember { mutableStateOf(false) }
-    
-    val targetMap = remember { mutableStateMapOf<String, TrickyStore.TargetMode>().apply { putAll(initialTargetMap) } }
-    var expandedPackage by remember { mutableStateOf<String?>(null) }
-    val initialTargetSet = remember { initialTargetMap.keys }
+    val maxHeight = LocalConfiguration.current.screenHeightDp.dp * 0.85f
 
-    fun saveTargets() {
-        val text = targetMap.map { "${it.key}${it.value.symbol}" }.joinToString("\n")
-        Settings.Secure.putString(context.contentResolver, TrickyStore.TS_TARGET_KEY, text)
+    var query by remember { mutableStateOf("") }
+    var showSystem by remember { mutableStateOf(false) }
+    var expanded by remember { mutableStateOf<String?>(null) }
+    var pinned by remember { mutableStateOf(initialTargets.keys.toSet()) }
+    val targets = remember { mutableStateMapOf<String, TrickyStore.TargetMode>().apply { putAll(initialTargets) } }
+
+    fun commit() {
+        TrickyStore.saveTargets(context, targets)
+        onChanged()
     }
 
-    val filteredApps = remember(searchQuery, showSystemApps, installedApps, initialTargetSet) {
-        installedApps.filter { app ->
-            val isSystem = (app.flags and ApplicationInfo.FLAG_SYSTEM) != 0
-            val matchesQuery = app.loadLabel(pm).toString().contains(searchQuery, ignoreCase = true) ||
-                               app.packageName.contains(searchQuery, ignoreCase = true)
-            val isSelectedInitially = initialTargetSet.contains(app.packageName)
-            val shouldShow = (!isSystem || showSystemApps || isSelectedInitially)
-            shouldShow && matchesQuery
-        }.sortedWith(
-            compareByDescending<ApplicationInfo> { initialTargetSet.contains(it.packageName) }
-                .thenBy { it.loadLabel(pm).toString().lowercase() }
-        )
+    fun setMode(pkg: String, mode: TrickyStore.TargetMode?) {
+        if (mode == null) targets.remove(pkg) else targets[pkg] = mode
+        commit()
+    }
+
+    val filteredApps = remember(query, showSystem, pinned, apps) {
+        apps.filter {
+            (showSystem || !it.isSystem || it.pkg in pinned) &&
+                (it.label.contains(query, ignoreCase = true) || it.pkg.contains(query, ignoreCase = true))
+        }.sortedWith(compareByDescending<TargetApp> { it.pkg in pinned }.thenBy { it.label.lowercase() })
     }
 
     ModalBottomSheet(
         onDismissRequest = onDismiss,
-        sheetState = sheetState
+        sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .heightIn(max = maxSheetHeight)
-                .animateContentSize()
-                .padding(horizontal = 16.dp)
+            Modifier.fillMaxWidth().heightIn(max = maxHeight).animateContentSize().padding(horizontal = 16.dp)
         ) {
             Text(
-                stringResource(R.string.spoof_ts_manage_target_apps),
+                text = stringResource(R.string.spoof_ts_manage_target_apps),
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
 
             OutlinedTextField(
-                value = searchQuery,
-                onValueChange = { searchQuery = it },
+                value = query,
+                onValueChange = { query = it },
                 modifier = Modifier.fillMaxWidth(),
                 placeholder = { Text(stringResource(R.string.spoof_ts_search_apps)) },
                 leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
                 trailingIcon = {
-                    if (searchQuery.isNotEmpty()) {
-                        IconButton(onClick = { searchQuery = "" }) {
-                            Icon(Icons.Default.Close, contentDescription = "Clear")
-                        }
+                    if (query.isNotEmpty()) {
+                        IconButton(onClick = { query = "" }) { Icon(Icons.Default.Close, contentDescription = "Clear") }
                     }
                 },
                 singleLine = true,
@@ -575,152 +448,178 @@ fun TargetManagerBottomSheet(
             )
 
             Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
+                modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                FilterChip(
-                    selected = showSystemApps,
-                    onClick = { showSystemApps = !showSystemApps },
-                    label = { Text("System") }
-                )
-                TextButton(
-                    onClick = {
-                        var changed = false
-                        TrickyStore.AUTO_SELECT_PACKAGES.forEach { pkg ->
-                            if (!targetMap.containsKey(pkg)) {
-                                targetMap[pkg] = TrickyStore.TargetMode.AUTO
-                                changed = true
-                            }
-                        }
-                        if (changed) saveTargets()
+                FilterChip(selected = showSystem, onClick = { showSystem = !showSystem }, label = { Text("System") })
+                TextButton(onClick = {
+                    val missing = TrickyStore.AUTO_SELECT_PACKAGES.filter { it !in targets }
+                    if (missing.isNotEmpty()) {
+                        missing.forEach { targets[it] = TrickyStore.TargetMode.AUTO }
+                        pinned = targets.keys.toSet()
+                        commit()
                     }
-                ) {
-                    Text("Auto")
-                }
+                }) { Text("Auto") }
             }
 
-            LazyColumn(
-                modifier = Modifier.weight(1f, fill = false),
-                verticalArrangement = Arrangement.spacedBy(6.dp)
+            LazyColumn(Modifier.weight(1f, fill = false), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                items(filteredApps, key = { it.pkg }) { app ->
+                    TargetAppItem(
+                        app = app,
+                        mode = targets[app.pkg],
+                        expanded = expanded == app.pkg,
+                        onToggleExpand = { expanded = if (expanded == app.pkg) null else app.pkg },
+                        onCheckedChange = { checked ->
+                            if (checked) {
+                                expanded = app.pkg
+                                setMode(app.pkg, TrickyStore.TargetMode.AUTO)
+                            } else {
+                                if (expanded == app.pkg) expanded = null
+                                setMode(app.pkg, null)
+                            }
+                        },
+                        onModeSelected = { setMode(app.pkg, it) }
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun TargetAppItem(
+    app: TargetApp,
+    mode: TrickyStore.TargetMode?,
+    expanded: Boolean,
+    onToggleExpand: () -> Unit,
+    onCheckedChange: (Boolean) -> Unit,
+    onModeSelected: (TrickyStore.TargetMode) -> Unit
+) {
+    val pm = LocalContext.current.packageManager
+    val icon by produceState<Drawable?>(null, app.pkg) {
+        value = withContext(Dispatchers.IO) { runCatching { app.info.loadIcon(pm) }.getOrNull() }
+    }
+
+    Surface(
+        modifier = Modifier.fillMaxWidth().animateContentSize(),
+        shape = RoundedCornerShape(14.dp),
+        color = if (mode != null) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.25f)
+        else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.45f)
+    ) {
+        Column {
+            Row(
+                modifier = Modifier.fillMaxWidth().clickable(onClick = onToggleExpand).padding(12.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                items(filteredApps, key = { it.packageName }) { app ->
-                    val pkg = app.packageName
-                    val isEnabled = targetMap.containsKey(pkg)
-                    val mode = targetMap[pkg] ?: TrickyStore.TargetMode.AUTO
-                    val isExpanded = expandedPackage == pkg
+                AndroidView(
+                    factory = { ImageView(it) },
+                    update = { it.setImageDrawable(icon) },
+                    modifier = Modifier.size(44.dp)
+                )
+                Spacer(Modifier.width(12.dp))
+                Column(Modifier.weight(1f)) {
+                    Text(app.label, fontWeight = FontWeight.SemiBold, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                    Text(
+                        text = app.pkg,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
+                if (mode != null && !expanded) {
+                    Text(
+                        text = stringResource(mode.labelRes),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.padding(end = 8.dp)
+                    )
+                }
+                Checkbox(checked = mode != null, onCheckedChange = onCheckedChange)
+            }
 
-                    Surface(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .animateContentSize(),
-                        shape = RoundedCornerShape(14.dp),
-                        color = if (isEnabled) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.25f)
-                                else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.45f)
-                    ) {
-                        Column {
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .clickable {
-                                        if (!isEnabled) {
-                                            targetMap[pkg] = TrickyStore.TargetMode.AUTO
-                                            expandedPackage = pkg
-                                            saveTargets()
-                                        } else {
-                                            expandedPackage = if (isExpanded) null else pkg
-                                        }
-                                    }
-                                    .padding(12.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                AndroidView(
-                                    factory = { ImageView(it) },
-                                    update = { iv ->
-                                        scope.launch(Dispatchers.IO) {
-                                            val icon = try { app.loadIcon(pm) } catch (e: Exception) { null }
-                                            withContext(Dispatchers.Main) { iv.setImageDrawable(icon) }
-                                        }
-                                    },
-                                    modifier = Modifier.size(44.dp)
-                                )
-                                Spacer(modifier = Modifier.width(12.dp))
-                                Column(modifier = Modifier.weight(1f)) {
-                                    Text(app.loadLabel(pm).toString(), fontWeight = FontWeight.SemiBold, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                                    Text(pkg, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                                }
-                                if (isEnabled && !isExpanded) {
-                                    Text(
-                                        text = when (mode) {
-                                            TrickyStore.TargetMode.LEAF_HACK -> stringResource(R.string.spoof_ts_target_mode_leaf)
-                                            TrickyStore.TargetMode.CERT_GEN -> stringResource(R.string.spoof_ts_target_mode_cert)
-                                            else -> stringResource(R.string.spoof_ts_target_mode_auto)
-                                        },
-                                        style = MaterialTheme.typography.labelSmall,
-                                        color = MaterialTheme.colorScheme.primary,
-                                        modifier = Modifier.padding(end = 8.dp)
-                                    )
-                                }
-                                Checkbox(
-                                    checked = isEnabled,
-                                    onCheckedChange = { checked ->
-                                        if (checked) {
-                                            targetMap[pkg] = TrickyStore.TargetMode.AUTO
-                                            expandedPackage = pkg
-                                        } else {
-                                            targetMap.remove(pkg)
-                                            if (isExpanded) expandedPackage = null
-                                        }
-                                        saveTargets()
-                                    }
-                                )
-                            }
-
-                            AnimatedVisibility(visible = isExpanded && isEnabled) {
-                                Row(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(bottom = 12.dp),
-                                    horizontalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterHorizontally),
-                                    verticalAlignment = Alignment.CenterVertically
-                                ) {
-                                    TrickyStore.TargetMode.entries.forEach { targetMode ->
-                                        Row(verticalAlignment = Alignment.CenterVertically) {
-                                                RadioButton(
-                                                    selected = mode == targetMode,
-                                                    onClick = {
-                                                        targetMap[pkg] = targetMode
-                                                        saveTargets()
-                                                    }
-                                                )
-                                                Text(
-                                                    text = when(targetMode) {
-                                                        TrickyStore.TargetMode.LEAF_HACK -> stringResource(R.string.spoof_ts_target_mode_leaf)
-                                                        TrickyStore.TargetMode.CERT_GEN -> stringResource(R.string.spoof_ts_target_mode_cert)
-                                                        else -> stringResource(R.string.spoof_ts_target_mode_auto)
-                                                    },
-                                                    style = MaterialTheme.typography.bodyMedium
-                                                )
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+            AnimatedVisibility(visible = expanded) {
+                Row(
+                    modifier = Modifier.fillMaxWidth().padding(bottom = 12.dp),
+                    horizontalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterHorizontally),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    TrickyStore.TargetMode.entries.forEach { option ->
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            RadioButton(selected = mode == option, onClick = { onModeSelected(option) })
+                            Text(stringResource(option.labelRes), style = MaterialTheme.typography.bodyMedium)
                         }
                     }
                 }
             }
         }
     }
+}
+
+@Composable
+private fun HeaderCard(title: String, lines: List<String>) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(24.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceBright)
+    ) {
+        Row(Modifier.fillMaxWidth().padding(20.dp), verticalAlignment = Alignment.CenterVertically) {
+            Box(
+                modifier = Modifier.size(48.dp).clip(CircleShape).background(MaterialTheme.colorScheme.primaryContainer),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    imageVector = Icons.Default.EnhancedEncryption,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                    modifier = Modifier.size(24.dp)
+                )
+            }
+            Spacer(Modifier.width(16.dp))
+            Column {
+                Text(title, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                Spacer(Modifier.height(2.dp))
+                lines.forEach {
+                    Text(it, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun SectionTitle(text: String) {
+    Text(
+        text = text,
+        style = MaterialTheme.typography.labelMedium,
+        color = MaterialTheme.colorScheme.primary,
+        modifier = Modifier.padding(start = 8.dp, top = 8.dp, bottom = 4.dp)
+    )
+}
+
+@Composable
+private fun ConfirmDialog(
+    title: String,
+    message: String,
+    confirmText: String,
+    onConfirm: () -> Unit,
+    onDismiss: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(title) },
+        text = { Text(message) },
+        confirmButton = { Button(onClick = onConfirm) { Text(confirmText) } },
+        dismissButton = { OutlinedButton(onClick = onDismiss) { Text(stringResource(android.R.string.cancel)) } }
+    )
+}
 
 @Composable
 private fun PrefItem(title: String, summary: String, enabled: Boolean = true, onClick: () -> Unit) {
+    val alpha = if (enabled) 1f else 0.4f
     Surface(
-        modifier = Modifier
-            .fillMaxWidth()
-            .animateContentSize(),
+        modifier = Modifier.fillMaxWidth().animateContentSize(),
         shape = RoundedCornerShape(14.dp),
         color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = if (enabled) 0.45f else 0.2f)
     ) {
@@ -731,17 +630,9 @@ private fun PrefItem(title: String, summary: String, enabled: Boolean = true, on
                 .padding(horizontal = 20.dp, vertical = 16.dp),
             verticalArrangement = Arrangement.Center
         ) {
-            Text(
-                text = title, 
-                style = MaterialTheme.typography.titleMedium, 
-                color = if (enabled) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f)
-            )
-            Spacer(modifier = Modifier.height(2.dp))
-            Text(
-                text = summary, 
-                style = MaterialTheme.typography.bodyMedium, 
-                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = if (enabled) 1f else 0.4f)
-            )
+            Text(title, style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onSurface.copy(alpha = alpha))
+            Spacer(Modifier.height(2.dp))
+            Text(summary, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = alpha))
         }
     }
 }
