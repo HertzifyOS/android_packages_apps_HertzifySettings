@@ -29,7 +29,14 @@
         android:title="@string/spoof_ap_title"
         android:summary="@string/spoof_ap_summary"
         android:fragment="com.hertzify.settings.fragments.miscellaneous.AppSpoofing" />
-        
+
+    <!-- AppShield -->
+    <Preference
+        android:key="appshield"
+        android:title="@string/appshield_title"
+        android:summary="@string/appshield_summary"
+        android:fragment="com.hertzify.settings.fragments.miscellaneous.AppShield" />
+            
     <!-- Allow application downgrade -->
     <com.hertzify.settings.preferences.GlobalSettingSwitchPreference
         android:key="pm_downgrade_allowed"

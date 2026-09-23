@@ -338,4 +338,23 @@
     <string name="spoof_ap_error_empty_name">Name cannot be empty</string>
     <string name="spoof_ap_profile_saved">Profile saved</string>
     <string name="spoof_ap_save">Save</string>
+
+    <!-- AppShield -->
+    <string name="appshield_title">AppShield</string>
+    <string name="appshield_summary">Hide apps, hide ADB/Developer status, detach from Play Store</string>
+    <string name="appshield_search">Search apps</string>
+    <string name="appshield_filter_system">System</string>
+    <string name="appshield_counts">Hidden: %1$d • Launcher: %2$d • ADB: %3$d • Detached: %4$d</string>
+    <string name="appshield_tag_hidden">Hidden</string>
+    <string name="appshield_tag_launcher">No Launcher</string>
+    <string name="appshield_tag_dev">ADB hidden</string>
+    <string name="appshield_tag_detach">Detached</string>
+    <string name="appshield_opt_hide_applist">Hide from app list</string>
+    <string name="appshield_opt_hide_applist_summary">Other apps cannot see that this app is installed</string>
+    <string name="appshield_opt_hide_launcher">Hide from Launcher</string>
+    <string name="appshield_opt_hide_launcher_summary">Remove app icon from home screen and app drawer</string>
+    <string name="appshield_opt_hide_dev">Hide ADB / Developer options</string>
+    <string name="appshield_opt_hide_dev_summary">This app always reads ADB and developer options as disabled</string>
+    <string name="appshield_opt_detach">Detach from Play Store</string>
+    <string name="appshield_opt_detach_summary">Play Store cannot see the install source and will not auto-update this app</string>
 </resources>
