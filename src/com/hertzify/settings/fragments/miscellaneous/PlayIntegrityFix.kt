@@ -97,7 +97,7 @@ class PlayIntegrityFix : SettingsPreferenceFragment() {
     companion object {
         const val PIF_CONFIG_KEY = "spoof_pif_config"
         const val PIF_CONFIG_NAME = "pif.json"
-        const val PHOTOS_CONFIG_KEY = "spoofPhotos"
+        const val PHOTOS_CONFIG_KEY = "spoof_pif_photos"
 
         private const val PIF_DEVICE_CACHE_KEY = "spoof_pif_device_cache"
         private const val PIF_DEVICE_TIMESTAMP_KEY = "spoof_pif_device_timestamp"
@@ -122,7 +122,7 @@ class PlayIntegrityFix : SettingsPreferenceFragment() {
             "spoofVendingSdk" to false
         )
 
-        private val PRESERVED_KEYS = ADVANCED_FLAGS.keys + listOf(PHOTOS_CONFIG_KEY, "DEBUG", "verboseLogs")
+        private val PRESERVED_KEYS = ADVANCED_FLAGS.keys + listOf("DEBUG", "verboseLogs")
 
         data class PifDevice(val product: String, val device: String, val model: String) {
             fun toJson(): JSONObject = JSONObject().apply {
@@ -169,12 +169,20 @@ class PlayIntegrityFix : SettingsPreferenceFragment() {
         fun isFlagOn(config: Map<String, String>, key: String): Boolean =
             config[key]?.let { it == "true" || it == "1" } ?: (ADVANCED_FLAGS[key] ?: false)
 
+        fun isPhotosSpoofed(context: Context): Boolean =
+            Settings.Secure.getInt(context.contentResolver, PHOTOS_CONFIG_KEY, 1) != 0
+
+        fun setPhotosSpoofed(context: Context, enabled: Boolean) {
+            Settings.Secure.putInt(context.contentResolver, PHOTOS_CONFIG_KEY, if (enabled) 1 else 0)
+            restartTargetPackages(context, includePhotos = true)
+        }
+
         fun updateConfig(context: Context, key: String, value: Any) {
             val existing = Settings.Secure.getString(context.contentResolver, PIF_CONFIG_KEY)
             val json = runCatching { JSONObject(existing ?: "") }.getOrDefault(JSONObject())
             json.put(key, value)
             writeConfig(context, json)
-            restartTargetPackages(context, includePhotos = key == PHOTOS_CONFIG_KEY)
+            restartTargetPackages(context)
         }
 
         fun resetAdvancedFlags(context: Context) {
@@ -190,16 +198,13 @@ class PlayIntegrityFix : SettingsPreferenceFragment() {
                 ?.use { it.readBytes().toString(StandardCharsets.UTF_8) }
                 .orEmpty()
             val json = normalizePifPayload(raw)
-            val photos = readConfig(context)[PHOTOS_CONFIG_KEY]
-            if (photos != null && !json.has(PHOTOS_CONFIG_KEY)) json.put(PHOTOS_CONFIG_KEY, photos)
             writeConfig(context, json)
             restartTargetPackages(context)
         }
 
         fun deleteConfig(context: Context) {
-            val photos = readConfig(context)[PHOTOS_CONFIG_KEY]
-            writeConfig(context, photos?.let { JSONObject().put(PHOTOS_CONFIG_KEY, it) })
-            restartTargetPackages(context, includePhotos = true)
+            writeConfig(context, null)
+            restartTargetPackages(context)
         }
 
         fun applyFetched(context: Context, fetched: JSONObject) {
@@ -363,19 +368,20 @@ fun PlayIntegrityFixScreen() {
     val scope = rememberCoroutineScope()
 
     var activeConfig by remember { mutableStateOf(PlayIntegrityFix.readConfig(context)) }
+    var isSpoofPhotos by remember { mutableStateOf(PlayIntegrityFix.isPhotosSpoofed(context)) }
     var isFetching by remember { mutableStateOf(false) }
     var deviceList by remember { mutableStateOf<List<PlayIntegrityFix.Companion.PifDevice>?>(null) }
     var showConfigDetails by remember { mutableStateOf(false) }
     var showDeleteConfirm by remember { mutableStateOf(false) }
 
-    val hasConfig = activeConfig.keys.any { it != "DEBUG" && it != "verboseLogs" && !it.startsWith("spoof") }
-    val isSpoofPhotos = PlayIntegrityFix.isFlagOn(activeConfig, PlayIntegrityFix.PHOTOS_CONFIG_KEY)
+    val hasConfig = activeConfig.isNotEmpty()
 
     fun toast(msg: String, long: Boolean = false) =
         Toast.makeText(context, msg, if (long) Toast.LENGTH_LONG else Toast.LENGTH_SHORT).show()
 
     fun refresh() {
         activeConfig = PlayIntegrityFix.readConfig(context)
+        isSpoofPhotos = PlayIntegrityFix.isPhotosSpoofed(context)
     }
 
     fun toggleKey(key: String, checked: Boolean) {
@@ -483,10 +489,16 @@ fun PlayIntegrityFixScreen() {
                     trailing = {
                         SwitchWithCheck(
                             checked = isSpoofPhotos,
-                            onCheckedChange = { toggleKey(PlayIntegrityFix.PHOTOS_CONFIG_KEY, it) }
+                            onCheckedChange = { checked ->
+                                PlayIntegrityFix.setPhotosSpoofed(context, checked)
+                                refresh()
+                            }
                         )
                     },
-                    onClick = { toggleKey(PlayIntegrityFix.PHOTOS_CONFIG_KEY, !isSpoofPhotos) }
+                    onClick = {
+                        PlayIntegrityFix.setPhotosSpoofed(context, !isSpoofPhotos)
+                        refresh()
+                    }
                 )
             }
 
